@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h2>{{ __('Editar Usuario') }}</h2></div>
+                <div class="card-header"><h2>{{ __('Perfil  Usuario') }}</h2></div>
 
                 <div class="card-body">
                     @include('custom.message')
 
                     
-                        <form action="{{route('user.update', $user->id) }}" method="POST">
+                        <form action="{{route('perfil.update')}}" method="POST">
                           @csrf
                             @method('PUT')
                                <div class="row">
@@ -160,7 +160,7 @@
                                            @foreach($roles as $role)
 
                                                   
-                                           <option value="{{ $role->id }}"
+                                           <option disabled value="{{ $role->id }}"
 
                                             @isset ($user->roles[0]->name)
                                                 @if ($role->name == $user->roles[0]->name)
@@ -178,6 +178,21 @@
                                          
                                       </div>
                                    </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group ">
+                                         <label for="password" class="col-form-label text-md-right">{{ __('Nueva Contraseña') }}
+                                         </label>
+
+
+                                       <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                       @error('password')
+                                      <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                    </div>
+                           </div>
                                 </div>
                                 @endcan
 

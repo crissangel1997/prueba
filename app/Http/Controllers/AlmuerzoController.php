@@ -27,7 +27,7 @@ class AlmuerzoController extends Controller
        
 
         Gate::authorize('haveaccess','almuerzo.index');
-            $iduser = auth()->user()->id;
+        $iduser = auth()->user()->id;
         $almuerzos = DB::select('CALL ` getAlmuerzo`(?)',[$iduser]);
 
         $menualmuerzos = DB::select('CALL `getSelectMenuAlmuerzo`()');
@@ -81,7 +81,7 @@ class AlmuerzoController extends Controller
             return  redirect()->route('almuerzo.index')->with('warning','¡El usuario '.auth()->user()->name.'  '.auth()->user()->fname.' ya tiene su almuerzo!');
       
          }
-        //  dump(date("Y-m-d",$mod_date));
+
 
      
     

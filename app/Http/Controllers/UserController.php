@@ -24,6 +24,7 @@ class UserController extends Controller
     {
       
         $this->authorize('haveaccess','user.index');
+
       
          $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(0);
     
@@ -200,4 +201,8 @@ class UserController extends Controller
          return  redirect()->route('user.index')->with('status_success','Usuario Eliminado Existosamente');
         
     }
+
+    
+
+
 }

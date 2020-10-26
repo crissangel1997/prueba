@@ -304,6 +304,13 @@ return [
             
         ],
         [
+
+            'text' => 'Perfil Usuario',
+            'route'  => 'perfil.edit',
+         
+            
+        ],
+        [
             'text' => 'Roles',
             'route'  => 'role.index',
             'icon' => 'fas fa-fw fa-cog',

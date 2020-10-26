@@ -43,6 +43,14 @@ Route::resource('/role', 'RoleController')->names('role');
 
 Route::resource('/user', 'UserController')->names('user');
 
+
+//Route::get('/profile', 'UsuarioController@edit')->name('profile');
+
+Route::get('profile',['as'=> 'perfil.edit', 'uses' => 'UsuarioController@edit']);
+Route::patch('profile',['as'=> 'perfil.update', 'uses' => 'UsuarioController@update']);
+//Route::view('/profile', 'profile.edit')->name('profile');
+
+
 Route::resource('/almuerzo', 'AlmuerzoController')->names('almuerzo');
 
 Route::resource('/malmuerzo', 'MenuAlmuerzoController')->names('malmuerzo');
