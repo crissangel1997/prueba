@@ -31,11 +31,7 @@ class AlmuerzoController extends Controller
         $almuerzos = DB::select('CALL ` getAlmuerzo`(?)',[$iduser]);
 
         $menualmuerzos = DB::select('CALL `getSelectMenuAlmuerzo`()');
-        
-        //dump($almuerzos);
-        //$malmuerzos = MenuAlmuerzo::orderBy('nombre')->get();
-  
-     
+    
         return view('almuerzo.index',compact('almuerzos','menualmuerzos'));
     }
 
@@ -47,10 +43,7 @@ class AlmuerzoController extends Controller
     public function create()
     {
         
-         //$this->authorize('haveaccess','almuerzo.create');
-        // $malmuerzos = MenuAlmuerzo::orderBy('nombre')->get();
-
-       // return view('almuerzo.create',compact('malmuerzos'));
+      
 
     }
 
