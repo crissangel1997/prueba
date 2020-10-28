@@ -21,6 +21,10 @@ class EventServiceProvider extends ServiceProvider
          Registered::class => [
             'App\Listeners\RegisteredEvent',
         ],
+
+          'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\UpdateLastSignInAt',
+        ],
     ];
 
     /**

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registro') }}</div>
+                <div class="card-header col-form-label " style="font-size: 20px;  font-family: sans-serif;">{{ __('Registro De Usuario') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{route('user.store') }}">
@@ -135,7 +135,7 @@
                                  </label>
 
                                
-                                 <input id="direc" type="text" class="form-control @error('direc') is-invalid @enderror" name="direc" value="{{ old('direc') }}" required autocomplete="direc" autofocus>
+                                 <input id="direc" type="text" class="form-control @error('direc') is-invalid @enderror" name="direc" value="{{ old('direc') }}" autocomplete="direc" autofocus>
 
                                  @error('direc')
                                     <span class="invalid-feedback" role="alert">

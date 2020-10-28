@@ -43,12 +43,15 @@ Route::resource('/role', 'RoleController')->names('role');
 
 Route::resource('/user', 'UserController')->names('user');
 
+Route::get('host', 'UserController@gethostnames')->name('host');
+
+
 
 //Route::get('/profile', 'UsuarioController@edit')->name('profile');
 
 Route::get('profile',['as'=> 'perfil.edit', 'uses' => 'UsuarioController@edit']);
-Route::patch('profile',['as'=> 'perfil.update', 'uses' => 'UsuarioController@update']);
-//Route::view('/profile', 'profile.edit')->name('profile');
+Route::put('/profile',['as'=> 'perfil.update', 'uses' => 'UsuarioController@update']);
+//Route::view('/profile', 'profile')->name('profile');
 
 
 Route::resource('/almuerzo', 'AlmuerzoController')->names('almuerzo');
@@ -63,9 +66,3 @@ Route::resource('/cena', 'CenaController')->names('cena');
 
 
 
-/* @isset ($user->roles[0]->name)
-    @if ($role->name == $user->roles[0]->name)
-     selected 
-    @endif
-@endisset
-*/

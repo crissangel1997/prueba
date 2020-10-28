@@ -55,8 +55,9 @@ class MenuCenaController extends Controller
        $mcenas = [$request->nombrec, $request->descriptionc];
        DB::select('CALL `insMenuCena`(?,?)',$mcenas);
      
-       //dump($mcenas);
-       return  redirect()->route('menucena.index')->with('status_success','Menu cena  guardado Existosamente');
+     
+
+     return  redirect()->route('menucena.index')->with('status_success','Menu cena  guardado Existosamente');
 
     }
 
@@ -71,8 +72,10 @@ class MenuCenaController extends Controller
         
         $this->authorize('haveaccess','menucena.show');
 
-      
+       
         return view('menucena.view',compact('menucena'));
+
+       
     }
 
     /**

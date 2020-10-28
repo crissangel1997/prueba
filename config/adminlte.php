@@ -88,8 +88,8 @@ return [
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-info',
     'usermenu_image' => true,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
    /*
    |--------------------------------------------------------------------------
@@ -256,14 +256,16 @@ return [
             'search' =>  false,
             'topnav' => false,
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
 
 
         ['header' => 'MENU'],
+        [
+            'text' => ' Inicio',
+            'route'  => 'home',
+            'icon'   => 'fas fa-home',
+            
+        ],
+
         [
             'text'    => 'Alimentacion',
             'icon'    => 'fas fa-fw fa-share',
@@ -282,12 +284,16 @@ return [
                 
 
                 ],
+
+         
                 [
+               
                     'text' => ' Menu Almuerzo',
                     'route'  => 'malmuerzo.index',
                     'icon'    => 'fab fa-elementor',
                 ],
 
+                
                 [
                     'text' => ' Menu Cena',
                     'route'  => 'menucena.index',
@@ -303,13 +309,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
             
         ],
-        [
-
-            'text' => 'Perfil Usuario',
-            'route'  => 'perfil.edit',
-         
-            
-        ],
+       
         [
             'text' => 'Roles',
             'route'  => 'role.index',

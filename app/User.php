@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','sname', 'fname','slname','typeident','ident','fnaci', 'direc','email','usu', 'password',
+        'name','sname', 'fname','slname','typeident','ident','fnaci', 'direc','email','usu', 'password',   'current_sign_in_at', 'last_sign_in_at', 'host_name'
     ];
 
     /**
@@ -48,8 +48,15 @@ class User extends Authenticatable
     }
 
      public function adminlte_desc()
+    { 
+
+    }
+      public function adminlte_profile_url()
     {
 
-       
+        return 'profile';
     }
+
+
+    
 }

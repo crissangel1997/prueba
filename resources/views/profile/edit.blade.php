@@ -2,20 +2,22 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-7">
+    <div class="row justify-content-center" style="">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header"><h2>{{ __('Perfil  Usuario') }}</h2></div>
 
                 <div class="card-body">
                     @include('custom.message')
 
-                    
-                        <form action="{{route('perfil.update')}}" method="POST">
+                     
+                        <form action="{{route('perfil.update', auth()->user()->id)}}" method="POST">
                           @csrf
-                            @method('PUT')
+                          @method('PUT') 
+
+                            <input type="hidden" name="_method" value="PUT">
                                <div class="row">
-                                   <div class="col-md-6">
+                                   <div class="col-md-4">
                                       <div class="form-group">
                                        <label for="name" class="col-form-label text-md-right">{{ __('Nombre') }}</label>
 
@@ -26,7 +28,7 @@
                                    </div>
 
 
-                                   <div class="col-md-6">  
+                                   <div class="col-md-4">  
                                       <div class="form-group">
                                          <label for="sname" class="col-form-label text-md-right">{{ __('Segundo Nombre') }}
                                          </label>
@@ -37,11 +39,8 @@
                                         
                                       </div>
                                    </div>
-                                </div>
-                                <!--/////////////////////////////////////////-->
-                                
-                                <div class="row">
-                                   <div class="col-md-6">
+
+                                   <div class="col-md-4">
                                       <div class="form-group">
                                        <label for="fname" class="col-form-label text-md-right">{{ __('Apellido') }}</label>
 
@@ -52,7 +51,12 @@
                                       </div>
                                    </div>
 
-                                <div class="col-md-6">
+                                </div>
+                                <!--/////////////////////////////////////////-->
+                                
+                              <div class="row">
+                                 
+                                 <div class="col-md-4">
                                    <div class="form-group">
                                          <label for="slname" class="col-form-label text-md-right">{{ __('Segundo Apellido') }}
                                          </label>
@@ -63,10 +67,10 @@
                                           
                                       </div>
                                    </div>
-                                </div>
+                             
                                    <!--/////////////////////////////////////////-->
-                                <div class="row">
-                                   <div class="col-md-6">   
+                                
+                                   <div class="col-md-4">   
                                       <div class="form-group">
                                           <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo De Identificacion') }}
                                           </label>
@@ -77,7 +81,7 @@
                                       </div>
                                    </div>
 
-                                   <div class="col-md-6">
+                                   <div class="col-md-4">
                                       <div class="form-group">
                                          <label for="ident" class="col-form-label text-md-right">{{ __(' Identificacion') }}
                                          </label>
@@ -88,10 +92,14 @@
                                          
                                        </div>
                                    </div>
-                                </div>
+                                 </div>
+                            <div class="row">  
+                             
                                   <!--/////////////////////////////////////////-->
-                                <div class="row">
-                                  <div class="col-md-6">
+                              
+
+
+                                  <div class="col-md-4">
                                     <div class="form-group">
                                          <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha De Nacimiento') }}
                                          </label>
@@ -103,7 +111,7 @@
                                     </div>
                                   </div>
                                    
-                                  <div class="col-md-6">
+                                  <div class="col-md-4">
                                       <div class="form-group ">
 
                                          <label for="direc" class="col-form-label text-md-right">{{ __('Direccion') }}
@@ -115,11 +123,8 @@
                                          
                                       </div>
                                   </div>
-                                </div>
 
-                                 <!--/////////////////////////////////////////-->
-                                <div class="row">
-                                   <div class="col-md-6">
+                                    <div class="col-md-4">
                                       <div class="form-group">
                                             <label for="email" class="col-form-label text-md-right">{{ __('Correo Electrónico') }}
                                             </label>
@@ -129,9 +134,14 @@
 
                                       </div>
                                    </div>
-                                   
 
-                                   <div class="col-md-6">
+                             </div>
+
+                                 <!--/////////////////////////////////////////-->
+                                <div class="row">
+                                 
+                                   
+                                   <div class="col-md-4">
                                       <div class="form-group">
                                             <label for="usu" class="col-form-label text-md-right">{{ __('Usuario') }}
                                             </label>
@@ -142,16 +152,14 @@
                                           
                                       </div>
                                    </div>
-                                </div> 
+                               
 
-                              @can('haveaccess','role.index')
-                                <div  class="row">
-                                   <div class="col-md-6">   
+                                   <div class="col-md-4">   
                                       <div  class="form-group" >
                                         <label for="roles" class="col-form-label text-md-right">{{ __('Roles') }}
                                         </label>
 
-                                         <select 
+                                         <select  disabled
 
                                           
                                           class="form-control" name="roles" id="roles"
@@ -160,7 +168,7 @@
                                            @foreach($roles as $role)
 
                                                   
-                                           <option disabled value="{{ $role->id }}"
+                                           <option  value="{{ $role->id }}"
 
                                             @isset ($user->roles[0]->name)
                                                 @if ($role->name == $user->roles[0]->name)
@@ -178,26 +186,30 @@
                                          
                                       </div>
                                    </div>
-                                   <div class="col-md-6">
-                                       <div class="form-group ">
+                                    <div class="col-md-4">
+                                        <div class="form-group ">
                                          <label for="password" class="col-form-label text-md-right">{{ __('Nueva Contraseña') }}
                                          </label>
 
 
-                                       <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                       <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
 
                                        @error('password')
-                                      <span class="invalid-feedback" role="alert">
+                                       <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                      </span>
-                                      @enderror
-                                    </div>
-                           </div>
-                                </div>
-                                @endcan
+                                       </span>
+                                       @enderror
+                                     </div>
+                                   </div>
+                               </div> 
+                                
+                            
+                           
 
                                 <hr>
+                             
                                  <input class=" btn btn-primary" type="submit" value="Actualizar">
+                             
                             </div>  
                                 
                         </form>

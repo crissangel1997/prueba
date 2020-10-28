@@ -92,35 +92,39 @@ class UsuarioController extends Controller
     public function update(Request $request, User $user)
     {
     
-      $request -> validate([
-            'name'      => 'max:150|:users,name,'.$user->id,
-            'sname'     => 'max:150|:users,sname,'.$user->id,
-            'fname'     => 'max:150|:users,fname,'.$user->id,
-            'slname'    => 'max:150|:users,slname,'.$user->id,
-            'typeident' => 'max:150|:users,typeident,'.$user->id,
-            'ident'     => 'max:150|:users,ident,'.$user->id,
-            'fnaci'     => 'max:150|:users,fnaci,'.$user->id,
-            'direc'     => 'max:150|:users,direc,'.$user->id,
-            'email'     => 'max:150|:users,email,'.$user->id,
-            'usu'       => 'max:150|unique:users,usu,'.$user->id
-           
-            
-
-        ]);
-
-     /*crear un permiso en donde....si el rol es  = a---Agente entonces el campo se desabilita pero en el formulario
-     */
-         //dd($request->all());
+        //$user = User::find(auth()->user()->id);
+       
+        $data =  $request->all();
 
 
-         $user->update($request->all());
+    if ($data['password'] != null){
 
-         /*Sincroniza con la tabla de permisos y roles*/
-            $user->roles()->sync($request->get('roles'));
-        //}
+        $data['password'] = bcrypt($data['password']); 
+        }
+         
+    else{
+        
+             unset($data['password']);
+    }
+        $update = auth()->user()->update($data); 
+         /*Sincroniza con la tabla de permisos y roles*/ 
+        $user->roles()->sync($request->get('roles'));
+
+        //dump($update);
+    
+         if ($update) {
+
+             return  redirect()->route('perfil.edit')->with('status_success','Perfil Usuario  Actualizado Existosamente');
+
+         }else{
+
+               return  redirect()->route('profile')->with('warning','Usuario no actializado');
+
+         }
 
 
-        return  redirect()->route('profile.edit')->with('status_success','Usuario Actualizado Existosamente');
+
+    
         
     }
 

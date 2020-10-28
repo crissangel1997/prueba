@@ -27,11 +27,7 @@ class UserController extends Controller
 
       
          $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(0);
-    
-
-         //$users = DB::select('call getUsers()');
-
-        //return $users;
+ 
        
         return view('user.index',compact('users'));
     }
@@ -72,7 +68,7 @@ class UserController extends Controller
                 'typeident'=> ['required', 'string', 'max:150'],
                 'ident'    => ['required', 'string', 'max:150'],
                 'fnaci'    => [ 'max:150'],
-                'direc'    => ['required', 'string', 'max:150'],
+                'direc'    => [ 'string', 'max:150'],
                 'email'    => [ 'email', 'max:255'],
                 'usu'      => ['required', 'string', 'max:150','unique:users,usu'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -202,6 +198,12 @@ class UserController extends Controller
         
     }
 
+
+     public function gethostname(){
+
+     
+        return  gethostname();
+     }
     
 
 
