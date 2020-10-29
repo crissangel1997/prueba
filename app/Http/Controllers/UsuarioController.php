@@ -70,15 +70,19 @@ class UsuarioController extends Controller
 
      //$this->authorize('haveaccess','profile.edit');
 
-      $user = User::find(auth()->user()->id);
-      $roles = Role::orderBy('name')->get();
+       $iduser = auth()->user()->id;
+
+       $role = DB::select('CALL `getRoleName`(?)',[$iduser]);
+
+       $user = User::find(auth()->user()->id);
+       $roles = Role::orderBy('name')->get();
        if(empty($user)){
           Flash::error('mensaje error');
          return redirect()->back();
        }
 
       //dump($user);
-      return view('profile.edit', compact('roles', 'user')); 
+      return view('profile.edit', compact('roles', 'user','role')); 
 
     }
 
@@ -92,11 +96,26 @@ class UsuarioController extends Controller
     public function update(Request $request, User $user)
     {
     
-        //$user = User::find(auth()->user()->id);
+      
        
-        $data =  $request->all();
+        //$data =  $request->all();
 
+        $data = request()->validate([
+      
+            'name'      => 'max:150|:users,name,'.$user->id,
+            'sname'     => 'max:150|:users,sname,'.$user->id,
+            'fname'     => 'max:150|:users,fname,'.$user->id,
+            'slname'    => 'max:150|:users,slname,'.$user->id,
+            'typeident' => 'max:150|:users,typeident,'.$user->id,
+            'ident'     => 'max:150|:users,ident,'.$user->id,
+            'fnaci'     => 'max:150|:users,fnaci,'.$user->id,
+            'direc'     => 'max:150|:users,direc,'.$user->id,
+            'email'     => 'max:150|:users,email,'.$user->id,
+            'usu'       => 'max:150|:users,usu,'.$user->id,
+            'password'  =>  'max:150|confirmed|:users,password,'.$user->id
+        ]);
 
+       
     if ($data['password'] != null){
 
         $data['password'] = bcrypt($data['password']); 

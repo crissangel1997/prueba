@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 
 class LoginController extends Controller
 {
@@ -38,6 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        
         $this->middleware('guest')->except('logout');
 
 
@@ -47,12 +49,9 @@ class LoginController extends Controller
     protected function authenticated(Request $request,  $user)
    {   
 
-    $user->update([
-       
-          
-       'host_name' => $request->getHost()
-
-    ]);
+        $iduser = auth()->user()->id;     
+        $login = [$iduser,  gethostname(), $_SERVER['REMOTE_ADDR']];
+        DB::select('CALL `insLogin`(?,?,?)',$login);       
 
    }
 

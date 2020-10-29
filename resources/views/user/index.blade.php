@@ -12,7 +12,7 @@
 <div class="container">
     
            @include('custom.message')
-            <div class="card">
+            <div class="card card-primary card-outline">
                 <div class="card-header"><h2>{{ __('Lista de Usuarios') }}</h2></div>
 
                 <div class="card-body">

@@ -28,7 +28,8 @@ class UserController extends Controller
       
          $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(0);
  
-       
+   
+
         return view('user.index',compact('users'));
     }
 

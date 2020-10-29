@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use DB;
 
 class UpdateLastSignInAt
 {
@@ -32,11 +33,6 @@ class UpdateLastSignInAt
 
         $event->user->current_sign_in_at = Carbon::now();
       
-
-       /* $username = gethostname();
-
-        $event->user->host_name = $username;*/
-
         $event->user->save();
     }
 }

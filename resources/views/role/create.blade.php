@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
-            <div class="card">
+            <div class="card card-primary card-outline">
                 <div class="card-header"><h2>{{ __('Crear Roles') }}</h2></div>
 
                 <div class="card-body">

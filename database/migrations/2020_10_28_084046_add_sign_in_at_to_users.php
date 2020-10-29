@@ -14,6 +14,7 @@ class AddSignInAtToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            
             $table->timestamp('last_sign_in_at')->nullable();
         });
     }

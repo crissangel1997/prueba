@@ -14,7 +14,7 @@
             
             @include('custom.message')
 
-            <div class="card">
+            <div class="card card-primary card-outline">
                 <div class="card-header"><h2>{{ __('Lista de Menu Almuerzos') }}</h2></div>
 
                 <div class="card-body">

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card card-primary card-outline">
                 <div class="card-header col-form-label " style="font-size: 20px;  font-family: sans-serif;">{{ __('Registro De Usuario') }}</div>
 
                 <div class="card-body">
