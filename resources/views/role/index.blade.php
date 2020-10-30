@@ -15,7 +15,7 @@
       @include('custom.message')
 
       <div class="card card-primary card-outline">
-          <div class="card-header"><h2>{{ __('Lista de Roles') }}</h2></div>
+          <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de Roles') }}</h2></div>
 
                 <div class="card-body">
                     @can('haveaccess','role.create')

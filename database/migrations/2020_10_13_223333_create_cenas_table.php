@@ -15,7 +15,7 @@ class CreateCenasTable extends Migration
     {
         Schema::create('cenas', function (Blueprint $table) {
             $table->id();
-             $table->date('fechac')->nullable();
+            $table->date('fechac')->nullable();
             $table->string('descriptionc')->nullable();
             $table->integer('active')->default(1);
 

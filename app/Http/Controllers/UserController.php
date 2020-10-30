@@ -153,16 +153,16 @@ class UserController extends Controller
         
        
         $request -> validate([
-            'name'      => 'required|max:150|:users,name,'.$user->id,
-            'sname'     => 'required|max:150|:users,sname,'.$user->id,
-            'fname'     => 'required|max:150|:users,fname,'.$user->id,
-            'slname'    => 'required|max:150|:users,slname,'.$user->id,
-            'typeident' => 'required|max:150|:users,typeident,'.$user->id,
-            'ident'     => 'required|max:150|:users,ident,'.$user->id,
-            'fnaci'     => 'required|max:150|:users,fnaci,'.$user->id,
-            'direc'     => 'required|max:150|:users,direc,'.$user->id,
-            'email'     => 'required|max:150|:users,email,'.$user->id,
-            'usu'       => 'required|max:150|unique:users,usu,'.$user->id
+            'name'      => 'max:150|:users,name,'.$user->id,
+            'sname'     => 'max:150|:users,sname,'.$user->id,
+            'fname'     => 'max:150|:users,fname,'.$user->id,
+            'slname'    => 'max:150|:users,slname,'.$user->id,
+            'typeident' => 'max:150|:users,typeident,'.$user->id,
+            'ident'     => 'max:150|:users,ident,'.$user->id,
+            'fnaci'     => 'max:150|:users,fnaci,'.$user->id,
+            'direc'     => 'max:150|:users,direc,'.$user->id,
+            'email'     => 'max:150|:users,email,'.$user->id,
+            'usu'       => 'max:150|unique:users,usu,'.$user->id
             
 
         ]);
@@ -200,12 +200,7 @@ class UserController extends Controller
     }
 
 
-     public function gethostname(){
-
-     
-        return  gethostname();
-     }
-    
+   
 
 
 }

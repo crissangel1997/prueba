@@ -18,11 +18,19 @@ class CreateAlmuerzosTable extends Migration
             $table->date('fecha')->nullable();
             $table->string('description')->nullable();
             $table->integer('active')->default(1);
-            $table->timestamps();
-            
+            $table->timestamps(); 
+            $table->integer('visit_id')->unsigned();
+            $table->foreign('visit_id')->references('id')->on('visitas');
+           
+           
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('malmuerzo_id')->references('id')->on('menu_almuerzos')->onDelete('cascade');
+
+        
         });
+          
+             
+        
     }
 
     /**
@@ -33,5 +41,6 @@ class CreateAlmuerzosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('almuerzos');
+       
     }
 }

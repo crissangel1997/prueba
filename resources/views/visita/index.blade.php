@@ -19,48 +19,52 @@
             @include('custom.messages')
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de Cenas') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista Almuerzo Visita') }}</h2></div>
 
                 <div class="card-body">
 
-                   @can('haveaccess','cena.create')
-                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nuevo</a>
+                   @can('haveaccess','visita.create')
+                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#visitas" class="btn btn-primary float-right" >Nueva Visita</a>
 
                     @endcan
 
                     
 
-                    <table id="cena" class="table table-hover">
+                    <table id="visita" class="table table-hover">
                       <thead>
                         <tr>
+                          <th scope="col">ID</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
                           <th scope="col">Fecha</th>
                           <th scope="col">Descripcion</th>
                           <th scope="col">Menu</th>
+                           <th scope="col">activo</th>
                           <th scope="col">Acción</th>                         
                           
 
                         </tr>
                       </thead>
                       <tbody>
-                            @foreach ($cenas as $cena)
+                            @foreach ($visitas as $visita)
                               <tr>
-                                  <td> {{auth()->user()->name }} </td>
-                                  <td> {{auth()->user()->fname}} </td>
-                                  <td>{{ $cena->fechac }}</td>
-                                  <td>{{ $cena->descriptionc }}</td>
-                                  <td>{{ $cena->nombrec }}</td>
-                              
+                                  <td>{{ $visita->id    }} </td>
+                                  <td>{{ $visita->name  }} </td>
+                                  <td>{{ $visita->fname  }} </td>
+                                  <td>{{ $visita->fechav }}</td>
+                                  <td>{{ $visita->descriptionv }}</td>
+                                  <td>{{ $visita->nombre }}</td>
+                                  <td>{{ $visita->activev }}</td>
+
+
+                                  
                                   <td> 
-                                    @if ($date < $cena->fechac )
-                                    @can('haveaccess','cena.destroy')
-                                    <form action="{{ route('cena.destroy',$cena->id) }}" method="POST">
+                                    @if ($date < $visita->fechav )
+                                    @can('haveaccess','visita.destroy')
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger">Eliminar</button>
-                                    </form>
-                                    @endcan
+                                      <a class="btn btn-danger" href="{{route('visita.destroy',$visita->id) }}">Eliminar</a>
+                                       @endcan
                                     @endif
 
 
@@ -77,44 +81,57 @@
 @endsection
 
 <!-- Modal Registro Menu-->
-<div class="modal fade" id="cenas" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="visitas" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="margin-top: 126px;">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Registro Cena</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Registro Visita</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-         <form  action="{{route('cena.store') }}" method="POST">
+         <form  action="{{route('visita.store') }}" method="POST">
           @csrf
-          
-
+           
 
           <div class="row">
               <div class="col-md-12">
-                <div class="form-group" hidden>
-                     <label for="iduser" class="col-form-label text-md-right">{{ __('Id Usuario') }}</label>
-      
-                     <input id="iduser" disabled type="text" class="form-control @error('iduser') is-invaliduser @enderror" name="iduser" value="{{auth()->user()->id}}" required autocomplete="id" autofocus> 
+               
+              <div class="form-group">
+                    <label for="user_id" class="col-form-label text-md-right">{{ __('Nombre y  Apellido') }}
+                    </label>
 
-                     @error('iduser')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                </div>
+                    <select class="form-control" name="user_id" id="user_id">
+
+                     @foreach($users as $user)
+
+                     <option value="{{ $user->id }}"
+                      @isset ($visita->user[0]->name)
+                      @if ($user->name == $visita->user[0]->name)
+                      selected 
+                      @endif
+                      @endisset
+
+
+                      >{{ $user->name }} - {{ $user->fname }}</option>
+
+                      @endforeach
+
+                    </select> 
+
+              </div>
+                
               
             
                <div class="form-group">
 
-                     <label for="fecha" class="col-form-label text-md-right">{{ __('fecha ') }}</label>
+                     <label for="fechav" class="col-form-label text-md-right">{{ __('fecha') }}</label>
                      
-                     <input min="{{date('Y-m-d') }}"  max="2030-12-31" id="fechac" type="date" class="form-control @error('fechac') is-invalid @enderror" name="fechac" value="{{date('Y-m-d') }}" required autocomplete="fechac" autofocus> 
+                     <input min="{{date('Y-m-d') }}"  max="2030-12-31" id="fechav" type="date" class="form-control @error('fechav') is-invalid @enderror" name="fechav" value="{{date('Y-m-d') }}" required autocomplete="fechav" autofocus> 
 
-                     @error('fechac')
+                     @error('fechav')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -123,22 +140,22 @@
 
             
                   <div class="form-group">
-                    <label for="menucena_id" class="col-form-label text-md-right">{{ __('Menu Cena') }}
+                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
                     </label>
 
-                    <select class="form-control" name="menucena_id" id="menucena_id">
+                    <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
 
-                     @foreach($menucenas as $menucena)
+                     @foreach($menualmuerzos as $malmuerzo)
 
-                     <option value="{{ $menucena->id }}"
-                      @isset ($cena->menucena[0]->nombrec)
-                      @if ($menucena->nombrec == $cena->menucena[0]->nombrec)
+                     <option value="{{ $malmuerzo->id }}"
+                      @isset ($almuerzo->malmuerzo[0]->nombre)
+                      @if ($malmuerzo->nombre == $almuerzo->malmuerzo[0]->nombre)
                       selected 
                       @endif
                       @endisset
 
 
-                      >{{ $menucena->nombrec }} - {{ $menucena->descriptionc }}</option>
+                      >{{ $malmuerzo->nombre }} - {{ $malmuerzo->description }}</option>
 
                       @endforeach
 
@@ -148,8 +165,8 @@
 
                     <div class="form-group">
 
-                        <label for="descriptionc" class="col-form-label text-md-right">{{ __('Descripcion') }}</label>
-                       <textarea class="form-control"  name="descriptionc" placeholder="Descripcion" id="descriptionc" rows="3">{{ old('descriptionc')}}</textarea>
+                        <label for="descriptionv" class="col-form-label text-md-right">{{ __('Descripcion') }}</label>
+                       <textarea class="form-control"  name="descriptionv" placeholder="Descripcion" id="descriptionv" rows="3">{{ old('descriptionv')}}</textarea>
                    </div>
                 </div>
         </div>
@@ -172,7 +189,7 @@
 
 <script>
   
-   $('#cena').DataTable({
+   $('#visita').DataTable({
     responsive:true,
     autoWidth:false, 
 

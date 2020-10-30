@@ -19,12 +19,18 @@
             @include('custom.messages')
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2>{{ __('Lista de Almuerzos') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de Almuerzos') }}</h2></div>
 
                 <div class="card-body">
 
                    @can('haveaccess','almuerzo.create')
-                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#almuerzos" class="btn btn-primary float-right" >Nuevo</a>
+                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#almuerzos" class="btn btn-primary float-right" >Nuevo Amuerzo</a>
+
+                    @endcan
+
+
+                   @can('haveaccess','visita.create')
+                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Nueva Visita</a>
 
                     @endcan
 
@@ -51,6 +57,9 @@
                                   <td>{{ $almuerzo->fecha }}</td>
                                   <td>{{ $almuerzo->description }}</td>
                                   <td>{{ $almuerzo->nombre }}</td>
+                                  
+
+
                                   <!--td> 
 
                                    @can('haveaccess','almuerzo.show')
@@ -175,6 +184,91 @@
   </div>
 </div>
 
+<!--formulario de  Registro de  Visitas -->
+
+<div class="modal fade" id="visitas" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="margin-top: 126px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Registro Visita</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <form  action="{{route('visita.store') }}" method="POST">
+          @csrf
+           
+
+          <div class="row">
+              <div class="col-md-12">
+               
+              <div class="form-group">
+                    <label for="user_id" class="col-form-label text-md-right">{{ __('Nombre y  Apellido') }}
+                    </label>
+
+                    
+              </div>
+                
+              
+            
+               <div class="form-group">
+
+                     <label for="fechav" class="col-form-label text-md-right">{{ __('fecha') }}</label>
+                     
+                     <input min="{{date('Y-m-d') }}"  max="2030-12-31" id="fechav" type="date" class="form-control @error('fechav') is-invalid @enderror" name="fechav" value="{{date('Y-m-d') }}" required autocomplete="fechav" autofocus> 
+
+                     @error('fechav')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                </div>
+
+            
+                  <div class="form-group">
+                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
+                    </label>
+
+                    <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
+
+                     @foreach($menualmuerzos as $malmuerzo)
+
+                     <option value="{{ $malmuerzo->id }}"
+                      @isset ($almuerzo->malmuerzo[0]->nombre)
+                      @if ($malmuerzo->nombre == $almuerzo->malmuerzo[0]->nombre)
+                      selected 
+                      @endif
+                      @endisset
+
+
+                      >{{ $malmuerzo->nombre }} - {{ $malmuerzo->description }}</option>
+
+                      @endforeach
+
+                    </select> 
+
+                  </div>
+
+                    <div class="form-group">
+
+                        <label for="descriptionv" class="col-form-label text-md-right">{{ __('Descripcion') }}</label>
+                       <textarea class="form-control"  name="descriptionv" placeholder="Descripcion" id="descriptionv" rows="3">{{ old('descriptionv')}}</textarea>
+                   </div>
+                </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+          </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
 
 @section('js')
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>

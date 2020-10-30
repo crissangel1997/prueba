@@ -15,6 +15,8 @@ class AddCurrentSignInAtToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
+            
+
             $table->timestamp('current_sign_in_at')->nullable()->after('updated_at');
         });
     }

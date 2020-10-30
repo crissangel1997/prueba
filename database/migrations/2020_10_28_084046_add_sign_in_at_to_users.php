@@ -27,7 +27,6 @@ class AddSignInAtToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            
             $table->dropColumn('las_sign_in_at');
         });
     }
