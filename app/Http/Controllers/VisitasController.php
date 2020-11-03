@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Permission\Models\Role;
 use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
-use Illuminate\Support\Facades\Gate;
-use App\Permission\Models\MenuAlmuerzo;
-use App\Permission\Models\Visita;
 use Illuminate\Support\Facades\Hash;
+use App\Permission\Models\Visita;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
 use DB;
 
-class VisitaController extends Controller
+
+class VisitasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,12 +31,10 @@ class VisitaController extends Controller
 
         $visitas = DB::select('CALL `getVisita`()');
            
-        // dump($visitas);
-        $users = DB::select('CALL `getSelectUsers`()');
- 
-        $menualmuerzos = DB::select('CALL `getSelectMenuAlmuerzo`()');
+      
+        return view('visita.index',compact('visitas'));
 
-        return view('visita.index',compact('visitas', 'menualmuerzos', 'users'));
+
     }
 
     /**
@@ -44,7 +44,7 @@ class VisitaController extends Controller
      */
     public function create()
     {
-      
+        //
     }
 
     /**
@@ -56,38 +56,17 @@ class VisitaController extends Controller
     public function store(Request $request)
     {
         
+         $this->authorize('haveaccess','visita.create');
 
-         $this->authorize('haveaccess','almuerzo.create');
+    
+        $visitas = [$request->name,  $request->lastname];
 
-        //$iduser = auth()->user()->id;
-
-       /* $ValidateVisit = [$request->fechav];*/
-
-        $visitas = [$request->user_id,  $request->fechav, $request->malmuerzo_id, $request->descriptionv];
-
-        /*$ValVisit= DB::select('CALL `getValidateVisit`(?)',$ValidateVisit);
-       */
- 
-       /* $date = date('Y-m-d');*/
-
-         DB::select('CALL `insVisita`(?,?,?,?)',$visitas);
+       
+         DB::select('CALL `insVisita`(?,?)',$visitas);
 
         return  redirect()->route('visita.index')->with('status_success','¡La visita  ha pedido su almuerzo!');
-    
-        
-        /*if ($ValVisit == null)  {
-
-          
 
 
-         }else{
-
-            return  redirect()->route('visita.index')->with('warning','!La Visita ya tiene su almuerzo!');
-      
-         }*/
-
-
-     
     }
 
     /**
@@ -130,17 +109,13 @@ class VisitaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Visita $visita)
     {
-       
-
-       $this->authorize('haveaccess','visita.destroy');
-
-        $visita->activev='0';
+         $this->authorize('haveaccess','visita.destroy');
+        
+        $visita->active='0';
         $visita->update();
-
-        //dump($visita);
-
-    return  redirect()->route('visita.index')->with('status_success','Almuerzo Eliminado Existosamente');
+ //dump($visita);
+    return  redirect()->route('visita.index')->with('status_success','Visita Eliminada Existosamente');
     }
 }

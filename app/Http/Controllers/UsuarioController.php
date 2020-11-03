@@ -8,6 +8,8 @@ use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Permission\Models\Visita;
+
 use Illuminate\Support\Facades\Validator;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
@@ -153,8 +155,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        
+
     }
 }

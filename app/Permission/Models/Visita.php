@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visita extends Model
 {
+
      protected $fillable = [
 
-        'fechav','descriptionv',
+      'name','lastname',
 
     ];
+
 
       public function permissions(){
 

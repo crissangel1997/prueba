@@ -309,7 +309,7 @@ return [
                 ],
                  
                 [
-                    'text' => ' Almuerzo Visita',
+                    'text' => ' Visita',
                     'route'  => 'visita.index',
                     'icon'    => 'fas fa-user-friends',
                 ],

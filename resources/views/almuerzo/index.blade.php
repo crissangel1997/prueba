@@ -29,7 +29,7 @@
                     @endcan
 
 
-                   @can('haveaccess','visita.create')
+                   @can('haveaccess','almuerzo.create')
                     <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Nueva Visita</a>
 
                     @endcan
@@ -114,6 +114,7 @@
 
           <div class="row">
               <div class="col-md-12">
+
                 <div class="form-group" hidden>
                      <label for="iduser" class="col-form-label text-md-right">{{ __('Id Usuario') }}</label>
       
@@ -125,7 +126,7 @@
                         </span>
                       @enderror
                 </div>
-              
+
             
                <div class="form-group">
 
@@ -197,7 +198,7 @@
       </div>
       <div class="modal-body">
 
-         <form  action="{{route('visita.store') }}" method="POST">
+         <form  action="{{route('almuerzo.create') }}" method="PUT">
           @csrf
            
 
@@ -205,8 +206,32 @@
               <div class="col-md-12">
                
               <div class="form-group">
-                    <label for="user_id" class="col-form-label text-md-right">{{ __('Nombre y  Apellido') }}
+                    <label for="visit_id" class="col-form-label text-md-right">{{ __('Nombre y  Apellido') }}
                     </label>
+
+                     <div class="form-group">
+                    <label for="visit_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
+                    </label>
+
+                    <select class="form-control" name="visit_id" id="visit_id">
+
+                     @foreach($visitas as $visita)
+
+                     <option value="{{ $visita->id }}"
+                      @isset ($almuerzo->visita[0]->name)
+                      @if ($visita->name == $almuerzo->visita[0]->name)
+                      selected 
+                      @endif
+                      @endisset
+
+
+                      >{{ $visita->name }} - {{ $visita->lastname }}</option>
+
+                      @endforeach
+
+                    </select> 
+
+                  </div>
 
                     
               </div>
@@ -215,11 +240,11 @@
             
                <div class="form-group">
 
-                     <label for="fechav" class="col-form-label text-md-right">{{ __('fecha') }}</label>
+                     <label for="fecha" class="col-form-label text-md-right">{{ __('fecha') }}</label>
                      
-                     <input min="{{date('Y-m-d') }}"  max="2030-12-31" id="fechav" type="date" class="form-control @error('fechav') is-invalid @enderror" name="fechav" value="{{date('Y-m-d') }}" required autocomplete="fechav" autofocus> 
+                     <input min="{{date('Y-m-d') }}"  max="2030-12-31" id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror" name="fecha" value="{{date('Y-m-d') }}" required autocomplete="fecha" autofocus> 
 
-                     @error('fechav')
+                     @error('fecha')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -253,8 +278,8 @@
 
                     <div class="form-group">
 
-                        <label for="descriptionv" class="col-form-label text-md-right">{{ __('Descripcion') }}</label>
-                       <textarea class="form-control"  name="descriptionv" placeholder="Descripcion" id="descriptionv" rows="3">{{ old('descriptionv')}}</textarea>
+                        <label for="description" class="col-form-label text-md-right">{{ __('Descripcion') }}</label>
+                       <textarea class="form-control"  name="description" placeholder="Descripcion" id="description" rows="3">{{ old('description')}}</textarea>
                    </div>
                 </div>
         </div>

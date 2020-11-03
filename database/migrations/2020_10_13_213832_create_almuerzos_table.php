@@ -19,8 +19,8 @@ class CreateAlmuerzosTable extends Migration
             $table->string('description')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps(); 
-            $table->integer('visit_id')->unsigned();
-            $table->foreign('visit_id')->references('id')->on('visitas');
+            $table->integer('visit_id')->unsigned()->nullable();
+            $table->foreign('visit_id')->references('id')->on('visitas')->onDelete('cascade');
            
            
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');

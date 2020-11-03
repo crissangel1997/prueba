@@ -19,7 +19,7 @@
             @include('custom.messages')
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista Almuerzo Visita') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Visita') }}</h2></div>
 
                 <div class="card-body">
 
@@ -30,16 +30,13 @@
 
                     
 
-                    <table id="visita" class="table table-hover">
+                    <table id="visit" class="table table-hover">
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Descripcion</th>
-                          <th scope="col">Menu</th>
-                           <th scope="col">activo</th>
+                          <th scope="col">active</th>
                           <th scope="col">Acción</th>                         
                           
 
@@ -48,26 +45,23 @@
                       <tbody>
                             @foreach ($visitas as $visita)
                               <tr>
-                                  <td>{{ $visita->id    }} </td>
-                                  <td>{{ $visita->name  }} </td>
-                                  <td>{{ $visita->fname  }} </td>
-                                  <td>{{ $visita->fechav }}</td>
-                                  <td>{{ $visita->descriptionv }}</td>
-                                  <td>{{ $visita->nombre }}</td>
-                                  <td>{{ $visita->activev }}</td>
+                                  <td>{{$visita->id}} </td>
+                                  <td>{{ $visita->name}} </td>
+                                  <td>{{ $visita->lastname}}</td>
+                                  <td>{{ $visita->active }}</td>
 
 
+
+                                   <td> 
                                   
-                                  <td> 
-                                    @if ($date < $visita->fechav )
                                     @can('haveaccess','visita.destroy')
+                                 
+                                    <form action="{{ route('visita.destroy',$visita->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                      <a class="btn btn-danger" href="{{route('visita.destroy',$visita->id) }}">Eliminar</a>
-                                       @endcan
-                                    @endif
-
-
+                                    <button class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                     @endcan
                                  </td>
                               </tr>
                             @endforeach
@@ -98,78 +92,31 @@
 
           <div class="row">
               <div class="col-md-12">
-               
-              <div class="form-group">
-                    <label for="user_id" class="col-form-label text-md-right">{{ __('Nombre y  Apellido') }}
-                    </label>
+                 <div class="form-group">
+                   <label for="name" class="col-form-label text-md-right">{{ __('Nombre') }}</label>
 
-                    <select class="form-control" name="user_id" id="user_id">
+                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
 
-                     @foreach($users as $user)
+                          @error('name')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                     </div>
 
-                     <option value="{{ $user->id }}"
-                      @isset ($visita->user[0]->name)
-                      @if ($user->name == $visita->user[0]->name)
-                      selected 
-                      @endif
-                      @endisset
+                     <div class="form-group">
+                       <label for="lastname" class="col-form-label text-md-right">{{ __('Apellido') }}</label>
 
+                             <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" autocomplete="lastname" autofocus>
 
-                      >{{ $user->name }} - {{ $user->fname }}</option>
-
-                      @endforeach
-
-                    </select> 
-
-              </div>
-                
-              
-            
-               <div class="form-group">
-
-                     <label for="fechav" class="col-form-label text-md-right">{{ __('fecha') }}</label>
-                     
-                     <input min="{{date('Y-m-d') }}"  max="2030-12-31" id="fechav" type="date" class="form-control @error('fechav') is-invalid @enderror" name="fechav" value="{{date('Y-m-d') }}" required autocomplete="fechav" autofocus> 
-
-                     @error('fechav')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                </div>
-
-            
-                  <div class="form-group">
-                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
-                    </label>
-
-                    <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
-
-                     @foreach($menualmuerzos as $malmuerzo)
-
-                     <option value="{{ $malmuerzo->id }}"
-                      @isset ($almuerzo->malmuerzo[0]->nombre)
-                      @if ($malmuerzo->nombre == $almuerzo->malmuerzo[0]->nombre)
-                      selected 
-                      @endif
-                      @endisset
-
-
-                      >{{ $malmuerzo->nombre }} - {{ $malmuerzo->description }}</option>
-
-                      @endforeach
-
-                    </select> 
-
-                  </div>
-
-                    <div class="form-group">
-
-                        <label for="descriptionv" class="col-form-label text-md-right">{{ __('Descripcion') }}</label>
-                       <textarea class="form-control"  name="descriptionv" placeholder="Descripcion" id="descriptionv" rows="3">{{ old('descriptionv')}}</textarea>
-                   </div>
-                </div>
-        </div>
+                              @error('lastname')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                         </div>
+                     </div>
+          </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -189,7 +136,7 @@
 
 <script>
   
-   $('#visita').DataTable({
+   $('#visit').DataTable({
     responsive:true,
     autoWidth:false, 
 

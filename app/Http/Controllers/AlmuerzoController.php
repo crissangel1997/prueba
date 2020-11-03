@@ -31,8 +31,9 @@ class AlmuerzoController extends Controller
         $almuerzos = DB::select('CALL ` getAlmuerzo`(?)',[$iduser]);
 
         $menualmuerzos = DB::select('CALL `getSelectMenuAlmuerzo`()');
-    
-        return view('almuerzo.index',compact('almuerzos','menualmuerzos'));
+
+         $visitas = DB::select('CALL `getSelectVisita`()');
+        return view('almuerzo.index',compact('almuerzos','menualmuerzos', 'visitas'));
     }
 
     /**
@@ -40,10 +41,18 @@ class AlmuerzoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+
         
-      
+    $visita = [$request->visit_id,  $request->fecha, $request->malmuerzo_id, $request->description];
+
+    //dump($visita);
+       DB::select('CALL `insAlmuerzoVisita`(?,?,?,?)',$visita);
+
+    return  redirect()->route('almuerzo.index')->with('status_success','¡la visita  ha pedido su almuerzo!');
+
+
 
     }
 
@@ -134,8 +143,8 @@ class AlmuerzoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Almuerzo $almuerzo)
-    {
+        public function destroy(Almuerzo $almuerzo)
+        {
       
        $this->authorize('haveaccess','almuerzo.destroy');
 
@@ -145,4 +154,10 @@ class AlmuerzoController extends Controller
         return  redirect()->route('almuerzo.index')->with('status_success','Almuerzo Eliminado Existosamente');
 
     }
+   
+
+
+
+ 
+    
 }

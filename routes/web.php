@@ -56,13 +56,19 @@ Route::put('/profile',['as'=> 'perfil.update', 'uses' => 'UsuarioController@upda
 
 Route::resource('/almuerzo', 'AlmuerzoController')->names('almuerzo');
 
+//Route::get('/almuerzo', 'AlmuerzoController@insvisit')->name('almuerzo');
+
+
 Route::resource('/malmuerzo', 'MenuAlmuerzoController')->names('malmuerzo');
 
 Route::resource('/menucena', 'MenuCenaController')->names('menucena');
 
 Route::resource('/cena', 'CenaController')->names('cena');
 
-Route::resource('/visita', 'VisitaController')->names('visita');
+Route::resource('/visita', 'VisitasController')->names('visita');
+
+
+
 
 
 
