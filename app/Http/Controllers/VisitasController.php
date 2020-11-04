@@ -9,7 +9,7 @@ use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use App\Permission\Models\Visita;
+use App\Permission\Models\Visit;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use RodionARR\PDOService;
@@ -29,7 +29,7 @@ class VisitasController extends Controller
         
         Gate::authorize('haveaccess','visita.index');
 
-        $visitas = DB::select('CALL `getVisita`()');
+        $visitas =  DB::select('CALL `getVisita`()');
            
       
         return view('visita.index',compact('visitas'));
@@ -109,13 +109,17 @@ class VisitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Visita $visita)
+    public function destroy(Visit $visita)
     {
          $this->authorize('haveaccess','visita.destroy');
         
-        $visita->active='0';
-        $visita->update();
- //dump($visita);
-    return  redirect()->route('visita.index')->with('status_success','Visita Eliminada Existosamente');
+
+        $id = [$visita->id];
+
+        //dump($id);
+
+        //DB:: select ('CALL `UpdActiveVisit`(?)',$id); $visita->active='0'; $visita->update();
+        //dump($visita);
+         return  redirect()->route('visita.index')->with('status_success','Visita Eliminada Existosamente');
     }
 }

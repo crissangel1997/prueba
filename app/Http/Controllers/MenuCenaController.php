@@ -128,10 +128,10 @@ class MenuCenaController extends Controller
 
         
         $id = [$menucena->id];
-         //dump ($id);
+        // dump ($id);
       DB:: select ('CALL `updActiveMenu`(?)',$id);
 
     
-       return  redirect()->route('menucena.index')->with('status_success','Menu Cena Actualizado Existosamente');
+     return  redirect()->route('menucena.index')->with('status_success','Menu Cena Actualizado Existosamente');
     }
 }

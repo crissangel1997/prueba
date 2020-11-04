@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAlmuerzosTable extends Migration
+class CreateAlmuerzoTotalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,16 @@ class CreateAlmuerzosTable extends Migration
      */
     public function up()
     {
-        Schema::create('almuerzos', function (Blueprint $table) {
+        Schema::create('almuerzo_total', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha')->nullable();
-            $table->string('description')->nullable();
-            $table->integer('active')->default(1);
-            $table->timestamps(); 
-            //$table->integer('visit_id')->unsigned()->nullable();
+            $table->foreignId('almuerzo_id')->references('id')->on('almuerzos')->onDelete('cascade')->nullable();
             $table->foreignId('visit_id')->references('id')->on('visitas')->onDelete('cascade')->nullable();
-           
-           
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->nullable();
             $table->foreignId('malmuerzo_id')->references('id')->on('menu_almuerzos')->onDelete('cascade');
-
-        
+            $table->integer('active')->default(1);
+            
+            $table->timestamps();
         });
-          
-             
-        
     }
 
     /**
@@ -40,7 +32,6 @@ class CreateAlmuerzosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('almuerzos');
-       
+        Schema::dropIfExists('almuerzo_total');
     }
 }

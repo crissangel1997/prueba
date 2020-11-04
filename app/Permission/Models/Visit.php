@@ -4,18 +4,20 @@ namespace App\Permission\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Visita extends Model
+class Visit extends Model
 {
+   
+    protected $fillable = [
 
-     protected $fillable = [
-
-      'name','lastname',
+        'name','lastname',
 
     ];
 
-
-      public function permissions(){
+    public function permissions(){
 
         return $this->belongsToMany('App\Permission\Models\permission')->withTimesTamps();
     }
+
+    
+
 }

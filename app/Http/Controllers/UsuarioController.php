@@ -8,7 +8,7 @@ use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use App\Permission\Models\Visita;
+use App\Permission\Models\Visit;
 
 use Illuminate\Support\Facades\Validator;
 use RodionARR\PDOService;
@@ -157,7 +157,6 @@ class UsuarioController extends Controller
      */
     public function destroy()
     {
-        
-
+     
     }
 }

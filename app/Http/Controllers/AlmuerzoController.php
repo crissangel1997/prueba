@@ -11,6 +11,7 @@ use App\Permission\Models\MenuAlmuerzo;
 use App\Permission\Models\Almuerzo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Permission\Models\Visit;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
 use DB;
@@ -44,7 +45,8 @@ class AlmuerzoController extends Controller
     public function create(Request $request)
     {
 
-        
+    $this->authorize('haveaccess','user.create');   
+    
     $visita = [$request->visit_id,  $request->fecha, $request->malmuerzo_id, $request->description];
 
     //dump($visita);

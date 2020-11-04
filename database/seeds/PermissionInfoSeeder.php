@@ -375,6 +375,39 @@ class PermissionInfoSeeder extends Seeder
     ]);
 
 
+      $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'List  visit',
+       'slug'  =>  'visita.index',
+       'description' => 'A  visit can List  visit'
+
+    ]);
+
+
+      $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Create  visit',
+       'slug'  =>  'visita.create',
+       'description' => 'A  visit can create  visit'
+
+      ]);
+
+      $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Destroy  visit',
+       'slug'  =>  'visita.destroy',
+       'description' => 'A  visit can destroy  visit'
+
+      ]);
+
+
+
 
 
      /*hacer el db:seed a lo ultimo*/

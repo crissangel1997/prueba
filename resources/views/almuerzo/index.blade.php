@@ -29,7 +29,7 @@
                     @endcan
 
 
-                   @can('haveaccess','almuerzo.create')
+                   @can('haveaccess','user.create')
                     <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Nueva Visita</a>
 
                     @endcan
