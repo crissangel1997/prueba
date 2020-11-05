@@ -34,6 +34,7 @@ class AlmuerzoController extends Controller
         $menualmuerzos = DB::select('CALL `getSelectMenuAlmuerzo`()');
 
          $visitas = DB::select('CALL `getSelectVisita`()');
+         
         return view('almuerzo.index',compact('almuerzos','menualmuerzos', 'visitas'));
     }
 

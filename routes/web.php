@@ -67,6 +67,9 @@ Route::resource('/cena', 'CenaController')->names('cena');
 
 Route::resource('/visita', 'VisitasController')->names('visita');
 
+Route::resource('almuerzototal', 'AmuerzoTolalController')->names('almuerzototal');
+
+
 
 
 

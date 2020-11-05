@@ -15,7 +15,7 @@ class CreateVisitasTable extends Migration
     {
         Schema::create('visitas', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('namev')->nullable();
             $table->string('lastname')->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();

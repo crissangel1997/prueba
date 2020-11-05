@@ -225,7 +225,7 @@
                       @endisset
 
 
-                      >{{ $visita->name }} - {{ $visita->lastname }}</option>
+                      >{{ $visita->namev }} - {{ $visita->lastname }}</option>
 
                       @endforeach
 

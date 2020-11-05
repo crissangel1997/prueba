@@ -314,6 +314,13 @@ return [
                     'icon'    => 'fas fa-user-friends',
                 ],
 
+                [
+                    'text' => ' Almuerzos Totales',
+                    'route'  => 'almuerzototal.index',
+                    'icon'    => 'far fa-clipboard',
+
+                ],
+
 
             ],
         ],
