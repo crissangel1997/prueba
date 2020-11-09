@@ -36,7 +36,7 @@
                           <th scope="col">ID</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
-                          <th scope="col">active</th>
+                          <th scope="col">¿Activo?</th>
                           <th scope="col">Acción</th>                         
                           
 
@@ -46,22 +46,36 @@
                             @foreach ($visitas as $visita)
                               <tr>
                                   <td>{{$visita->id}} </td>
-                                  <td>{{ $visita->name}} </td>
+                                  <td>{{ $visita->namev}} </td>
                                   <td>{{ $visita->lastname}}</td>
-                                  <td>{{ $visita->active }}</td>
+                                  <td>
+                                  @if ($visita->active == 1)
+                                  SI
+                                  @else
+                                  NO
+                                  @endif
+                                  </td> 
 
+                                <td> 
 
-
-                                   <td> 
-                                  
+                                  @if ($visita->active == 1)
                                     @can('haveaccess','visita.destroy')
-                                 
                                     <form action="{{ route('visita.destroy',$visita->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger">Eliminar</button>
+                                    <button class="btn btn-danger">Deshabilitar</button>
                                     </form>
-                                     @endcan
+                                    @endcan
+                                    @else
+                                    @can('haveaccess','visita.edit')
+                                    <form action="{{ route('visita.edit',$visita->id) }}" method="get">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-primary">Habilitar</button>
+                                    </form>
+                                    @endcan
+                                    @endif
+
                                  </td>
                               </tr>
                             @endforeach

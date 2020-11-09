@@ -19,7 +19,7 @@
 
 @section('body')
     <div class="wrapper">
-
+           
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')
@@ -34,7 +34,7 @@
 
         {{-- Content Wrapper --}}
         <div class="content-wrapper  {{ config('adminlte.classes_content_wrapper') ?? '' }}">
-
+         
             {{-- Content Header --}}
             <div class="content-header">
                 <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }}">
@@ -48,8 +48,10 @@
                     @yield('content')
                 </div>
             </div>
-
+   
+      
         </div>
+
 
         {{-- Footer --}}
         @hasSection('footer')

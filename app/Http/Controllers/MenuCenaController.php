@@ -110,8 +110,7 @@ class MenuCenaController extends Controller
         ]);
   
         $menucena->update($request->all());
-          // $menucena = DB::select('sp_UdateMenualmuerzo (?,?)',[$request->nombre, $request->description ]);
-          //dump($menucena);
+          
         return  redirect()->route('menucena.index')->with('status_success','Menu Cena Actualizado Existosamente');
 
     }
@@ -128,8 +127,8 @@ class MenuCenaController extends Controller
 
         
         $id = [$menucena->id];
-        // dump ($id);
-      DB:: select ('CALL `updActiveMenu`(?)',$id);
+     
+         DB:: select ('CALL `updActiveMenu`(?)',$id);
 
     
      return  redirect()->route('menucena.index')->with('status_success','Menu Cena Actualizado Existosamente');

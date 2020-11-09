@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Permission\Models\Visit;
-
 use Illuminate\Support\Facades\Validator;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;

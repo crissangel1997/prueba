@@ -7,11 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Visit extends Model
 {
    
+
+    protected $table = "visitas";
+    
+
     protected $fillable = [
 
         'name','lastname',
 
     ];
+
+     protected $primaryKey = 'id';
 
     public function permissions(){
 

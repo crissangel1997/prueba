@@ -88,7 +88,16 @@ class VisitasController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        if ($visita = Visit::findOrFail($id))
+         {
+
+           $visita->active='1';
+           $visita->update(); 
+        }
+
+       return  redirect()->route('visita.index')->with('status_success','Almuerzo Actualizado Existosamente');
+
     }
 
     /**
@@ -109,17 +118,21 @@ class VisitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Visit $visita)
+    public function destroy($id)
     {
-         $this->authorize('haveaccess','visita.destroy');
+          $this->authorize('haveaccess','almuerzototal.destroy');
+
+        
         
 
-        $id = [$visita->id];
+        if ($visita = Visit::findOrFail($id))
+         {
 
-        //dump($id);
+           $visita->active='0';
+           $visita->update(); 
+        }
 
-        //DB:: select ('CALL `UpdActiveVisit`(?)',$id); $visita->active='0'; $visita->update();
-        //dump($visita);
-         return  redirect()->route('visita.index')->with('status_success','Visita Eliminada Existosamente');
+       return  redirect()->route('visita.index')->with('status_success','Almuerzo Actualizado Existosamente');
+  
     }
 }

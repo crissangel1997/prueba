@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use RodionARR\PDOService;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\App;
 use DB;
 
@@ -23,7 +24,7 @@ class UserController extends Controller
     public function index()
     {
       
-        $this->authorize('haveaccess','user.index');
+        Gate::authorize('haveaccess','user.index');
 
       
          $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(0);

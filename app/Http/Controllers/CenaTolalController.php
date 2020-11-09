@@ -8,19 +8,19 @@ use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 use Illuminate\Support\Facades\Gate;
-use App\Permission\Models\MenuAlmuerzo;
-use App\Permission\Models\Almuerzo;
+use App\Permission\Models\MenuCena;
+use App\Permission\Models\Cena;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Permission\Models\Visit;
 use RodionARR\PDOService;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AlmuerzoExport;
+use App\Exports\CenaExport;
 
 use Illuminate\Support\Facades\App;
 use DB;
 
-class AmuerzoTolalController extends Controller
+class CenaTolalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,16 +31,16 @@ class AmuerzoTolalController extends Controller
     {
         
 
-        Gate::authorize('haveaccess','almuerzototal.index');
+        Gate::authorize('haveaccess','cenatotal.index');
+
+        $busqueda = [$request->fecha1,  $request->fecha2];
+
+        $cenatotal = DB::select('CALL `ListCenaTotal`(?,?)',$busqueda);
+       
+        return  view('cenatotal.index',compact('cenatotal'));
 
 
-        $busq = [$request->fecha1,  $request->fecha2];
-
-        $almuerzototal = DB::select('CALL `ListAlmuerzoTotal`(?,?)',$busq);
         
-
-        return view('almuerzototal.index',compact('almuerzototal'));
-     
     }
 
     /**
@@ -49,10 +49,8 @@ class AmuerzoTolalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-
     {
-
-         
+        //
     }
 
     /**
@@ -63,14 +61,17 @@ class AmuerzoTolalController extends Controller
      */
     public function store(Request $request)
     {
-         
-        $this->authorize('haveaccess','almuerzototal.create');
+        
 
-        $busq = [$request->fecha1,  $request->fecha2];
+        Gate::authorize('haveaccess','cenatotal.create');
 
-        $almuerzototal = DB::select('CALL `ListAlmuerzoTotal`(?,?)',$busq);
-       
-        return  view('almuerzototal.index',compact('almuerzototal'));
+        $busqueda = [$request->fecha1,  $request->fecha2];
+
+        $cenatotal = DB::select('CALL `ListCenaTotal`(?,?)',$busqueda);
+     
+
+        return  view('cenatotal.index',compact('cenatotal'));
+
     }
 
     /**
@@ -115,24 +116,24 @@ class AmuerzoTolalController extends Controller
      */
     public function destroy($id)
     {
-        
-        $this->authorize('haveaccess','almuerzototal.destroy');
+
+        $this->authorize('haveaccess','cenatotal.destroy');
 
         
-        $almuerzototal = Almuerzo::find($id);
-        $almuerzototal->active='0';
-        $almuerzototal->update();
+        $cena = Cena::find($id);
+        $cena->active='0';
+        $cena->update();
 
       
 
-       return  redirect()->route('almuerzototal.index')->with('status_success','Almuerzo Eliminado Existosamente');
-
+      return  redirect()->route('cenatotal.index')->with('status_success','Almuerzo Eliminado Existosamente'); 
+        
     }
 
     public function exportExcel(){
 
 
-       return Excel::download(new AlmuerzoExport, 'almuerzo-total.xlsx');
+       return Excel::download(new CenaExport, 'cena-total.xlsx');
 
     }
 }

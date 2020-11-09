@@ -276,7 +276,7 @@ return [
 
         [
             'text'    => 'Alimentacion',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-plus-circle',
             'submenu' => [
                 [
                     'text' => ' Almuezo',
@@ -293,12 +293,14 @@ return [
 
                 ],
 
+   
          
                 [
                
                     'text' => ' Menu Almuerzo',
                     'route'  => 'malmuerzo.index',
-                    'icon'    => 'fab fa-elementor',
+                    'icon'    => 'fas fa-list',
+                   
                 ],
 
                 
@@ -308,27 +310,46 @@ return [
                     'icon'    => 'fas fa-list-ul',
                 ],
                  
-                [
-                    'text' => ' Visita',
-                    'route'  => 'visita.index',
-                    'icon'    => 'fas fa-user-friends',
-                ],
 
+            ],
+        ],
+
+        [
+         
+            'text'    => 'Reportes',
+            'icon'    => 'fas fa-plus-square',
+            'submenu' => [
+                
                 [
                     'text' => ' Almuerzos Totales',
                     'route'  => 'almuerzototal.index',
                     'icon'    => 'far fa-clipboard',
 
                 ],
+                [
+                    'text' => ' Cena Total',
+                    'route'  => 'cenatotal.index',
+                    'icon'    => 'fas fa-clipboard-list',
+
+               
+               ],
 
 
             ],
+
+        ],
+
+        [
+            'text' => ' Visita',
+            'route'  => 'visita.index',
+            'icon'    => 'fas fa-user-friends',
         ],
         [
 
             'text' => 'Usuario',
             'route'  => 'user.index',
             'icon' => 'fas fa-fw fa-user',
+          
             
         ],
        

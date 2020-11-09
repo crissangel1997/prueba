@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -46,13 +48,34 @@ class LoginController extends Controller
     }
 
 
-    protected function authenticated(Request $request,  $user)
-   {   
+ 
+    public function login(Request $request){
 
-        $iduser = auth()->user()->id;     
-        $login = [$iduser,  gethostname(), $_SERVER['REMOTE_ADDR']];
-        DB::select('CALL `insLogin`(?,?,?)',$login);       
+        $this->validateLogin($request);
+        
+    
+        if (Auth::attempt(['usu' => $request->usu,'password' => $request->password,'active'=>1])){
 
-   }
+            return redirect()->route('home');
 
+        }
+        
+        return back()->withErrors(['usu' => trans('auth.failed')]);
+
+    }   
+        
+        protected function validateLogin(Request $request){
+             
+
+            $this->validate($request,[
+                'usu' => 'required|string',
+                'password' => 'required|string'
+            ]);
+        }
+
+       
+
+
+    
 }
+  

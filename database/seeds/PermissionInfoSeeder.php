@@ -406,11 +406,74 @@ class PermissionInfoSeeder extends Seeder
 
       ]);
 
+   
+      /*----++----Almuerzo Total -----------++----*/
+
+     $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'List  Lunch Total',
+       'slug'  =>  'almuerzototal.index',
+       'description' => 'A  lunch total can list  lunch total'
+
+    ]);
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Create  Lunch Total',
+       'slug'  =>  'almuerzototal.create',
+       'description' => 'A  lunch total can create  lunch total'
+
+    ]);
 
 
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Destroy Lunch Total',
+       'slug'  =>  'almuerzototal.destroy',
+       'description' => 'A  lunch total can destroy  lunch total'
+
+    ]);
+
+    /*----++-+++---Cena Total ------+++-----++----*/
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'List  dinner Total',
+       'slug'  =>  'cenatotal.index',
+       'description' => 'A  dinner total can list  dinner total'
+
+    ]);
+
+      $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Create dinner Total',
+       'slug'  =>  'cenatotal.create',
+       'description' => 'A  dinner total can create  dinner total'
+
+    ]);
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Destroy dinner Total',
+       'slug'  =>  'cenatotal.destroy',
+       'description' => 'A  dinner total can destroy  dinner total'
+
+    ]);
 
 
-     /*hacer el db:seed a lo ultimo*/
+    /*hacer el db:seed a lo ultimo*/
 
     /* $roladmin->permissions()->sync($permission_all);*/
        

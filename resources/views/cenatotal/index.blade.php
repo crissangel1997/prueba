@@ -19,55 +19,53 @@
             @include('custom.messages')
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Almuerzos Totales') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Cena Total') }}</h2></div>
 
                 <div class="card-body">
 
                    
 
-                   @can('haveaccess','almuerzototal.create')
-                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#almtotal" class="btn btn-info float-right" >Nuevo</a>
+                   @can('haveaccess','cenatotal.create')
+                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#centotal" class="btn btn-info float-right" >Nuevo</a>
 
                     @endcan
-                     @can('haveaccess','almuerzototal.create')
-                    <a href="{{ route('almtotal.excel') }}" style="margin-top: -4px; margin-right: 5px;"  class="btn btn-success float-right" >Descargar Reporte</a>
+
+                    @can('haveaccess','cenatotal.create')
+                    <a href="{{ route('cenatotal.excel') }}" style="margin-top: -4px; margin-right: 5px;"  class="btn btn-success float-right" >Descargar Reporte</a>
 
                     @endcan
 
                     
 
-                    <table id="almuerzototal" class="table table-hover">
+                    <table id="cenatotal" class="table table-hover">
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
                           <th scope="col">Fecha</th>
-                          <th scope="col">Menu</th>
-                          <th scope="col">Descripcion</th>
-                          <th scope="col">Nombre (usuario)</th>
-                          <th scope="col">Apellido (usuario)</th>
-                          <th scope="col">Nombre (Visita)</th>
-                          <th scope="col">Apellido (Visita)</th>
+                          <th scope="col">Menu Cena</th>
+                          <th scope="col">Descripcion Cena</th>
+                          <th scope="col">Nombre </th>
+                          <th scope="col">Apellido </th>
                           <th scope="col">Acción</th>                         
                           
 
                         </tr>
                       </thead>
                       <tbody>
-                            @foreach ($almuerzototal as $almuerzotot)
+                            @foreach ($cenatotal as $cenatot)
                               <tr>
-                                  <td>{{ $almuerzotot->id }}</td>
-                                  <td>{{ $almuerzotot->fecha }}</td>
-                                  <td>{{ $almuerzotot->nombre }}</td>
-                                  <td>{{ $almuerzotot->description }}</td>
-                                  <td>{{ $almuerzotot->name }}</td>
-                                  <td>{{ $almuerzotot->fname }}</td>
-                                  <td>{{ $almuerzotot->namev }}</td>
-                                  <td>{{ $almuerzotot->lastname }}</td>
+                                  <td>{{ $cenatot->id }}</td>
+                                  <td>{{ $cenatot->fechac }}</td>
+                                  <td>{{ $cenatot->nombrec }}</td>
+                                  <td>{{ $cenatot->descriptionc }}</td>
+                                  <td>{{ $cenatot->name }}</td>
+                                  <td>{{ $cenatot->fname }}</td>
+                               
                               
                                  <td> 
                                    
-                                    @can('haveaccess','almuerzototal.destroy')
-                                    <form action="{{ route('almuerzototal.destroy',$almuerzotot->id) }}" method="POST">
+                                    @can('haveaccess','cenatotal.destroy')
+                                    <form action="{{ route('cenatotal.destroy',$cenatot->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger">Eliminar</button>
@@ -86,7 +84,7 @@
 @endsection
 
 <!-- Modal Registro Menu-->
-<div class="modal fade" id="almtotal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="centotal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="margin-top: 126px;">
       <div class="modal-header">
@@ -97,7 +95,7 @@
       </div>
       <div class="modal-body">
 
-         <form  action="{{route('almuerzototal.store') }}" method="POST">
+         <form  action="{{route('cenatotal.store') }}" method="POST">
           @csrf
           
            <div class="row">
@@ -151,7 +149,7 @@
 
 <script>
   
-   $('#almuerzototal').DataTable({
+   $('#cenatotal').DataTable({
     responsive:true,
     autoWidth:false, 
 

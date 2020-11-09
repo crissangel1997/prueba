@@ -15,7 +15,14 @@
                 <h1 class="car-title">Bienvenido </h1>
 
            </div>
-
+           @php
+             
+              $iduser = auth()->user()->id;     
+              $login = [$iduser,  gethostname(), $_SERVER['REMOTE_ADDR']];
+              //dump ($login);
+             DB::select('CALL `insLogin`(?,?,?)',$login); 
+        
+           @endphp  
 
            <div class="card-body">  
 

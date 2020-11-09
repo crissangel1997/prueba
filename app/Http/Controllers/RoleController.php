@@ -58,12 +58,9 @@ class RoleController extends Controller
        
         $role = Role::create($request->all()); 
 
-      //  if ($request->get('permission')) {
-            
-            /*return $request->all();*/
-             /*Sincroniza con la tabla de permisos y roles*/
-            $role->permissions()->sync($request->get('permission'));
-       // }
+     
+          $role->permissions()->sync($request->get('permission'));
+    
 
 
         return  redirect()->route('role.index')->with('status_success','Rol  Guardado Existosamente');
@@ -86,7 +83,6 @@ class RoleController extends Controller
              $permission_role[]=$permission->id; 
         }
 
-       // return $permission_role;
           
         $permissions = Permission::get();
 
@@ -111,7 +107,6 @@ class RoleController extends Controller
              $permission_role[]=$permission->id; 
         }
 
-       // return $permission_role;
           
         $permissions = Permission::get();
 
@@ -140,12 +135,8 @@ class RoleController extends Controller
         $role->update($request->all()); 
 
 
-        //if ($request->get('permission')) {
-            
-            /*return $request->all();*/
-             /*Sincroniza con la tabla de permisos y roles*/
             $role->permissions()->sync($request->get('permission'));
-        //}
+       
 
 
         return  redirect()->route('role.index')->with('status_success','Rol Actualizado Existosamente');

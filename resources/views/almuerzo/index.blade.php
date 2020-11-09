@@ -206,11 +206,9 @@
               <div class="col-md-12">
                
               <div class="form-group">
-                    <label for="visit_id" class="col-form-label text-md-right">{{ __('Nombre y  Apellido') }}
-                    </label>
-
-                     <div class="form-group">
-                    <label for="visit_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
+                
+                     
+                    <label for="visit_id" class="col-form-label text-md-right">{{ __('Nombre y Apellido') }}
                     </label>
 
                     <select class="form-control" name="visit_id" id="visit_id">
@@ -231,7 +229,7 @@
 
                     </select> 
 
-                  </div>
+                
 
                     
               </div>

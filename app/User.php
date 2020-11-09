@@ -19,7 +19,10 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array
+
+
      */
+    protected $table = "users";
     protected $fillable = [
         'name','sname', 'fname','slname','typeident','ident','fnaci', 'direc','email','usu', 'password',   'current_sign_in_at', 'last_sign_in_at', 'host_name'
     ];
@@ -42,6 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+  protected $primaryKey = 'id';
+  
     public function adminlte_image()
     {
         return 'https://picsum.photos/300/300';

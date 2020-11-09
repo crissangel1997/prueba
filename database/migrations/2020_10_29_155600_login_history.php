@@ -18,7 +18,8 @@ class LoginHistory extends Migration
             $table->increments('idHistory');
             $table->datetime('LoginDateTime')->nullable();
             $table->datetime('LogoutDateTime')->nullable();
-            $table->integer('user_id')->unsigned();;
+           // $table->integer('user_id')->unsigned();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->nullable();
             $table->string('HostName')->nullable();
             $table->String('Description')->nullable();
             $table->integer('Active')->default(1);

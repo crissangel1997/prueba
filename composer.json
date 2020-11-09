@@ -16,6 +16,7 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.4",
+        "maatwebsite/excel": "^3.1",
         "rodion-arr/laravel-mysql-stored-procedures": "^1.0",
         "yajra/laravel-datatables-oracle": "^9.11"
     },

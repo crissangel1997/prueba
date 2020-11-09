@@ -105,8 +105,7 @@ class MenuAlmuerzoController extends Controller
         ]);
   
         $malmuerzo->update($request->all());
-          // $malmuerzo = DB::select('sp_UdateMenualmuerzo (?,?)',[$request->nombre, $request->description ]);
-          //dump($malmuerzo);
+          
         return  redirect()->route('malmuerzo.index')->with('status_success','Menu Actualizado Existosamente');
 
     }
@@ -122,8 +121,7 @@ class MenuAlmuerzoController extends Controller
       
         $this->authorize('haveaccess','malmuerzo.destroy');
 
-         $id = [$malmuerzo->id];
-         //dump ($malmuerzo);
+   
         DB:: select ('CALL `updActiveMenuAlm`(?)',$id);
 
         return  redirect()->route('malmuerzo.index')->with('status_success','Menu Actualizado Existosamente');

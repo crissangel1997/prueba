@@ -50,7 +50,7 @@ class AlmuerzoController extends Controller
     
     $visita = [$request->visit_id,  $request->fecha, $request->malmuerzo_id, $request->description];
 
-    //dump($visita);
+  
        DB::select('CALL `insAlmuerzoVisita`(?,?,?,?)',$visita);
 
     return  redirect()->route('almuerzo.index')->with('status_success','¡la visita  ha pedido su almuerzo!');
@@ -109,12 +109,7 @@ class AlmuerzoController extends Controller
      */
     public function show(Almuerzo $almuerzo)
     {
-       /* $this->authorize('haveaccess','almuerzo.show');
-
-         $malmuerzos = MenuAlmuerzo::orderBy('nombre')->get();
-
-   
-        return view('almuerzo.view',compact('malmuerzos', 'almuerzo'));*/
+       
     }
 
     /**
