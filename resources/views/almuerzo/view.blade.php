@@ -77,4 +77,33 @@
         </div>
     </div>
 </div>
+
+<!--div class="form-group">
+                
+                     
+                    <label for="visit_id" class="col-form-label text-md-right">{{ __('Usuarios') }}
+                    </label>
+
+                    <select class="form-control" name="visit_id" id="visit_id">
+
+                     @foreach($users as $user)
+
+                     <option value="{{ $user->id }}"
+                      @isset ($user->user[0]->name)
+                      @if ($user->name == $user->user[0]->name)
+                      selected 
+                      @endif
+                      @endisset
+
+
+                      >{{ $user->name }} - {{ $user->fname }}</option>
+
+                      @endforeach
+
+                    </select> 
+
+                
+
+                    
+              </div-->
 @endsection

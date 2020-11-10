@@ -26,11 +26,11 @@
                    
 
                    @can('haveaccess','almuerzototal.create')
-                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#almtotal" class="btn btn-info float-right" >Nuevo</a>
+                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#almtotal" class="btn btn-info float-right" >Buscar</a>
 
                     @endcan
                      @can('haveaccess','almuerzototal.create')
-                    <a href="{{ route('almtotal.excel') }}" style="margin-top: -4px; margin-right: 5px;"  class="btn btn-success float-right" >Descargar Reporte</a>
+                    <a href="" data-toggle="modal" data-target="#excel" style="margin-top: -4px; margin-right: 5px;"  class="btn btn-success float-right" >Descargar Reporte</a>
 
                     @endcan
 
@@ -108,7 +108,7 @@
             
                <div class="form-group">
 
-                     <label for="fecha1" class="col-form-label text-md-right">{{ __('fecha1 ') }}</label>
+                     <label for="fecha1" class="col-form-label text-md-right">{{ __('Desde: ') }}</label>
                      
                      <input id="fecha1" type="date" class="form-control @error('fecha1') is-invalid @enderror" name="fecha1" value="{{date('Y-m-d') }}"  autocomplete="fecha1" autofocus> 
 
@@ -121,7 +121,7 @@
 
                 <div class="form-group">
 
-                     <label for="fecha2" class="col-form-label text-md-right">{{ __('fecha2 ') }}</label>
+                     <label for="fecha2" class="col-form-label text-md-right">{{ __('Hasta: ') }}</label>
                      
                      <input  id="fecha2" type="date" class="form-control @error('fecha2') is-invalid @enderror" name="fecha2" value="{{date('Y-m-d') }}"  autocomplete="fecha2" autofocus> 
 
@@ -131,6 +131,8 @@
                         </span>
                       @enderror
                 </div>
+
+                
            </div>
         </div>
 
@@ -145,8 +147,89 @@
   </div>
 </div>
 
+<!--expor excel------------------------------------------------------+++++++++++++++++++++++-->
+<div class="modal fade" id="excel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="margin-top: 126px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Reporte Excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <form  action="{{ route('almtotal.excel') }}" method="get">
+          @csrf
+          
+           <div class="row">
+              <div class="col-md-12">
+
+                
+
+            
+               <div class="form-group">
+
+                     <label for="fecha1" class="col-form-label text-md-right">{{ __('Desde: ') }}</label>
+                     
+                     <input id="fecha1" type="date" class="form-control @error('fecha1') is-invalid @enderror" name="fecha1" value="{{date('Y-m-d') }}"  autocomplete="fecha1" autofocus> 
+
+                     @error('fecha1')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                </div>
+
+                <div class="form-group">
+
+                     <label for="fecha2" class="col-form-label text-md-right">{{ __('Hasta: ') }}</label>
+                     
+                     <input  id="fecha2" type="date" class="form-control @error('fecha2') is-invalid @enderror" name="fecha2" value="{{date('Y-m-d') }}"  autocomplete="fecha2" autofocus> 
+
+                     @error('fecha2')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                 </div> 
+
+                  <div class="form-group">
+
+                    <label for="campo2" class="col-form-label text-md-right">{{ __('Tipo') }}
+                    </label>
+
+                      <select class="form-control" id="campo1"  name="campo1">
+
+                        <option value="0" selected>Todos</option> 
+                        <option value="1" >Usuario</option>
+                        <option value="2">Visita</option>
+
+                      </select>
+
+                  </div>
+
+          
+
+             
+           </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success">descargar</button>
+        </div>
+          </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
 @section('js')
+
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
 
 <script>
@@ -171,6 +254,30 @@
             }
         }
    });
+
+
+
+
+</script>
+
+
+<script>
+
+ /* $("#campo1").change(function() {
+      if($("#campo1").val() !== "0"){
+        $('#campo3').prop('disabled', false);
+       }else{
+        $('#campo3').prop('disabled', 'disabled');
+       
+    
+      }
+
+   
+    });*/
+
+   
+
+ 
 
 </script>
 @endsection

@@ -130,10 +130,10 @@ class CenaTolalController extends Controller
         
     }
 
-    public function exportExcel(){
+    public function exportExcel(Request $request){
 
 
-       return Excel::download(new CenaExport, 'cena-total.xlsx');
+       return Excel::download(new CenaExport($request->fecha1,$request->fecha2), 'cena-total.xlsx');
 
     }
 }

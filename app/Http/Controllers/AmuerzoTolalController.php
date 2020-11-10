@@ -38,8 +38,10 @@ class AmuerzoTolalController extends Controller
 
         $almuerzototal = DB::select('CALL `ListAlmuerzoTotal`(?,?)',$busq);
         
+        
+        $selectt = DB::select ('CALL `selectExcel`()');
 
-        return view('almuerzototal.index',compact('almuerzototal'));
+        return view('almuerzototal.index',compact('almuerzototal','selectt'));
      
     }
 
@@ -129,10 +131,12 @@ class AmuerzoTolalController extends Controller
 
     }
 
-    public function exportExcel(){
+    public function exportExcel(Request $request){
 
+      
 
-       return Excel::download(new AlmuerzoExport, 'almuerzo-total.xlsx');
+  
+       return Excel::download(new AlmuerzoExport($request->fecha1,$request->fecha2,$request->campo1), 'almuerzo-total.xlsx');
 
     }
 }

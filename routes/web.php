@@ -72,6 +72,7 @@ Route::resource('almuerzototal', 'AmuerzoTolalController')->names('almuerzototal
 Route::resource('cenatotal', 'CenaTolalController')->names('cenatotal');
 
 Route::get('almuerzo-total-excel', 'AmuerzoTolalController@exportExcel')->name('almtotal.excel');
+
 Route::get('cena-total-excel', 'CenaTolalController@exportExcel')->name('cenatotal.excel');
 
 

@@ -15,15 +15,25 @@ class CenaExport implements FromCollection, WithHeadings, ShouldAutoSize,WithEve
 {
     /**
     * @return \Illuminate\Support\Collection
+
+
     */
+
+     protected $fecha1, $fecha2;
+
+     function __construct($fecha1, $fecha2) {
+            $this->fecha1 = $fecha1;
+            $this->fecha2 = $fecha2;
+           
+     }       
     public function collection()
     {
         
 
         return DB::table("cenas")
         	->Join('users', 'cenas.user_id', '=', 'users.id')
-            ->Join('menu_cenas', 'cenas.menucena_id', '=', 'menu_cenas.id')->where('cenas.active','=','1')
-            ->select('cenas.id', 'cenas.fechac', 'menu_cenas.nombrec','cenas.descriptionc','users.name', 'users.fname')
+            ->Join('menu_cenas', 'cenas.menucena_id', '=', 'menu_cenas.id')->where('cenas.active','=','1')->orderby('cenas.fechac','asc')
+            ->select('cenas.id', 'cenas.fechac', 'menu_cenas.nombrec','cenas.descriptionc','users.name', 'users.fname')->whereBetween('cenas.fechac',[$this->fecha1, $this->fecha2])
             ->get();
     }
 
