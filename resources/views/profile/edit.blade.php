@@ -148,7 +148,7 @@
                                </label>
 
                              
-                              <input id="fnaci" type="date" class="form-control" name="fnaci" value="{{ old('fnaci',$user->fnaci) }}" autocomplete="fnaci" autofocus>
+                              <input disabled id="fnaci" type="date" class="form-control" name="fnaci" value="{{ old('fnaci',$user->fnaci) }}" autocomplete="fnaci" autofocus>
 
                                   
                           </div>

@@ -22,7 +22,7 @@ class RoleController extends Controller
 
 
        //$roles =  DB::select('CALL getRol()');
-       $roles = Role::orderBy('id','Desc')->where('active','=','1')->paginate(0);
+       $roles = Role::orderBy('id','Desc')->where('active','=','1')->paginate(1000);
 
         return view('role.index',compact('roles'));
     }

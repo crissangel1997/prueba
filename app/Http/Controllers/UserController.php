@@ -27,7 +27,7 @@ class UserController extends Controller
         Gate::authorize('haveaccess','user.index');
 
       
-         $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(0);
+         $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(100000);
  
    
 

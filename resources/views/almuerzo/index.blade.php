@@ -30,7 +30,7 @@
 
 
                    @can('haveaccess','user.create')
-                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Nueva Visita</a>
+                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Almuerzo Visita</a>
 
                     @endcan
 
@@ -59,18 +59,6 @@
                                   <td>{{ $almuerzo->nombre }}</td>
                                   
 
-
-                                  <!--td> 
-
-                                   @can('haveaccess','almuerzo.show')
-                                    <a class="btn btn-info" href="{{ route('almuerzo.show',$almuerzo->id) }}" >Ver</a>
-                                   @endcan
-                        
-                                  </td-->
-                                  <!--td>
-                                  <a class="btn btn-success" href="">Editar</a>
-                               
-                                 </td-->
                                   <td> 
                                     @if ($date < $almuerzo->fecha )
                                     @can('haveaccess','almuerzo.destroy')
@@ -146,7 +134,7 @@
                     <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
                     </label>
 
-                    <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
+                    <select disabled class="form-control" name="malmuerzo_id" id="malmuerzo_id">
 
                      @foreach($menualmuerzos as $malmuerzo)
 
@@ -191,7 +179,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="margin-top: 126px;">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Registro Visita</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Registro Almuerzo Visita</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -254,7 +242,7 @@
                     <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
                     </label>
 
-                    <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
+                    <select disabled class="form-control" name="malmuerzo_id" id="malmuerzo_id">
 
                      @foreach($menualmuerzos as $malmuerzo)
 

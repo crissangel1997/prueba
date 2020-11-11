@@ -24,7 +24,7 @@
                 <div class="card-body">
 
                    @can('haveaccess','cena.create')
-                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nuevo</a>
+                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nueva Cena</a>
 
                     @endcan
 
@@ -126,7 +126,7 @@
                     <label for="menucena_id" class="col-form-label text-md-right">{{ __('Menu Cena') }}
                     </label>
 
-                    <select class="form-control" name="menucena_id" id="menucena_id">
+                    <select disabled class="form-control" name="menucena_id" id="menucena_id">
 
                      @foreach($menucenas as $menucena)
 

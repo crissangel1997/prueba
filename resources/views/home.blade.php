@@ -26,11 +26,27 @@
 
            <div class="card-body">  
 
+          @php
+       /*      setlocale(LC_TIME, "spanish");
+          $fecha =   date('Y-m-d');
+          $fecha = str_replace("/", "-", $fecha);     
+          $newDate = date("d-m-Y", strtotime($fecha));        
+          $mesDesc = strftime("%B de %Y", strtotime($newDate)); 
+
+           echo $mesDesc;*/
+          @endphp
+
+         
+        <br>
+
+
+
               Lorem ipsum dolor sit, amet consectetur, adipisicing elit. Non vel labore animi ratione consectetur quod obcaecati vitae laborum harum ad accusamus aperiam, consequuntur? Atque velit voluptates dolores, amet, illo nam.  
             
          
-
+              
            </div>
+
       </div>
   </div>
 
