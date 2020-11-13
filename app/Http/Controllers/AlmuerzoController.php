@@ -73,7 +73,9 @@ class AlmuerzoController extends Controller
         $iduser = auth()->user()->id;
 
         $ValidateAlm = [$iduser,  $request->fecha];
-        $almuerzos = [$iduser,  $request->fecha, $request->malmuerzo_id, $request->description];
+        $almuerzos = [$iduser,  $request->fecha, $request->malmuerzo_id, $request->description,$request->sede];
+
+
         $ValAlm = DB::select('CALL `getValidateAlm`(?,?)',$ValidateAlm);
        
  
@@ -83,7 +85,7 @@ class AlmuerzoController extends Controller
         
         if ($ValAlm == null)  {
 
-            DB::select('CALL `insAlmuerzo`(?,?,?,?)',$almuerzos);
+            DB::select('CALL `insAlmuerzo`(?,?,?,?,?)',$almuerzos);
 
             return  redirect()->route('almuerzo.index')->with('status_success','¡El usuario '.auth()->user()->name.'  '.auth()->user()->fname.'  ha pedido su almuerzo!');
 

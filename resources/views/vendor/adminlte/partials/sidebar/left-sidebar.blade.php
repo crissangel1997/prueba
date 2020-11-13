@@ -207,6 +207,22 @@
 
                 </li> 
                 @endcan
+             @can('haveaccess','user.index')
+                <li class="nav-item">
+
+                    <a class="nav-link  " href="http://prueba.test/confighora">
+
+                    <i class="far fa-clock"></i>
+
+                        <p>
+                            Hora Limite
+
+                        </p>
+
+                    </a>
+
+                </li> 
+                @endcan
              @can('haveaccess','role.index')
               <li class="nav-item">
 

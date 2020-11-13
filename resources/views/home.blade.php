@@ -19,34 +19,117 @@
              
               $iduser = auth()->user()->id;     
               $login = [$iduser,  gethostname(), $_SERVER['REMOTE_ADDR']];
-              //dump ($login);
-             DB::select('CALL `insLogin`(?,?,?)',$login); 
+              DB::select('CALL `insLogin`(?,?,?)',$login); 
         
            @endphp  
 
            <div class="card-body">  
 
-          @php
-       /*      setlocale(LC_TIME, "spanish");
-          $fecha =   date('Y-m-d');
-          $fecha = str_replace("/", "-", $fecha);     
-          $newDate = date("d-m-Y", strtotime($fecha));        
-          $mesDesc = strftime("%B de %Y", strtotime($newDate)); 
-
-           echo $mesDesc;*/
-          @endphp
-
-         
-        <br>
 
 
-
-              Lorem ipsum dolor sit, amet consectetur, adipisicing elit. Non vel labore animi ratione consectetur quod obcaecati vitae laborum harum ad accusamus aperiam, consequuntur? Atque velit voluptates dolores, amet, illo nam.  
-            
-         
+              @php
               
-           </div>
+              $iduser2 = auth()->user()->id;     
+              $login2 = [$iduser2];
+              $AlmMes = DB::select('CALL `getAlmMes`(?)',$login2); 
 
+              
+              foreach ($AlmMes as $vAlmMes){
+              $meses[] = $vAlmMes->MonthName ." ". $vAlmMes->Year;
+              $AlmCant[] = $vAlmMes->Count;
+              }
+
+              $CenasMes = DB::select('CALL `getCenasMes`(?)',$login2); 
+
+              
+              foreach ($CenasMes as $vCenasMes){
+              $mesesc[] = $vCenasMes->MonthName ." ". $vCenasMes->Year;
+              $CenasCant[] = $vCenasMes->Count;
+              }
+
+              $hbd = DB::select('CALL `getHBD`()'); 
+              
+              setlocale(LC_TIME, "spanish");
+              $mesactual = date("m");
+              setlocale(LC_TIME, "spanish");
+              $mesactual =   date('Y-m-d');
+              $mesactual = str_replace("/", "-", $mesactual);     
+              $newDate = date("d-m-Y", strtotime($mesactual));        
+              $mesDesc = strftime("%B", strtotime($newDate)); 
+
+              @endphp
+
+
+
+
+              <div class="row">
+                <div class="col-lg-6">
+                        <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">Cumpleaños de 
+                            {{ $mesDesc }}
+                          </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                          <table class="table table-bordered">
+                            <thead>                  
+                              <tr>
+                                <th style="width: 200px">Dia</th>
+                                <th style="width: 200px">Nombre</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                               @foreach ($hbd as $hbdd)
+                                        <tr>
+                                            <td> {{ $dd=$hbdd->DAY }} de {{ $hbdd->MONTHNAME }} </td>
+                                            <td> {{ $hbdd->NAME }} 
+                                            @IF($hbdd->HBD>0)
+                                               <i class="fa fa-birthday-cake" aria-hidden="true" style="color:#FF0000"></i>
+                                              @ENDIF
+                                            </td>
+
+                                        </tr>
+                                      @endforeach
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card"> <div class="card-header"> <h3 class="card-title">Almuerzos pedidos en los ultimos meses
+                          </h3><canvas id="AlmMes"></canvas></div></div>
+                      
+
+                </div>
+                <div class="col-lg-6">
+                  <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">
+
+                          </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                        </div>
+                      </div>
+                    <div class="card"> <div class="card-header"> <h3 class="card-title">Cenas pedidas en los ultimos meses
+                          </h3><canvas id="CenasMes"></canvas></div></div>
+
+                </div>
+              </div>
+
+             <br>
+             
+    
+              
+
+
+
+             
+
+           </div>
       </div>
   </div>
 
@@ -58,10 +141,94 @@
 @stop
 
 @section('js')
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script >
-      
+    var meses = <?php echo json_encode($meses) ?>;
+    var mesesc = <?php echo json_encode($mesesc) ?>;
     
+    var cenascant = <?php echo json_encode($CenasCant) ?>;;
+    var valores = <?php echo json_encode($AlmCant) ?>;;
+      var ctx = document.getElementById('AlmMes').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: meses,
+                            datasets: [{
+                                label: 'Almuerzos',
+                                data: valores,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+    </script>
+    <script >
+      var almuerzos=[];
+      var valalmuerzos=[];
+      var ctx = document.getElementById('CenasMes').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: mesesc,
+                            datasets: [{
+                                label: 'Cenas',
+                                data: cenascant,
+                                backgroundColor: [
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                    
+                                ],
+                                borderColor: [
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
     </script>
 @stop
 

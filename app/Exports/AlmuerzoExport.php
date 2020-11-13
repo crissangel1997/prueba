@@ -37,14 +37,14 @@ class AlmuerzoExport implements FromCollection, WithHeadings, ShouldAutoSize,Wit
             ->leftJoin('users', 'almuerzos.user_id', '=', 'users.id')
             ->leftJoin('visitas', 'almuerzos.visit_id', '=', 'visitas.id')
             ->leftJoin('menu_almuerzos', 'almuerzos.malmuerzo_id', '=', 'menu_almuerzos.id')->where('almuerzos.active','=','1')->orderby('almuerzos.fecha','asc')
-            ->select('almuerzos.id', 'almuerzos.fecha', 'menu_almuerzos.nombre','almuerzos.description','users.name', 'users.fname','visitas.namev', 'visitas.lastname')->whereBetween('almuerzos.fecha',[$this->fecha1, $this->fecha2])
+            ->select('almuerzos.id', 'almuerzos.fecha', 'menu_almuerzos.nombre','almuerzos.description','users.name', 'users.fname','visitas.namev', 'visitas.lastname','almuerzos.sede')->whereBetween('almuerzos.fecha',[$this->fecha1, $this->fecha2])
             ->get();
                break;
               case 1:
                 return DB::table("almuerzos")
             ->join('users', 'almuerzos.user_id', '=', 'users.id')
             ->Join('menu_almuerzos', 'almuerzos.malmuerzo_id', '=', 'menu_almuerzos.id')->where('almuerzos.active','=','1')->orderby('almuerzos.fecha','asc')
-            ->select('almuerzos.id', 'almuerzos.fecha', 'menu_almuerzos.nombre','almuerzos.description','users.name', 'users.fname')->whereBetween('almuerzos.fecha',[$this->fecha1, $this->fecha2])
+            ->select('almuerzos.id', 'almuerzos.fecha', 'menu_almuerzos.nombre','almuerzos.description','users.name', 'users.fname','almuerzos.sede')->whereBetween('almuerzos.fecha',[$this->fecha1, $this->fecha2])
             ->get();
               
               break; 
@@ -53,7 +53,7 @@ class AlmuerzoExport implements FromCollection, WithHeadings, ShouldAutoSize,Wit
                 return DB::table("almuerzos")
             ->Join('visitas', 'almuerzos.visit_id', '=', 'visitas.id')
             ->Join('menu_almuerzos', 'almuerzos.malmuerzo_id', '=', 'menu_almuerzos.id')->where('almuerzos.active','=','1')->orderby('almuerzos.fecha','asc')
-            ->select('almuerzos.id', 'almuerzos.fecha', 'menu_almuerzos.nombre','almuerzos.description','visitas.namev', 'visitas.lastname')->whereBetween('almuerzos.fecha',[$this->fecha1, $this->fecha2])
+            ->select('almuerzos.id', 'almuerzos.fecha', 'menu_almuerzos.nombre','almuerzos.description','visitas.namev', 'visitas.lastname','almuerzos.sede')->whereBetween('almuerzos.fecha',[$this->fecha1, $this->fecha2])
             ->get();
 
               break;
@@ -72,13 +72,14 @@ class AlmuerzoExport implements FromCollection, WithHeadings, ShouldAutoSize,Wit
         case 0:
         return [
            'ID',
-			'Fecha',
-			'Menu',
-			'Descripcion',
-			'Nombre (usuario)',
-			'Apellido (usuario)',
-			'Nombre (Visita)',
-			'Apellido (Visita)',
+      			'Fecha',
+      			'Menu',
+      			'Descripcion',
+      			'Nombre (usuario)',
+      			'Apellido (usuario)',
+      			'Nombre (Visita)',
+      			'Apellido (Visita)',
+            'Sede'
 
         ];
         break;
@@ -92,6 +93,7 @@ class AlmuerzoExport implements FromCollection, WithHeadings, ShouldAutoSize,Wit
             'Descripcion',
             'Nombre (usuario)',
             'Apellido (usuario)',
+            'Sede'
        ];
 
         break; 
@@ -105,7 +107,9 @@ class AlmuerzoExport implements FromCollection, WithHeadings, ShouldAutoSize,Wit
             'Descripcion',
             'Nombre (Visita)',
             'Apellido (Visita)',
+            'Sede'
        ];
+
 
         break; 
 

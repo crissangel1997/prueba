@@ -46,6 +46,7 @@
                           <th scope="col">Descripcion Cena</th>
                           <th scope="col">Nombre </th>
                           <th scope="col">Apellido </th>
+                           <th scope="col">Sede </th>
                           <th scope="col">Acción</th>                         
                           
 
@@ -60,6 +61,7 @@
                                   <td>{{ $cenatot->descriptionc }}</td>
                                   <td>{{ $cenatot->name }}</td>
                                   <td>{{ $cenatot->fname }}</td>
+                                  <td>{{ $cenatot->sede }}</td>
                                
                               
                                  <td> 

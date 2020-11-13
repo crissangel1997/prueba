@@ -11,7 +11,7 @@ use App\User;
 class Almuerzo extends Model
 {
        protected $fillable = [
-        'fecha','description',
+        'fecha','description','sede',
 
     ];
 

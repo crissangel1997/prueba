@@ -12,25 +12,53 @@
 
 {{ $date = date('Y-m-d') }}
 
+  @php
+$time = time();
+$hora = date("H:i:s", $time);
+$confighoras = DB::select('CALL `getconfighora`()');
+@endphp
+  @foreach($confighoras as $config)
+  @endforeach
+
+
 <div class="container">
             
             @include('custom.message')
           
             @include('custom.messages')
+
                  
             <div class="card card-primary card-outline">
                 <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de Almuerzos') }}</h2></div>
 
                 <div class="card-body">
+                   
+                  @if($hora < $config->param1 ) 
+
 
                    @can('haveaccess','almuerzo.create')
                     <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#almuerzos" class="btn btn-primary float-right" >Nuevo Amuerzo</a>
 
                     @endcan
 
+                  @elseif($hora > $config->param2 ) 
 
-                   @can('haveaccess','user.create')
-                    <a href="" style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Almuerzo Visita</a>
+                   @can('haveaccess','almuerzo.create')
+                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#almuerzos" class="btn btn-primary float-right" >Nuevo Amuerzo</a>
+
+                    @endcan
+
+                  @else
+
+                     @can('haveaccess','almuerzo.create')
+                      <a href="" style="margin-top: -4px;" hidden data-toggle="modal" data-target="#almuerzos" class="btn btn-primary float-right" >Nuevo Amuerzo</a>
+
+                      @endcan
+
+
+                  @endif
+                 @can('haveaccess','user.create')
+                    <a href=""  style="margin-top: -4px; margin-right: 10px;"  data-toggle="modal" data-target="#visitas" class="btn btn-info float-right" >Almuerzo Visita</a>
 
                     @endcan
 
@@ -44,6 +72,7 @@
                           <th scope="col">Fecha</th>
                           <th scope="col">Descripcion</th>
                           <th scope="col">Menu</th>
+                          <th scope="col">Sede</th>
                           <th scope="col">Acción</th>                         
                           
 
@@ -57,6 +86,7 @@
                                   <td>{{ $almuerzo->fecha }}</td>
                                   <td>{{ $almuerzo->description }}</td>
                                   <td>{{ $almuerzo->nombre }}</td>
+                                  <td>{{ $almuerzo->sede }}</td>
                                   
 
                                   <td> 
@@ -134,7 +164,7 @@
                     <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
                     </label>
 
-                    <select disabled class="form-control" name="malmuerzo_id" id="malmuerzo_id">
+                    <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
 
                      @foreach($menualmuerzos as $malmuerzo)
 
@@ -151,6 +181,17 @@
                       @endforeach
 
                     </select> 
+
+                  </div>
+
+                    <div class="form-group">
+                    <label for="sede" class="col-form-label text-md-right">{{ __('Sede') }}
+                    </label>
+
+                    <select class="form-control" name="sede" id="sede">
+                        <option value="Cartagena">Cartagena</option>
+                        <option value="Carmen De Bolivar">Carmen De Bolivar</option>
+                     </select> 
 
                   </div>
 
@@ -308,5 +349,21 @@
         }
    });
 
+</script>
+
+<script>
+  window.setInterval(
+    function(){
+      var d = new Date();
+      var hour = d.getHours()+':'+d.getMinutes()
+      let hoursActive = ['11:25', '11:28',]
+      
+      if(hoursActive.includes(hour)){
+        document.getElementById('btn').style.display = 'block';
+      }else{
+        document.getElementById('btn').style.display = 'none';
+      }
+  }
+,2000);
 </script>
 @endsection

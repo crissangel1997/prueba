@@ -12,6 +12,16 @@
 
 {{ $date = date('Y-m-d') }}
 
+
+@php
+$time = time();
+$hora = date("H:i:s", $time);
+$confighoras = DB::select('CALL `getconfighora`()');
+@endphp
+@foreach($confighoras as $config)
+@endforeach
+
+
 <div class="container">
             
             @include('custom.message')
@@ -23,10 +33,31 @@
 
                 <div class="card-body">
 
+                     @if($hora < $config->param1 ) 
+
+
                    @can('haveaccess','cena.create')
                     <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nueva Cena</a>
 
                     @endcan
+
+                  @elseif($hora > $config->param2 ) 
+
+                   @can('haveaccess','cena.create')
+                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nueva Cena</a>
+
+                    @endcan
+
+                  @else
+
+                   @can('haveaccess','cena.create')
+                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nueva Cena</a>
+
+                    @endcan
+
+
+                  @endif
+
 
                     
 
@@ -38,6 +69,7 @@
                           <th scope="col">Fecha</th>
                           <th scope="col">Descripcion</th>
                           <th scope="col">Menu</th>
+                          <th scope="col">Sede</th>
                           <th scope="col">Acción</th>                         
                           
 
@@ -51,6 +83,7 @@
                                   <td>{{ $cena->fechac }}</td>
                                   <td>{{ $cena->descriptionc }}</td>
                                   <td>{{ $cena->nombrec }}</td>
+                                  <td>{{ $cena->sede }}</td>
                               
                                   <td> 
                                     @if ($date < $cena->fechac )
@@ -126,11 +159,9 @@
                     <label for="menucena_id" class="col-form-label text-md-right">{{ __('Menu Cena') }}
                     </label>
 
-                    <select disabled class="form-control" name="menucena_id" id="menucena_id">
-
+                    <select class="form-control" name="menucena_id" id="menucena_id">
                      @foreach($menucenas as $menucena)
-
-                     <option value="{{ $menucena->id }}"
+                     <option  value="{{ $menucena->id }}" 
                       @isset ($cena->menucena[0]->nombrec)
                       @if ($menucena->nombrec == $cena->menucena[0]->nombrec)
                       selected 
@@ -143,6 +174,17 @@
                       @endforeach
 
                     </select> 
+
+                  </div>
+
+                    <div class="form-group">
+                    <label for="sede" class="col-form-label text-md-right">{{ __('Sede') }}
+                    </label>
+
+                    <select class="form-control" name="sede" id="sede">
+                        <option value="Cartagena">Cartagena</option>
+                        <option value="Carmen De Bolivar">Carmen De Bolivar</option>
+                     </select> 
 
                   </div>
 

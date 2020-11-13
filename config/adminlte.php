@@ -34,7 +34,7 @@ return [
     |
     */
 
-    'title' => 'Contac Ser',
+    'title' => 'Contact Ser',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'logo' => '<b>Contac</b>SER',
+    'logo' => '<b>Contact</b>SER',
     'logo_img' => 'vendor/adminlte/dist/img/c.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,

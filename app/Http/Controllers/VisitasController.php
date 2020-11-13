@@ -44,7 +44,7 @@ class VisitasController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

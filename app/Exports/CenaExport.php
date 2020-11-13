@@ -33,7 +33,7 @@ class CenaExport implements FromCollection, WithHeadings, ShouldAutoSize,WithEve
         return DB::table("cenas")
         	->Join('users', 'cenas.user_id', '=', 'users.id')
             ->Join('menu_cenas', 'cenas.menucena_id', '=', 'menu_cenas.id')->where('cenas.active','=','1')->orderby('cenas.fechac','asc')
-            ->select('cenas.id', 'cenas.fechac', 'menu_cenas.nombrec','cenas.descriptionc','users.name', 'users.fname')->whereBetween('cenas.fechac',[$this->fecha1, $this->fecha2])
+            ->select('cenas.id', 'cenas.fechac', 'menu_cenas.nombrec','cenas.descriptionc','users.name', 'users.fname','cenas.sede')->whereBetween('cenas.fechac',[$this->fecha1, $this->fecha2])
             ->get();
     }
 
@@ -46,7 +46,7 @@ class CenaExport implements FromCollection, WithHeadings, ShouldAutoSize,WithEve
 			'Descripcion Cena',
 			'Nombre ',
 			'Apellido ',
-			
+            'Sede'			
 
         ];
     }

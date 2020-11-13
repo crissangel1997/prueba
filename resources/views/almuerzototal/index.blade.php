@@ -47,6 +47,7 @@
                           <th scope="col">Apellido (usuario)</th>
                           <th scope="col">Nombre (Visita)</th>
                           <th scope="col">Apellido (Visita)</th>
+                          <th scope="col">Sede</th>
                           <th scope="col">Acción</th>                         
                           
 
@@ -63,6 +64,7 @@
                                   <td>{{ $almuerzotot->fname }}</td>
                                   <td>{{ $almuerzotot->namev }}</td>
                                   <td>{{ $almuerzotot->lastname }}</td>
+                                  <td>{{ $almuerzotot->sede }}</td>
                               
                                  <td> 
                                    

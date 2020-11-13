@@ -62,17 +62,18 @@ class CenaController extends Controller
         $iduser = auth()->user()->id;
 
         $ValidateCena = [$iduser,  $request->fechac];
-        $cenas = [$iduser,  $request->fechac, $request->menucena_id, $request->descriptionc];
+        $cenas = [$iduser,  $request->fechac, $request->menucena_id, $request->descriptionc,$request->sede];
+
         $ValCen = DB::select('CALL `getValidateCena`(?,?)',$ValidateCena);
        
-      //  dump($ValidateCena);
+  
      
-        $date = date('Y-m-d');
+     $date = date('Y-m-d');
     
         
         if ($ValCen == null)  {
 
-            DB::select('CALL `insCena`(?,?,?,?)',$cenas);
+            DB::select('CALL `insCena`(?,?,?,?,?)',$cenas);
 
             return  redirect()->route('cena.index')->with('status_success','¡El usuario '.auth()->user()->name.'  '.auth()->user()->fname.'  ha pedido su cena!');
 

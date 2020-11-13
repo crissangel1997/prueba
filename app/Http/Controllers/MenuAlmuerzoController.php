@@ -120,7 +120,8 @@ class MenuAlmuerzoController extends Controller
     {
       
         $this->authorize('haveaccess','malmuerzo.destroy');
-
+     
+        $id = [$malmuerzo->id];
    
         DB:: select ('CALL `updActiveMenuAlm`(?)',$id);
 

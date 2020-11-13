@@ -9,6 +9,7 @@ use App\Permission\Models\MenuCena;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
+
 use DB;
 
 class MenuCenaController extends Controller

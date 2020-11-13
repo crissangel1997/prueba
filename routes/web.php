@@ -75,6 +75,10 @@ Route::get('almuerzo-total-excel', 'AmuerzoTolalController@exportExcel')->name('
 
 Route::get('cena-total-excel', 'CenaTolalController@exportExcel')->name('cenatotal.excel');
 
+Route::resource('confighora', 'ConfigController')->names('confighora');
+
+Route::resource('permisotipo', 'PermitsTypeController')->names('permisotipo');
+
 
 
 
