@@ -194,22 +194,6 @@
                  @can('haveaccess','user.index')
                 <li class="nav-item">
 
-                    <a class="nav-link  " href="http://prueba.test/user">
-
-                        <i class="fas fa-fw fa-user "></i>
-
-                        <p>
-                            Usuario
-
-                        </p>
-
-                    </a>
-
-                </li> 
-                @endcan
-             @can('haveaccess','user.index')
-                <li class="nav-item">
-
                     <a class="nav-link  " href="http://prueba.test/confighora">
 
                     <i class="far fa-clock"></i>
@@ -223,6 +207,73 @@
 
                 </li> 
                 @endcan
+                 @can('haveaccess','permisotipo.index')
+                <li class="nav-item">
+
+                    <a class="nav-link  " href="http://prueba.test/permisotipo">
+
+                    <i class="fas fa-thumbtack"></i>
+
+                        <p>
+                          Tipo Permiso
+
+                        </p>
+
+                    </a>
+
+                </li> 
+                @endcan
+                @can('haveaccess','permiso.index')
+                <li class="nav-item">
+
+                    <a class="nav-link  " href="http://prueba.test/permiso">
+
+                    <i class="fas fa-stamp"></i> 
+
+                        <p>
+
+                          Permiso Administrador
+
+                        </p>
+
+                    </a>
+
+                </li> 
+                @endcan
+                @can('haveaccess','permisouser.index')
+                <li class="nav-item">
+
+                    <a class="nav-link  " href="http://prueba.test/permisouser">
+
+                    <i class="fas fa-door-open"></i>
+
+                        <p>
+
+                          Permiso 
+
+                        </p>
+
+                    </a>
+
+                </li> 
+                @endcan
+                 @can('haveaccess','user.index')
+                <li class="nav-item">
+
+                    <a class="nav-link  " href="http://prueba.test/user">
+
+                        <i class="fas fa-fw fa-user "></i>
+
+                        <p>
+                            Usuario
+
+                        </p>
+
+                    </a>
+
+                </li> 
+                @endcan
+            
              @can('haveaccess','role.index')
               <li class="nav-item">
 

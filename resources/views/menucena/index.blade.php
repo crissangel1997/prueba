@@ -13,12 +13,12 @@
 <div class="container">
            @include('custom.message')
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2>{{ __('Lista de Menu Cena') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de Menu Cena') }}</h2></div>
 
                 <div class="card-body">
 
                    @can('haveaccess','menucena.create')
-                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#menucena" class="btn btn-primary float-right" >Nuevo</a>
+                    <a href="" style="margin-top: -4px; "  data-toggle="modal" data-target="#menucena" class="btn btn-primary float-right" >Nuevo</a>
 
                     @endcan
 

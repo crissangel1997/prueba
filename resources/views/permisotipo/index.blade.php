@@ -13,11 +13,11 @@
 <div class="container">
            @include('custom.message')
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2>{{ __('Lista Tipo Permisos') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista Tipo Permisos') }}</h2></div>
 
                 <div class="card-body">
 
-                   @can('haveaccess','permsiotipo.create')
+                   @can('haveaccess','permisotipo.create')
                     <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#permsiot" class="btn btn-primary float-right" >Nuevo Tipo Permiso</a>
 
                     @endcan
@@ -29,10 +29,9 @@
                           <th scope="col">Nombre</th>
                           <th scope="col">Descripcion</th>
                           <th scope="col">Active</th>
+                          <th scope="col"></th>
                           <th></th>
-                          <th></th>
-                          <th></th>
-
+                      
                         </tr>
                       </thead>
                       <tbody>
@@ -42,13 +41,7 @@
                               <th scope="row">{{ $permisot->id }}</th>
                                   <td>{{ $permisot->nombrept }}</td>
                                   <td>{{ $permisot->descriptionpt }}</td>
-                                  <td> {{ $permisot->active }}</td> 
-                                  <td> 
-
-                                  @can('haveaccess','permisotipo.show')
-                                    <a class="btn btn-info" href="{{ route('permisotipo.show',$permisot->id) }}" >Ver</a>
-                                  @endcan
-                                  </td>
+                                  <td> {{ $permisot->active }}</td>
                                   <td>
                                     @can('haveaccess','permisotipo.edit')
                                       <a class="btn btn-success" href="{{ route('permisotipo.edit',$permisot->id) }}">Editar</a>

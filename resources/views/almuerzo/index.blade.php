@@ -133,17 +133,7 @@ $confighoras = DB::select('CALL `getconfighora`()');
           <div class="row">
               <div class="col-md-12">
 
-                <div class="form-group" hidden>
-                     <label for="iduser" class="col-form-label text-md-right">{{ __('Id Usuario') }}</label>
-      
-                     <input id="iduser" disabled type="text" class="form-control @error('iduser') is-invaliduser @enderror" name="iduser" value="{{auth()->user()->id}}" required autocomplete="id" autofocus> 
-
-                     @error('iduser')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                </div>
+               
 
             
                <div class="form-group">
@@ -351,19 +341,5 @@ $confighoras = DB::select('CALL `getconfighora`()');
 
 </script>
 
-<script>
-  window.setInterval(
-    function(){
-      var d = new Date();
-      var hour = d.getHours()+':'+d.getMinutes()
-      let hoursActive = ['11:25', '11:28',]
-      
-      if(hoursActive.includes(hour)){
-        document.getElementById('btn').style.display = 'block';
-      }else{
-        document.getElementById('btn').style.display = 'none';
-      }
-  }
-,2000);
-</script>
+
 @endsection

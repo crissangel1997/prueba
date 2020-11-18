@@ -15,6 +15,8 @@
                 <h1 class="car-title">Bienvenido </h1>
 
            </div>
+           
+
            @php
              
               $iduser = auth()->user()->id;     
@@ -40,6 +42,7 @@
               }
 
               $CenasMes = DB::select('CALL `getCenasMes`(?)',$login2); 
+
 
               
               foreach ($CenasMes as $vCenasMes){
@@ -122,12 +125,6 @@
 
              <br>
              
-    
-              
-
-
-
-             
 
            </div>
       </div>
@@ -142,93 +139,10 @@
 
 @section('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-    <script >
-    var meses = <?php echo json_encode($meses) ?>;
-    var mesesc = <?php echo json_encode($mesesc) ?>;
-    
-    var cenascant = <?php echo json_encode($CenasCant) ?>;;
-    var valores = <?php echo json_encode($AlmCant) ?>;;
-      var ctx = document.getElementById('AlmMes').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: meses,
-                            datasets: [{
-                                label: 'Almuerzos',
-                                data: valores,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
 
-    </script>
-    <script >
-      var almuerzos=[];
-      var valalmuerzos=[];
-      var ctx = document.getElementById('CenasMes').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: mesesc,
-                            datasets: [{
-                                label: 'Cenas',
-                                data: cenascant,
-                                backgroundColor: [
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)'
-                                    
-                                ],
-                                borderColor: [
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
 
-    </script>
+ 
+
+ 
 @stop
 

@@ -79,6 +79,10 @@ Route::resource('confighora', 'ConfigController')->names('confighora');
 
 Route::resource('permisotipo', 'PermitsTypeController')->names('permisotipo');
 
+Route::resource('permiso', 'PermitsController')->names('permiso');
+
+Route::resource('permisouser', 'PermitsUserController')->names('permisouser');
+
 
 
 

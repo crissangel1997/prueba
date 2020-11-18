@@ -9,6 +9,7 @@ use App\Permission\Models\PermitsType;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\User;
 use DB; 
 
 
@@ -80,6 +81,8 @@ class PermitsTypeController extends Controller
     public function edit(PermitsType $permisotipo)
     {
         
+        $this->authorize('haveaccess','permisotipo.edit');
+
 
          return view('permisotipo.edit',compact('permisotipo'));
     }
@@ -96,12 +99,12 @@ class PermitsTypeController extends Controller
         
          $request -> validate([
 
-            'nombrept'       => 'max:250|:permits_types,nombrept,'.$permisotipo->id,
-            'descriptionpt'  => 'max:250|:permits_types,descriptionpt,'.$permisotipo->id
+            'nombrept'       => 'required|max:250|:permits_types,nombrept,'.$permisotipo->id,
+            'descriptionpt'  => 'required|max:250|:permits_types,descriptionpt,'.$permisotipo->id
             
 
         ]);
-    
+
 
       $permisotipo->update($request->all());
       
@@ -121,7 +124,7 @@ class PermitsTypeController extends Controller
         $permisotipo->active='0';
         $permisotipo->update();
 
-       return  redirect()->route('permisotipo.index')->with('status_success','Menu Cena Actualizado Existosamente');
+       return  redirect()->route('permisotipo.index')->with('status_success','Tipo De Permiso Eliminado Existosamente');
        
     }
 }

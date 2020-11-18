@@ -41,7 +41,7 @@
                           <th scope="col">Parametro 3</th>
                           <th scope="col">Parametro 4</th>
                           <th scope="col">Parametro 5</th>
-                          <th scope="col">Accion</th>
+                          <th scope="col"></th>
                           <th scope="col"></th>
                             
 

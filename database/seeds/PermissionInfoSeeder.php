@@ -54,7 +54,7 @@ class PermissionInfoSeeder extends Seeder
 
        ]);
 
-      /*registrar usuario*/
+      //registrar usuario
         $roluser = Role::create([
 
        'name'        => 'Agente',
@@ -415,7 +415,7 @@ class PermissionInfoSeeder extends Seeder
 
        'name'  => 'List  Lunch Total',
        'slug'  =>  'almuerzototal.index',
-       'description' => 'A  lunch total can list  lunch total'
+       'description' => 'A  lunch total can list'
 
     ]);
 
@@ -425,7 +425,7 @@ class PermissionInfoSeeder extends Seeder
 
        'name'  => 'Create  Lunch Total',
        'slug'  =>  'almuerzototal.create',
-       'description' => 'A  lunch total can create  lunch total'
+       'description' => 'A  lunch total can create'
 
     ]);
 
@@ -436,7 +436,7 @@ class PermissionInfoSeeder extends Seeder
 
        'name'  => 'Destroy Lunch Total',
        'slug'  =>  'almuerzototal.destroy',
-       'description' => 'A  lunch total can destroy  lunch total'
+       'description' => 'A  lunch total can destroy'
 
     ]);
 
@@ -448,7 +448,7 @@ class PermissionInfoSeeder extends Seeder
 
        'name'  => 'List  dinner Total',
        'slug'  =>  'cenatotal.index',
-       'description' => 'A  dinner total can list  dinner total'
+       'description' => 'A  dinner total can list'
 
     ]);
 
@@ -458,7 +458,7 @@ class PermissionInfoSeeder extends Seeder
 
        'name'  => 'Create dinner Total',
        'slug'  =>  'cenatotal.create',
-       'description' => 'A  dinner total can create  dinner total'
+       'description' => 'A  dinner total can create'
 
     ]);
 
@@ -468,12 +468,132 @@ class PermissionInfoSeeder extends Seeder
 
        'name'  => 'Destroy dinner Total',
        'slug'  =>  'cenatotal.destroy',
-       'description' => 'A  dinner total can destroy  dinner total'
+       'description' => 'A  dinner total can destroy'
+
+    ]);
+    
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'List Permission Type',
+       'slug'  =>  'permisotipo.index',
+       'description' => 'you can  list permission type'
 
     ]);
 
+    $permission_all[] = $permission->id;
 
-    /*hacer el db:seed a lo ultimo*/
+      $permission = Permission::create([
+
+       'name'  => 'Create Permission Type',
+       'slug'  =>  'permisotipo.create',
+       'description' => 'you can  create permission type'
+
+    ]);
+
+  
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Edit Permission Type',
+       'slug'  =>  'permisotipo.edit',
+       'description' => 'you can  edit permission type'
+
+    ]);
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Destroy Permission Type',
+       'slug'  =>  'permisotipo.destroy',
+       'description' => 'you can  destroy permission type'
+  
+    ]);
+    
+    /*++++++++++++++++++++++++++++++++++++*/
+     $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'List Permission',
+       'slug'  =>  'permiso.index',
+       'description' => 'you can  list permission'
+  
+    ]);
+     $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Create Permission',
+       'slug'  =>  'permiso.create',
+       'description' => 'you can create permission'
+  
+    ]);
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Edit Permission',
+       'slug'  =>  'permiso.edit',
+       'description' => 'you can  edit permission'
+  
+    ]);
+
+    $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Destroy Permission',
+       'slug'  =>  'permiso.destroy',
+       'description' => 'you can destroy permission'
+  
+    ]);
+
+
+/**+++++++++++++++++++++++++++++++++++++++++++++**/
+     $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'List Permission User',
+       'slug'  =>  'permisouser.index',
+       'description' => 'you can  list permission user'
+  
+    ]); 
+    
+     $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Create Permission User',
+       'slug'  =>  'permisouser.create',
+       'description' => 'you can create permission user'
+  
+    ]); 
+
+     $permission_all[] = $permission->id;
+
+      $permission = Permission::create([
+
+       'name'  => 'Destroy Permission User',
+       'slug'  =>  'permisouser.destroy',
+       'description' => 'you can destroy permission user'
+  
+    ]); 
+
+
+
+    /*hacer el db:seed a lo ultimo
+
+INSERT INTO permissions (NAME,slug, description, created_at, updated_at) VALUES ('Create Permission Type','permisotipo.create','you can  create permission type',NOW(),NOW()),
+INSERT INTO permissions (NAME,slug, description, created_at, updated_at) VALUES ('Edit Permission Type','permisotipo.edit','you can  edit permission type',NOW(),NOW()),
+INSERT INTO permissions (NAME,slug, description, created_at, updated_at) VALUES ('Destroy Permission Type','permisotipo.destroy','you can  destroy permission type',NOW(),NOW())
+    */
 
     /* $roladmin->permissions()->sync($permission_all);*/
        

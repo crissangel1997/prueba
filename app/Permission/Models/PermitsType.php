@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PermitsType extends Model
 {
      protected $fillable = [
-        'namept','descriptionpt',
+        'nombrept','descriptionpt',
 
     ];
 

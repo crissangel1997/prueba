@@ -98,8 +98,8 @@
                     </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-danger" style="margin-right: 5px" href="{{ route('confighora.index') }}">Cancelar</a>
+                                <input class=" btn btn-primary" type="submit" value="Actualizar">
                   </div>
                     </form>
                           
