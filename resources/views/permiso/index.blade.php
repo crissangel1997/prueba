@@ -13,7 +13,7 @@
 <div class="container">
            @include('custom.message')
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista De  Permisos') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de  permisos') }}</h2></div>
 
                 <div class="card-body">
 
@@ -26,15 +26,15 @@
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">Fecha Inicio</th>
-                          <th scope="col">Fecha Final</th>
-                          <th scope="col">Hora Inicio</th>
-                          <th scope="col">Fecha Final</th>
+                          <th scope="col">Fecha inicio</th>
+                          <th scope="col">Fecha final</th>
+                          <th scope="col">Hora inicio</th>
+                          <th scope="col">Fecha final</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
-                          <th scope="col">Tipo Permiso</th>
+                          <th scope="col">Tipo permiso</th>
                           <th scope="col">Descripcion</th>
-                          <th scope="col">Estado Permiso</th>
+                          <th scope="col">Estado permiso</th>
                           <th scope="col">Aprobado por: </th>
                           <th scope="col">Active</th>
                           <th scope="col"></th>
@@ -108,7 +108,7 @@
           <div class="col-md-6">
 
             <div class="form-group">
-                   <label for="fechainicio" class="col-form-label text-md-right">{{ __('Fecha Inicial Permiso') }}</label>
+                   <label for="fechainicio" class="col-form-label text-md-right">{{ __('Fecha inicial permiso') }}</label>
 
                          <input id="fechainicio" type="date" class="form-control @error('fechainicio') is-invalid @enderror" name="fechainicio" value="{{ old('fechainicio') }}" autocomplete="fechainicio" autofocus>
 
@@ -123,7 +123,7 @@
                 <div class="col-md-6">
                      <div class="form-group">
 
-                       <label for="fechafinal" class="col-form-label text-md-right">{{ __('Fecha Final Permiso') }}</label>
+                       <label for="fechafinal" class="col-form-label text-md-right">{{ __('Fecha final permiso') }}</label>
 
                              <input id="fechafinal" type="date" class="form-control @error('fechafinal') is-invalid @enderror" name="fechafinal" value="{{ old('fechafinal') }}" autocomplete="fechafinal" autofocus>
 
@@ -141,7 +141,7 @@
           <div class="col-md-6">
 
                <div class="form-group">
-                   <label for="horainicio" class="col-form-label text-md-right">{{ __('Hora Inicial Permiso') }}</label>
+                   <label for="horainicio" class="col-form-label text-md-right">{{ __('Hora inicial permiso') }}</label>
 
                          <input id="horainicio" type="time" class="form-control @error('horainicio') is-invalid @enderror" name="horainicio" value="{{ old('horainicio') }}" autocomplete="horainicio" autofocus>
 
@@ -155,7 +155,7 @@
 
               <div class="col-md-6">
                      <div class="form-group">
-                       <label for="horafinal" class="col-form-label text-md-right">{{ __('Hora Final Permiso') }}</label>
+                       <label for="horafinal" class="col-form-label text-md-right">{{ __('Hora final permiso') }}</label>
 
                              <input id="horafinal" type="time" class="form-control @error('horafinal') is-invalid @enderror" name="horafinal" value="{{ old('horafinal') }}" autocomplete="horafinal" autofocus>
 
@@ -198,7 +198,7 @@
           <div class="col-md-6">
               <div class="form-group">
                    
-                    <label for="permittype_id" class="col-form-label text-md-right">{{ __('Tipo De Permiso') }}
+                    <label for="permittype_id" class="col-form-label text-md-right">{{ __('Tipo de permiso') }}
                     </label>
 
                     <select class="form-control" name="permittype_id" id="permittype_id">
@@ -235,7 +235,7 @@
               @foreach($permiestado as $permistado)
               @endforeach
             <div class="form-group">
-               <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Estado Permiso') }}
+               <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Estado permiso') }}
               </label>
                 <select class="form-control" name="permitstatus_id" id="permitstatus_id">
 

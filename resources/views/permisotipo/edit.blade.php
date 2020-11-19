@@ -18,7 +18,7 @@
                               <div class="row">
                                  <div class="col-md-12">
                                      <div class="form-group">
-                                       <label for="nombrept" class="col-form-label text-md-right">{{ __('Nombre Del Permiso') }}</label>
+                                       <label for="nombrept" class="col-form-label text-md-right">{{ __('Nombre del permiso') }}</label>
 
                                        <input id="nombrept" type="text" class="form-control @error('nombrept') is-invalid @enderror" name="nombrept" value="{{ old('nombrept', $permisotipo->nombrept) }}" required autocomplete="nombrept" autofocus> 
                                      </div>

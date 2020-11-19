@@ -50,12 +50,12 @@ class ConfigController extends Controller
     {
 
 
-           $confighoras = [$request->namec,$request->descriptionc,$request->param1,$request->param2,$request->param3,$request->param4,$request->param5];
+        $confighoras = [$request->namec,$request->descriptionc,$request->param1,$request->param2,$request->param3,$request->param4,$request->param5];
 
-          DB::select('CALL `insconfighora`(?,?,?,?,?,?,?)',$confighoras);
+        DB::select('CALL `insconfighora`(?,?,?,?,?,?,?)',$confighoras);
 
            //dump($confighoras);
-         return  redirect()->route('confighora.index')->with('status_success','Hora Limite Registrada Existosamente');
+        return  redirect()->route('confighora.index')->with('status_success','Hora Limite Registrada Existosamente');
 
 
     }

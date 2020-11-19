@@ -29,7 +29,7 @@ $confighoras = DB::select('CALL `getconfighora`()');
 
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de Almuerzos') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de almuerzos') }}</h2></div>
 
                 <div class="card-body">
                    
@@ -151,7 +151,7 @@ $confighoras = DB::select('CALL `getconfighora`()');
 
             
                   <div class="form-group">
-                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
+                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu almerzo') }}
                     </label>
 
                     <select class="form-control" name="malmuerzo_id" id="malmuerzo_id">
@@ -270,7 +270,7 @@ $confighoras = DB::select('CALL `getconfighora`()');
 
             
                   <div class="form-group">
-                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu Almerzo') }}
+                    <label for="malmuerzo_id" class="col-form-label text-md-right">{{ __('Menu almerzo') }}
                     </label>
 
                     <select disabled class="form-control" name="malmuerzo_id" id="malmuerzo_id">

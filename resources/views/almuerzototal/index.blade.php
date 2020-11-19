@@ -19,7 +19,7 @@
             @include('custom.messages')
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Almuerzos Totales') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Almuerzos totales') }}</h2></div>
 
                 <div class="card-body">
 

@@ -19,7 +19,7 @@
             @include('custom.messages')
                  
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Configurar Hora') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Configurar hora') }}</h2></div>
 
                 <div class="card-body">
 
@@ -36,7 +36,7 @@
                           <th scope="col">ID</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Descripcion</th>
-                          <th scope="col">Hora Inicia</th>
+                          <th scope="col">Hora inicial</th>
                           <th scope="col">Hora final</th>
                           <th scope="col">Parametro 3</th>
                           <th scope="col">Parametro 4</th>
@@ -122,7 +122,7 @@
                     </div>
 
                      <div class="form-group">
-                       <label for="param1" class="col-form-label text-md-right">{{ __('Hora Inicial') }}</label>
+                       <label for="param1" class="col-form-label text-md-right">{{ __('Hora inicial') }}</label>
 
                              <input id="param1" type="time" class="form-control @error('param1') is-invalid @enderror" name="param1" value="{{ old('param1') }}" autocomplete="param1" autofocus>
 
@@ -135,7 +135,7 @@
 
 
                      <div class="form-group">
-                       <label for="param2" class="col-form-label text-md-right">{{ __('Hora Final') }}</label>
+                       <label for="param2" class="col-form-label text-md-right">{{ __('Hora final') }}</label>
 
                              <input id="param2" type="time" class="form-control @error('param2') is-invalid @enderror" name="param2" value="{{ old('param2') }}" autocomplete="param2" autofocus>
 

@@ -26,12 +26,9 @@ class UserController extends Controller
       
         Gate::authorize('haveaccess','user.index');
 
-      
-         $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(100000);
+          $users = User::with('roles')->orderBy('id','Desc')->where('active','=','1')->paginate(100000);
  
-   
-
-        return view('user.index',compact('users'));
+         return view('user.index',compact('users'));
     }
 
     /**
@@ -119,8 +116,6 @@ class UserController extends Controller
 
         $roles = Role::orderBy('name')->get();
 
-       //return $roles;
-
         return view('user.view', compact('roles','user'));
     }
 
@@ -200,8 +195,6 @@ class UserController extends Controller
         
     }
 
-
-   
 
 
 }

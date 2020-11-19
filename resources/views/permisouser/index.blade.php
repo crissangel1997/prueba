@@ -13,7 +13,7 @@
 <div class="container">
            @include('custom.message')
             <div class="card card-primary card-outline">
-                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista  Pedir Un Permiso') }}</h2></div>
+                <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista  pedir un permiso') }}</h2></div>
 
                 <div class="card-body">
 
@@ -26,15 +26,15 @@
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">Fecha Inicio</th>
-                          <th scope="col">Fecha Final</th>
-                          <th scope="col">Hora Inicio</th>
-                          <th scope="col">Fecha Final</th>
+                          <th scope="col">Fecha inicio</th>
+                          <th scope="col">Fecha final</th>
+                          <th scope="col">Hora inicio</th>
+                          <th scope="col">Fecha final</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Apellido</th>
-                          <th scope="col">Tipo Permiso</th>
+                          <th scope="col">Tipo permiso</th>
                           <th scope="col">Descripcion</th>
-                          <th scope="col">Estado Permiso</th>
+                          <th scope="col">Estado permiso</th>
                           <th scope="col">Aprobado por: </th>
                           <th scope="col">Active</th>
                           <th scope="col"></th>
@@ -87,25 +87,25 @@
 <!-- Modal Registro Menu-->
 <div class="modal fade" id="permsiouser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content" style="margin-top: 126px;">
+    <div class="modal-content" style="margin-top: 126px; width: 106%;">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Registro Pedir Permiso</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Registro pedir permiso</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        <form  action="{{route('permisouser.store') }}" method="POST">
+        <form  action="{{route('permisouser.store') }}" name="form" method="POST">
           @csrf
 
        <div class="row">
           <div class="col-md-6">
 
             <div class="form-group">
-                   <label for="fechainicio" class="col-form-label text-md-right">{{ __('Fecha Inicial Permiso') }}</label>
+                   <label for="fechainicio" class="col-form-label text-md-right">{{ __('Fecha inicial permiso') }}</label>
 
-                         <input id="fechainicio" type="date" class="form-control @error('fechainicio') is-invalid @enderror" name="fechainicio" value="{{ old('fechainicio') }}" autocomplete="fechainicio" autofocus>
+                         <input id="fechainicio" type="date" class="form-control @error('fechainicio') is-invalid @enderror" name="fechainicio" value="{{ old('fechainicio') }}" autocomplete="fechainicio" required autofocus>
 
                           @error('fechainicio')
                               <span class="invalid-feedback" role="alert">
@@ -118,9 +118,9 @@
                 <div class="col-md-6">
                      <div class="form-group">
 
-                       <label for="fechafinal" class="col-form-label text-md-right">{{ __('Fecha Final Permiso') }}</label>
+                       <label for="fechafinal" class="col-form-label text-md-right">{{ __('Fecha final permiso') }}</label>
 
-                             <input id="fechafinal" type="date" class="form-control @error('fechafinal') is-invalid @enderror" name="fechafinal" value="{{ old('fechafinal') }}" autocomplete="fechafinal" autofocus>
+                             <input id="fechafinal" type="date" class="form-control @error('fechafinal') is-invalid @enderror" name="fechafinal" value="{{ old('fechafinal') }}" autocomplete="fechafinal" required autofocus>
 
                               @error('fechafinal')
                                   <span class="invalid-feedback" role="alert">
@@ -132,13 +132,32 @@
               
             </div>
 
-          <div class="row">
+
+
+          
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+                 <label  for="permittype_id" class="col-form-label text-md-right">{{ __('Habilite los campos de horas si las fechas de permiso son el mismo dia') }}
+                    </label>
+
+                      <input type="checkbox"    name="check" id="check"  onclick="funcion()" />
+                 
+
+               
+                  </div>
+              </div>
+            </div>
+
+
+          <div class="row" style="margin-top: -14px;">
           <div class="col-md-6">
 
                <div class="form-group">
-                   <label for="horainicio" class="col-form-label text-md-right">{{ __('Hora Inicial Permiso') }}</label>
+                   <label for="horainicio" class="col-form-label text-md-right">{{ __('Hora inicial permiso') }}</label>
 
-                         <input id="horainicio" type="time" class="form-control @error('horainicio') is-invalid @enderror" name="horainicio" value="{{ old('horainicio') }}" autocomplete="horainicio" autofocus>
+                         <input id="horainicio"  disabled  type="time" class="form-control @error('horainicio') is-invalid @enderror" name="horainicio" value="{{ old('horainicio') }}" autocomplete="horainicio" autofocus>
 
                           @error('horainicio')
                               <span class="invalid-feedback" role="alert">
@@ -150,9 +169,9 @@
 
               <div class="col-md-6">
                      <div class="form-group">
-                       <label for="horafinal" class="col-form-label text-md-right">{{ __('Hora Final Permiso') }}</label>
+                       <label for="horafinal" class="col-form-label text-md-right">{{ __('Hora final permiso') }}</label>
 
-                             <input id="horafinal" type="time" class="form-control @error('horafinal') is-invalid @enderror" name="horafinal" value="{{ old('horafinal') }}" autocomplete="horafinal" autofocus>
+                             <input id="horafinal" disabled type="time" class="form-control @error('horafinal') is-invalid @enderror" name="horafinal" value="{{ old('horafinal') }}" autocomplete="horafinal" autofocus>
 
                               @error('horafinal')
                                   <span class="invalid-feedback" role="alert">
@@ -168,7 +187,7 @@
           <div class="col-md-12">
               <div class="form-group">
                    
-                    <label for="permittype_id" class="col-form-label text-md-right">{{ __('Tipo De Permiso') }}
+                    <label for="permittype_id" class="col-form-label text-md-right">{{ __('Tipo de permiso') }}
                     </label>
 
                     <select class="form-control" name="permittype_id" id="permittype_id">
@@ -205,7 +224,7 @@
               @foreach($permiestado as $permistado)
               @endforeach
             <div class="form-group">
-               <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Estado Permiso') }}
+               <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Estado permiso') }}
               </label>
                 <select class="form-control" name="permitstatus_id" id="permitstatus_id">
 
@@ -261,7 +280,26 @@
 
 </script>
 
+<script>
 
 
+
+function funcion(){
+     if(document.form.check.checked == true){
+        document.form.horainicio.disabled = false;
+        document.form.horafinal.disabled = false;
+        
+  }  else{
+        document.form.horainicio.disabled = true;
+        document.form.horafinal.disabled = true;
+  
+    }
+}
+
+
+
+
+
+</script>
 
 @endsection

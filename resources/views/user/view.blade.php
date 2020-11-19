@@ -55,7 +55,7 @@
 
                                 <div class="col-md-6">
                                    <div class="form-group">
-                                         <label for="slname" class="col-form-label text-md-right">{{ __('Segundo Apellido') }}
+                                         <label for="slname" class="col-form-label text-md-right">{{ __('Segundo apellido') }}
                                          </label>
 
                                        
@@ -69,7 +69,7 @@
                                 <div class="row">
                                    <div class="col-md-6">   
                                       <div class="form-group">
-                                          <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo De Identificacion') }}
+                                          <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo de identificacion') }}
                                           </label>
 
                                     <input disabled id="typeident" type="text" class="form-control" name="typeident" value="{{ old('typeident',$user->typeident) }}" autocomplete="typeident" autofocus>
@@ -94,7 +94,7 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                     <div class="form-group">
-                                         <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha De Nacimiento') }}
+                                         <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha de nacimiento') }}
                                          </label>
 
                                        
@@ -122,7 +122,7 @@
                                 <div class="row">
                                    <div class="col-md-6">
                                       <div class="form-group">
-                                            <label for="email" class="col-form-label text-md-right">{{ __('Correo Electrónico') }}
+                                            <label for="email" class="col-form-label text-md-right">{{ __('Correo electrónico') }}
                                             </label>
 
                                           

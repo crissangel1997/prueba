@@ -28,7 +28,6 @@ class PermitsTypeController extends Controller
 
          $permisotipo = DB::select('CALL ` getPermirsotipo`()');
 
-        //dump($permisotipo);
 
         return view('permisotipo.index',compact('permisotipo'));
     }
@@ -55,7 +54,7 @@ class PermitsTypeController extends Controller
 
         $permisotipo = [$request->nombrept, $request->descriptionpt];
 
-             DB::select('CALL `insPermisotype`(?,?)',$permisotipo);
+           DB::select('CALL `insPermisotype`(?,?)',$permisotipo);
 
         return  redirect()->route('permisotipo.index')->with('status_success','Tipo De Permiso Registrado Exitosamente');
 

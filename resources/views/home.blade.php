@@ -2,7 +2,7 @@
 
   
 @section('content_header')
-  <h1>ContacSer</h1>
+  <h1>ContactSer</h1>
 
 @stop
 

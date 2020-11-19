@@ -35,7 +35,7 @@
                               </div>
 
                                <div class="form-group">
-                                 <label for="param1" class="col-form-label text-md-right">{{ __('Hora Inicial') }}</label>
+                                 <label for="param1" class="col-form-label text-md-right">{{ __('Hora inicial') }}</label>
 
                                        <input id="param1" type="time" class="form-control @error('param1') is-invalid @enderror" name="param1" value="{{ old('param1',$confighora->param1) }}" autocomplete="param1" autofocus>
 
@@ -48,7 +48,7 @@
 
 
                                <div class="form-group">
-                                 <label for="param2" class="col-form-label text-md-right">{{ __('Hora Final') }}</label>
+                                 <label for="param2" class="col-form-label text-md-right">{{ __('Hora final') }}</label>
 
                                        <input id="param2" type="time" class="form-control @error('param2') is-invalid @enderror" name="param2" value="{{ old('param2',$confighora->param2) }}" autocomplete="param2" autofocus>
 

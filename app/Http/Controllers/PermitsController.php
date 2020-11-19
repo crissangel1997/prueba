@@ -98,9 +98,16 @@ class PermitsController extends Controller
          $permisotipo = DB::select('CALL ` getPermirsotipo`()');
             
          $permiestado  = DB::select('CALL `getPermitStatus`()');
+          
 
+        $id = [$permiso->id];
+     
+            
+         $permilist = DB::select('CALL `getPermisoFrom`(?)',$id);
+
+         //dump($permilist);
       
-        return view('permiso.edit',compact('permiso','users','permisotipo','permiestado'));
+        return view('permiso.edit',compact('permiso','permilist','permisotipo','permiestado'));
     
 
 
@@ -115,7 +122,21 @@ class PermitsController extends Controller
      */
     public function update(Request $request, Permits $permiso)
     {
-        //
+
+          $id = [$permiso->id]; 
+          
+          $iduser = auth()->user()->id;
+          $permitstatus=intval($request->permitstatus_id);
+
+            $permiso = [$permitstatus ,  $iduser,  $id[0]];
+
+        //dump($permiso);
+
+         DB::select('CALL updPermiso (?,?,?)',$permiso);
+
+
+      return  redirect()->route('permiso.index')->with('status_success','Permiso Actualizado Existosamente');
+       
     }
 
     /**

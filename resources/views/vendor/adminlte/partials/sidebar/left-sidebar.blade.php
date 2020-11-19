@@ -20,7 +20,7 @@
                         </li>
                         <li class="nav-item">
 
-                            <a class="nav-link  " href="http://prueba.test/home">
+                            <a class="nav-link "href="http://prueba.test/home">
 
                                 <i class="fas fa-home "></i>
 

@@ -28,7 +28,7 @@
 
                            <div class="col-md-6">  
                               <div class="form-group">
-                                 <label for="sname" class="col-form-label text-md-right">{{ __('Segundo Nombre') }}
+                                 <label for="sname" class="col-form-label text-md-right">{{ __('Segundo nombre') }}
                                  </label>
 
                                
@@ -62,7 +62,7 @@
 
                         <div class="col-md-6">
                            <div class="form-group">
-                                 <label for="slname" class="col-form-label text-md-right">{{ __('Segundo Apellido') }}
+                                 <label for="slname" class="col-form-label text-md-right">{{ __('Segundo apellido') }}
                                  </label>
 
                                
@@ -80,7 +80,7 @@
                         <div class="row">
                            <div class="col-md-6">   
                               <div class="form-group">
-                                  <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo De Identificacion') }}
+                                  <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo De identificacion') }}
                                   </label>
 
                            
@@ -114,7 +114,7 @@
                         <div class="row">
                            <div class="col-md-6">
                             <div class="form-group">
-                                 <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha De Nacimiento') }}
+                                 <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha De nacimiento') }}
                                  </label>
 
                                
@@ -150,7 +150,7 @@
                         <div class="row">
                            <div class="col-md-6">
                               <div class="form-group">
-                                    <label for="email" class="col-form-label text-md-right">{{ __('Correo Electrónico') }}
+                                    <label for="email" class="col-form-label text-md-right">{{ __('Correo electrónico') }}
                                     </label>
 
                                   

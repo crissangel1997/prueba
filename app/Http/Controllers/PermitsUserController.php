@@ -111,8 +111,15 @@ class PermitsUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permits $permisouser)
     {
-        //
+
+
+      $this->authorize('haveaccess','permisouser.destroy');
+
+        $permisouser->active='0';
+        $permisouser->update();
+
+        return  redirect()->route('permisouser.index')->with('status_success','Registro Eliminado Existosamente');
     }
 }

@@ -9,7 +9,7 @@
     <div class="row ">
       <div class="col-md-4">
        <div class="card card-primary card-outline">
-           <div class="card-header text-center" style="font-family: monospace;"><h2  style="font-size: 26px;">{{ __('Perfil  Usuario') }}</h2></div>
+           <div class="card-header text-center" style="font-family: monospace;"><h2  style="font-size: 26px;">{{ __('Perfil  usuario') }}</h2></div>
           <div class="card-body box-profile">
             <div class="text-center">
                 <img class="profile-user-img img-fluid img-circle"
@@ -34,13 +34,13 @@
                         <b>Apelldos:</b> <a class="float-right">{{ old('fname',$user->fname) }} - {{ old('slname',$user->slname) }}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>Tipo De identificacion:</b> <a class="float-right">{{ old('typeident',$user->typeident) }}</a>
+                      <b>Tipo de identificacion:</b> <a class="float-right">{{ old('typeident',$user->typeident) }}</a>
                    </li>
                    <li class="list-group-item">
                       <b>Identificacion:</b> <a class="float-right">{{ old('ident',$user->ident) }}</a>
                    </li>
                    <li class="list-group-item">
-                      <b>Fecha De Nacimiento:</b> <a class="float-right">{{ old('fnaci',$user->fnaci) }}</a>
+                      <b>Fecha de nacimiento:</b> <a class="float-right">{{ old('fnaci',$user->fnaci) }}</a>
                    </li>
 
                     <li class="list-group-item">
@@ -48,7 +48,7 @@
                    </li>
 
                     <li class="list-group-item">
-                      <b>Correo Electrónico:</b><a class="float-right">{{ old('email',$user->email) }}</a>
+                      <b>Correo electrónico:</b><a class="float-right">{{ old('email',$user->email) }}</a>
                    </li>
                      <li class="list-group-item">
                       <b>último inicio de sesión:</b><a class="float-right">{{  auth()->user()->last_sign_in_at}}</a>
@@ -84,7 +84,7 @@
 
                          <div class="col-md-4">  
                             <div class="form-group">
-                              <label for="sname" class="col-form-label text-md-right">{{ __('Segundo Nombre') }}
+                              <label for="sname" class="col-form-label text-md-right">{{ __('Segundo nombre') }}
                                </label>
                                    <input id="sname" type="text" class="form-control" name="sname" value="{{ old('sname',$user->sname) }}" autocomplete="sname" autofocus>
                             </div>
@@ -103,7 +103,7 @@
                      <div class="row">
                           <div class="col-md-4">
                              <div class="form-group">
-                                   <label for="slname" class="col-form-label text-md-right">{{ __('Segundo Apellido') }}
+                                   <label for="slname" class="col-form-label text-md-right">{{ __('Segundo apellido') }}
                                    </label>
 
                                  
@@ -117,7 +117,7 @@
                           
                              <div class="col-md-4">   
                                 <div class="form-group">
-                                    <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo De Identificacion') }}
+                                    <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo de identificacion') }}
                                     </label>
 
                               <input id="typeident" type="text" class="form-control" name="typeident" value="{{ old('typeident',$user->typeident) }}" autocomplete="typeident" autofocus>
@@ -144,7 +144,7 @@
                         
                       <div class="col-md-4">
                           <div class="form-group">
-                               <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha De Nacimiento') }}
+                               <label for="fnaci" class="col-form-label text-md-right">{{ __('Fecha de nacimiento') }}
                                </label>
 
                              
@@ -169,7 +169,7 @@
 
                               <div class="col-md-4">
                                 <div class="form-group">
-                                      <label for="email" class="col-form-label text-md-right">{{ __('Correo Electrónico') }}
+                                      <label for="email" class="col-form-label text-md-right">{{ __('Correo electrónico') }}
                                       </label>
 
                                     
@@ -231,7 +231,7 @@
                              </div>
                               <div class="col-md-4">
                                   <div class="form-group ">
-                                   <label for="password" class="col-form-label text-md-right">{{ __('Nueva Contraseña') }}
+                                   <label for="password" class="col-form-label text-md-right">{{ __('Nueva contraseña') }}
                                    </label>
 
 
