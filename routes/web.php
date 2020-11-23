@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Gate;
 Route::get('/', function () {
     return view('auth.login');
 });
+//Route::get ('auth/logout', 'Auth\AuthController@logout ');
+
+
 Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -82,6 +85,8 @@ Route::resource('permisotipo', 'PermitsTypeController')->names('permisotipo');
 Route::resource('permiso', 'PermitsController')->names('permiso');
 
 Route::resource('permisouser', 'PermitsUserController')->names('permisouser');
+
+Route::get('download', 'PermitsController@download')->name('downloandfile');
 
 
 

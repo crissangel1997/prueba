@@ -17,4 +17,10 @@ class Permits extends Model
 
         return $this->belongsToMany('App\Permission\Models\permission')->withTimesTamps();
     }
+
+    public function attachment(){
+
+
+    	return $this->hasMany('App\Permision\Models\Attachment');
+    }
 }

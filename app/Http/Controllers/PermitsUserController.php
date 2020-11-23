@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use App\Permission\Models\Permits;
+use App\Permission\Models\Attachment;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use DB; 
 
 
@@ -52,7 +54,7 @@ class PermitsUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Permits $permiso)
     {
          
         $this->authorize('haveaccess','permisouser.create');
@@ -62,12 +64,39 @@ class PermitsUserController extends Controller
 
        $permisouser = [$request->fechainicio, $request->fechafinal, $request->horainicio, $request->horafinal, $iduser, $request->permittype_id, $request->description, $request->permitstatus_id];
 
-       DB::select('CALL `insPermisoUser`(?,?,?,?,?,?,?,?)',$permisouser);
+     $request->validate([
+          
+            'file' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf|max:2048',
+        
+ 
+     ]);
+    
+
+      DB::select('CALL `insPermisoUser`(?,?,?,?,?,?,?,?)',$permisouser);
 
 
+     $idp = Permits::latest()->first()->id;
+  
 
-       return  redirect()->route('permisouser.index')->with('status_success','Permiso Registrado Exitosamente');
 
+      $archivo = $request->file('file')->store('public/archivos');
+     //dd($idp);
+
+      $size = Storage::size($archivo);
+      $mimetype = Storage::mimetype($archivo);
+      $url = Storage::url($archivo);
+    
+      $Attachment = [$idp, $size, $mimetype, $url];
+ 
+      //dd($Attachment);
+       DB::select('CALL `insAttachment`(?,?,?,?)',$Attachment);
+
+
+     // return $idp.$size.$mimetype.$url;
+    
+    
+
+   return  redirect()->route('permisouser.index')->with('status_success','Permiso Registrado Exitosamente');
 
     }
 
@@ -79,7 +108,7 @@ class PermitsUserController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

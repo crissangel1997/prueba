@@ -21,6 +21,7 @@ class CreateAttachmentsTable extends Migration
             $table->string('location')->nullable();
             $table->String('type')->nullable();
             $table->integer('active')->default(1);
+
             $table->timestamps();
         }); 
     }

@@ -10,6 +10,7 @@
 
 @endsection
 
+
 <div class="container">
            @include('custom.message')
             <div class="card card-primary card-outline">
@@ -88,11 +89,15 @@
 
 @endsection
 
-
+@php
+$fecha_actual = date("y-m-d");
+//sumo 1 día
+  $dia =  date("yy-m-d",strtotime($fecha_actual."+ 3 days")); 
+@endphp
 <!-- Modal Registro Menu-->
 <div class="modal fade" id="permsio" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content" style="margin-top: 126px;">
+    <div class="modal-content" style="margin-top: 126px;  width: 106%;">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Registro Permiso</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -101,7 +106,7 @@
       </div>
       <div class="modal-body">
 
-        <form  action="{{route('permiso.store') }}" method="POST">
+        <form  action="{{route('permiso.store') }}" name="form"enctype="multipart/form-data"   method="POST">
           @csrf
 
        <div class="row">
@@ -110,7 +115,7 @@
             <div class="form-group">
                    <label for="fechainicio" class="col-form-label text-md-right">{{ __('Fecha inicial permiso') }}</label>
 
-                         <input id="fechainicio" type="date" class="form-control @error('fechainicio') is-invalid @enderror" name="fechainicio" value="{{ old('fechainicio') }}" autocomplete="fechainicio" autofocus>
+                         <input id="fechainicio"  min="{{$dia}}" type="date" class="form-control @error('fechainicio') is-invalid @enderror" name="fechainicio"  value="{{ $dia }}"  autocomplete="fechainicio" autofocus>
 
                           @error('fechainicio')
                               <span class="invalid-feedback" role="alert">
@@ -125,7 +130,7 @@
 
                        <label for="fechafinal" class="col-form-label text-md-right">{{ __('Fecha final permiso') }}</label>
 
-                             <input id="fechafinal" type="date" class="form-control @error('fechafinal') is-invalid @enderror" name="fechafinal" value="{{ old('fechafinal') }}" autocomplete="fechafinal" autofocus>
+                             <input id="fechafinal" min="{{$dia}}" type="date" class="form-control @error('fechafinal') is-invalid @enderror" name="fechafinal"  value="{{ $dia }}"  autocomplete="fechafinal" autofocus>
 
                               @error('fechafinal')
                                   <span class="invalid-feedback" role="alert">
@@ -137,13 +142,29 @@
               
             </div>
 
-          <div class="row">
+
+           <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+
+               <label  for="permittype_id" class="col-form-label text-md-right">{{__('Habilite los campos de horas si las fechas de permiso son el mismo dia') }}
+                    </label>
+
+                      <input type="checkbox"    name="check" id="check"  onclick="funcion()" />
+                 
+
+               
+                  </div>
+              </div>
+            </div>
+
+          <div class="row" style="margin-top: -14px;">
           <div class="col-md-6">
 
                <div class="form-group">
                    <label for="horainicio" class="col-form-label text-md-right">{{ __('Hora inicial permiso') }}</label>
 
-                         <input id="horainicio" type="time" class="form-control @error('horainicio') is-invalid @enderror" name="horainicio" value="{{ old('horainicio') }}" autocomplete="horainicio" autofocus>
+                         <input id="horainicio" type="time" disabled  class="form-control @error('horainicio') is-invalid @enderror" name="horainicio" value="{{ old('horainicio') }}" autocomplete="horainicio" autofocus>
 
                           @error('horainicio')
                               <span class="invalid-feedback" role="alert">
@@ -157,7 +178,7 @@
                      <div class="form-group">
                        <label for="horafinal" class="col-form-label text-md-right">{{ __('Hora final permiso') }}</label>
 
-                             <input id="horafinal" type="time" class="form-control @error('horafinal') is-invalid @enderror" name="horafinal" value="{{ old('horafinal') }}" autocomplete="horafinal" autofocus>
+                             <input id="horafinal" type="time" disabled class="form-control @error('horafinal') is-invalid @enderror" name="horafinal" value="{{ old('horafinal') }}" autocomplete="horafinal" autofocus>
 
                               @error('horafinal')
                                   <span class="invalid-feedback" role="alert">
@@ -249,6 +270,24 @@
          </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-">
+        <div class="form-group">
+          <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Subir archivo') }}  </label>
+          <div class="custom-file">
+            <input type="file" name="file"  id="file" accept="image/*,.pdf" >
+
+            @error('file')
+                
+                <small class="text-danger">{{$message}}</small>
+            @enderror
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
 
       <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -288,6 +327,28 @@
             }
         }
    });
+
+</script>
+
+<script>
+
+
+
+function funcion(){
+     if(document.form.check.checked == true){
+        document.form.horainicio.disabled = false;
+        document.form.horafinal.disabled = false;
+        
+  }  else{
+        document.form.horainicio.disabled = true;
+        document.form.horafinal.disabled = true;
+  
+    }
+}
+
+
+
+
 
 </script>
 @endsection

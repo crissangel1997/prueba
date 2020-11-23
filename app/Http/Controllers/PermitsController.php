@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use App\Permission\Models\Permits;
+use App\Permission\Models\Attachment;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Storage;
 use DB; 
 
 class PermitsController extends Controller
@@ -54,19 +56,41 @@ class PermitsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Permits $permiso)
     {
         
         $this->authorize('haveaccess','permisotipo.create');
 
         $permiso = [$request->fechainicio, $request->fechafinal, $request->horainicio, $request->horafinal, $request->user_id, $request->permittype_id, $request->description, $request->permitstatus_id];
 
-      //  dump($permiso);
+         
+
+        $request->validate([
+          
+            'file' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf|max:2048',
+        
+ 
+          ]);
+    
 
           DB::select('CALL `insPermiso`(?,?,?,?,?,?,?,?)',$permiso); 
 
+          $idpt = Permits::latest()->first()->id;
 
-        return  redirect()->route('permiso.index')->with('status_success','Permiso Registrado Exitosamente');
+            $archivos = $request->file('file')->store('public/archivos');
+               
+            $size = Storage::size($archivos);
+            $mimetype = Storage::mimetype($archivos);
+            $url = Storage::url($archivos);
+        
+            $permi = [$idpt, $size, $mimetype, $url];
+
+          
+            DB::select('CALL `insPermiFile`(?,?,?,?)',$permi);
+
+
+
+        return  redirect()->route('permiso.index')->with('status_success','Permiso Registrado Exitosamente') ;
 
 
     }
@@ -79,7 +103,9 @@ class PermitsController extends Controller
      */
     public function show($id)
     {
-        //
+     
+      
+
     }
 
     /**
@@ -156,5 +182,17 @@ class PermitsController extends Controller
         return  redirect()->route('permiso.index')->with('status_success','Permiso Eliminado Existosamente');
 
 
+    }
+
+
+    public function download($id){
+
+        $dl = Attachment::find($id);
+
+     //dump($dl);
+
+      return Storage::download($dl->url, $dl->mimetype);
+
+      
     }
 }

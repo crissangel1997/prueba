@@ -12,13 +12,18 @@
       <div class="col-md-12">    
        <div class="card card-primary card-outline">        
             <div class="card-header">  
+               
                 <h1 class="car-title">Bienvenido </h1>
 
            </div>
-           
-
+        
+        
            @php
-             
+
+
+
+
+
               $iduser = auth()->user()->id;     
               $login = [$iduser,  gethostname(), $_SERVER['REMOTE_ADDR']];
               DB::select('CALL `insLogin`(?,?,?)',$login); 
@@ -60,8 +65,10 @@
               $newDate = date("d-m-Y", strtotime($mesactual));        
               $mesDesc = strftime("%B", strtotime($newDate)); 
 
-              @endphp
 
+ 
+
+              @endphp
 
 
 

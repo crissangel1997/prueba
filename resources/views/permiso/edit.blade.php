@@ -151,7 +151,16 @@
      </div>
 
    </div>
+
  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+         
+         <a href="{{route('downloandfile', $permiso->id)}}" class="btn btn-success">descargar</a>
+
+    </div>
+  </div>
 
  <div class="modal-footer">
   <a class="btn btn-danger" style="margin-right: 61%;" href="{{ route('permiso.index') }}">Cancelar</a>

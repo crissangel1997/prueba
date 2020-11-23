@@ -8,12 +8,17 @@ class Attachment extends Model
 {
     
      protected $fillable = [
-        'size','location','type',
+        'permits_id','size','type','ruta','created_at','updated_at',
 
     ];
 
      public function permissions(){
 
         return $this->belongsToMany('App\Permission\Models\permission')->withTimesTamps();
+    }
+    
+    public function permit(){
+
+    	return $this->belongsTo('App\Permission\Models\Permits');
     }
 }

@@ -12,6 +12,7 @@
 
 {{ $date = date('Y-m-d') }}
 
+
   @php
 $time = time();
 $hora = date("H:i:s", $time);
