@@ -24,14 +24,15 @@
                 <p class="text-muted text-center"  style="font-family: monospace;  font-size: 18px;" >{{ $rol->name }}</p>
 
                  @endforeach
+
                  <hr style=" background-color: #0f83ff">
                   <ul class="list-group list-group-unbordered mb-3">
 
                     <li class="list-group-item">
-                      <b>Nombres:</b> <a class="float-right">{{ old('name', $user->name) }} - {{ old('sname',$user->sname) }}</a>
+                      <b>Nombres:</b> <a class="float-right">{{ old('name', $user->name) }}  {{ old('sname',$user->sname) }}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Apelldos:</b> <a class="float-right">{{ old('fname',$user->fname) }} - {{ old('slname',$user->slname) }}</a>
+                        <b>Apelldos:</b> <a class="float-right">{{ old('fname',$user->fname) }}  {{ old('slname',$user->slname) }}</a>
                     </li>
                     <li class="list-group-item">
                       <b>Tipo de identificacion:</b> <a class="float-right">{{ old('typeident',$user->typeident) }}</a>
@@ -63,7 +64,7 @@
 
       <div class="col-md-8">
          <div class="card card-primary card-outline">
-              <div class="card-header text-center" style="font-family: monospace;"><h2  style="font-size: 26px;">{{ __('Edicion DeL Usuario') }}</h2></div>
+              <div class="card-header text-center" style="font-family: monospace;"><h2  style="font-size: 26px;">{{ __(' Usuario') }}</h2></div>
 
               <div class="card-body">
                     @include('custom.message')
@@ -78,7 +79,7 @@
                           <div class="form-group">
                            <label for="name" class="col-form-label text-md-right">{{ __('Nombre') }}</label>
 
-                           <input id="name" type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" autocomplete="name" autofocus>
+                           <input  disabled id="name" type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" autocomplete="name" autofocus>
                           </div>
                        </div>
 
@@ -86,14 +87,14 @@
                             <div class="form-group">
                               <label for="sname" class="col-form-label text-md-right">{{ __('Segundo nombre') }}
                                </label>
-                                   <input id="sname" type="text" class="form-control" name="sname" value="{{ old('sname',$user->sname) }}" autocomplete="sname" autofocus>
+                                   <input disabled id="sname" type="text" class="form-control" name="sname" value="{{ old('sname',$user->sname) }}" autocomplete="sname" autofocus>
                             </div>
                         </div>
 
                          <div class="col-md-4">
                             <div class="form-group">
                              <label for="fname" class="col-form-label text-md-right">{{ __('Apellido') }}</label>
-                            <input id="fname" type="text" class="form-control" name="fname" value="{{ old('fname',$user->fname) }}" autocomplete="fname" autofocus>
+                            <input  disabled  id="fname" type="text" class="form-control" name="fname" value="{{ old('fname',$user->fname) }}" autocomplete="fname" autofocus>
                            </div>
                          </div>
 
@@ -107,7 +108,7 @@
                                    </label>
 
                                  
-                                     <input id="slname" type="text" class="form-control" name="slname" value="{{ old('slname',$user->slname) }}" autocomplete="slname" autofocus>
+                                     <input disabled  id="slname" type="text" class="form-control" name="slname" value="{{ old('slname',$user->slname) }}" autocomplete="slname" autofocus>
 
                                     
                                 </div>
@@ -120,7 +121,7 @@
                                     <label for="typeident" class="col-form-label text-md-right">{{ __('Tipo de identificacion') }}
                                     </label>
 
-                              <input id="typeident" type="text" class="form-control" name="typeident" value="{{ old('typeident',$user->typeident) }}" autocomplete="typeident" autofocus>
+                              <input  disabled id="typeident" type="text" class="form-control" name="typeident" value="{{ old('typeident',$user->typeident) }}" autocomplete="typeident" autofocus>
 
                                    
                                 </div>
@@ -132,7 +133,7 @@
                                    </label>
 
                                 
-                                   <input id="ident" type="text" class="form-control" name="ident" value="{{ old('ident',$user->ident) }}" autocomplete="ident" autofocus>
+                                   <input disabled   id="ident" type="text" class="form-control" name="ident" value="{{ old('ident',$user->ident) }}" autocomplete="ident" autofocus>
 
                                    
                                  </div>
@@ -148,7 +149,7 @@
                                </label>
 
                              
-                              <input disabled id="fnaci" type="date" class="form-control" name="fnaci" value="{{ old('fnaci',$user->fnaci) }}" autocomplete="fnaci" autofocus>
+                              <input   disabled id="fnaci" type="date" class="form-control" name="fnaci" value="{{ old('fnaci',$user->fnaci) }}" autocomplete="fnaci" autofocus>
 
                                   
                           </div>
@@ -161,7 +162,7 @@
                                </label>
 
                              
-                               <input id="direc" type="text" class="form-control" name="direc" value="{{ old('direc',$user->direc) }}" autocomplete="direc" autofocus>
+                               <input  disabled d="direc" type="text" class="form-control" name="direc" value="{{ old('direc',$user->direc) }}" autocomplete="direc" autofocus>
 
                                
                             </div>
@@ -173,7 +174,7 @@
                                       </label>
 
                                     
-                                      <input id="email" type="email" class="form-control " name="email" value="{{ old('email',$user->email) }}" autocomplete="email">
+                                      <input disabled id="email" type="email" class="form-control " name="email" value="{{ old('email',$user->email) }}" autocomplete="email">
 
                                 </div>
                              </div>
@@ -197,12 +198,12 @@
                              </div>
                          
 
-                             <div class="col-md-4">   
+                             <div  class="col-md-4">   
                                 <div  class="form-group" >
                                   <label for="roles" class="col-form-label text-md-right">{{ __('Roles') }}
                                   </label>
 
-                                   <select  disabled
+                                   <select  disabled 
 
                                     
                                     class="form-control" name="roles" id="roles"
@@ -227,8 +228,44 @@
 
                                    </select> 
                                    
+                               </div>
+                             </div>
+                             <div class="col-md-4">   
+                                <div  class="form-group" >
+                                  <label for="sedes" class="col-form-label text-md-right">{{ __('Sede') }}
+                                  </label>
+
+                                   <select   
+
+                                    
+                                    class="form-control" name="sedes" id="sedes"
+                                    >
+                                   
+                                     @foreach($sede  as $sed)
+
+                                            
+                                     <option  value="{{ $sed->id }}"
+
+                                      @isset ($user->sede[0]->nombresd)
+                                          @if ($sed->nombresd == $user->sede[0]->nombresd)
+                                             
+                                          @endif
+      
+                                      @endisset
+
+                                    selected>
+                                       {{ $sed->nombresd }}</option>
+
+                                     @endforeach
+
+                                   </select> 
+                                   
                                 </div>
                              </div>
+                           </div>
+
+                           <div class="row">
+                              
                               <div class="col-md-4">
                                   <div class="form-group ">
                                    <label for="password" class="col-form-label text-md-right">{{ __('Nueva contraseña') }}
@@ -244,10 +281,7 @@
                                  @enderror
                                </div>
                              </div>
-
-                             
-                         </div> 
-                         <div class="row">
+                           
                              <div class="col-md-4">
                               <div class="form-group">
                                   <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirme La Contraseña') }}</label>
@@ -256,7 +290,34 @@
                                       <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
                                   </div>
                            </div>
-                         </div>
+
+
+                           <div  class="col-md-4">   
+                                <div  class="form-group" >
+                                  <label for="roles" class="col-form-label text-md-right">{{ __('Sede actual') }}
+                                  </label>
+
+                                   <input disabled 
+
+                                    
+                                    class="form-control" name="sede" id="sede"
+                                    
+                                   
+                                       @foreach($sd as $se)
+                                         @isset ($user->sd[0]->nombresd)
+                                          @if ($se->nombresd == $user->sd[0]->nombresd)
+                                          @endif
+      
+                                      @endisset
+
+                                     value = "{{ $se->nombresd }}">
+
+                                     @endforeach                                 
+                               </div>
+                             </div>
+
+                      </div>
+
                             <hr style=" background-color: #0f83ff">
                     
                            <input class=" btn btn-primary" type="submit" value="Actualizar">

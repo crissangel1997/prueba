@@ -27,17 +27,15 @@
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">Fecha inicio</th>
-                          <th scope="col">Fecha final</th>
-                          <th scope="col">Hora inicio</th>
-                          <th scope="col">Fecha final</th>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Apellido</th>
-                          <th scope="col">Tipo permiso</th>
-                          <th scope="col">Descripcion</th>
-                          <th scope="col">Estado permiso</th>
-                          <th scope="col">Aprobado por: </th>
-                          <th scope="col">Active</th>
+                          <th scope="col">F.inicio</th>
+                          <th scope="col">F.final</th>
+                          <th scope="col">H.inicio</th>
+                          <th scope="col">H.final</th>
+                          <th scope="col">Agente</th>
+                          <th scope="col">Tipo</th>
+                          <th scope="col">Estado</th>
+                          <th scope="col">Aprueba </th>
+                          <th scope="col">Sede </th>
                           <th scope="col"></th>
             
                       
@@ -53,15 +51,14 @@
                                   <td>{{ $permiuser->fechafinal }}</td>
                                   <td>{{ $permiuser->horainicio }}</td>
                                   <td>{{ $permiuser->horafinal }}</td>
-                                  <td>{{ $permiuser->name }}</td>
-                                  <td>{{ $permiuser->fname }}</td>
+                                  <td>{{ $permiuser->name }} {{ $permiuser->fname }}</td>
                                   <td>{{ $permiuser->nombrept }}</td>
-                                  <td>{{ $permiuser->description }}</td>
                                   <td>{{ $permiuser->namep }}</td>
-                                  <td>{{ $permiuser->nombre}} --- {{$permiuser->apellido}} </td>
-                                  <td>{{ $permiuser->active }}</td>
-                                
-                                 <td> 
+                                  <td>{{ $permiuser->nombre}}  {{$permiuser->apellido}} </td>
+                                  <td>{{ $permiuser->sede }}</td>
+
+                          
+                                  <td> 
                                    @can('haveaccess','permisouser.destroy')
                                     <form action="{{ route('permisouser.destroy',$permiuser->id) }}" method="POST">
                                     @csrf
@@ -225,13 +222,29 @@ $fecha_actual = date("y-m-d");
                <textarea class="form-control"  name="description" placeholder="Descripcion" id="description" rows="3">{{ old('description')}}</textarea>
 
             </div>
-              
+              <div hidden class="form-group">
+
+                  <label for="sede" class="col-form-label text-md-right">{{ __('Sede actual') }}
+                      </label>
+                       <select  class="form-control" name="sede" id="sede">
+                        @foreach($sd as $se)
+                           <option  value="{{$se->nombresd }}"
+                         @isset ($user->sd[0]->nombresd)
+                              @if ($se->nombresd == $user->sd[0]->nombresd)
+                               selected  
+                              @endif
+
+                          @endisset>{{ $se->nombresd }}</option>
+                         @endforeach
+                       </select> 
+                </div>
+            
               @foreach($permiestado as $permistado)
               @endforeach
             <div class="form-group">
                <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Estado permiso') }}
               </label>
-                <select class="form-control" name="permitstatus_id" id="permitstatus_id">
+                <select  class="form-control" name="permitstatus_id" id="permitstatus_id">
 
                    <option value="{{$permistado->id }}">{{ $permistado->namep}}</option>
 

@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-7">
       <div class="card card-primary card-outline">
-        <div class="card-header"><h2>{{ __('Habilitar Permiso') }}</h2></div>
+        <div class="card-header"><h2 style="font-family: monospace;">{{ __('Habilitar Permiso') }}</h2></div>
 
         <div class="card-body">
           @include('custom.message')
@@ -91,9 +91,7 @@
 
          <option value="{{ old('$permis->id',$permis->id) }}"
 
-
-
-          >{{ $permis->name }} - {{ $permis->fname}}</option>
+        >{{ $permis->name }} - {{ $permis->fname}}</option>
 
           @endforeach
 
@@ -101,10 +99,8 @@
       </div>
     </div>
 
-
-
-
-    <div class="col-md-6">
+  
+   <div class="col-md-6">
       <div class="form-group">
 
         <label for="permittype_id" class="col-form-label text-md-right">{{ __('Tipo de permiso') }}
@@ -136,6 +132,27 @@
 
       </div>
 
+      
+      <div class="form-group">
+
+        <label for="sede" class="col-form-label text-md-right">{{ __('Sede') }}
+        </label>
+
+        <select disabled  class="form-control" name="sede" id="sede">
+
+         @foreach($permilist as $permis)
+
+         <option value="{{ old('$permis->id',$permis->id) }}"
+
+
+          >{{ $permis->sede}}</option>
+
+          @endforeach
+
+        </select> 
+
+      </div>
+
       @foreach($permilist as $permis)
       @endforeach
       <div class="form-group">
@@ -146,24 +163,32 @@
          <option value="{{ old('$permis->id',$permis->id) }}">{{$permis->namep}}</option>
 
        </select>
-
-
      </div>
-
+ 
    </div>
 
  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-         
-         <a href="{{route('downloandfile', $permiso->id)}}" class="btn btn-success">descargar</a>
-
-    </div>
-  </div>
+ 
 
  <div class="modal-footer">
-  <a class="btn btn-danger" style="margin-right: 61%;" href="{{ route('permiso.index') }}">Cancelar</a>
+
+  <a class="btn btn-danger"  href="{{ route('permiso.index') }}">Cancelar</a>
+
+@foreach($attachments as $attachment)
+
+
+
+@endforeach
+@if($attachment->ruta == null)
+
+ <a href="{{route('download', $permiso->id)}}" hidden  class="btn btn-secondary"><i class="fas fa-cloud-download-alt" >  Descargar archivo  </i></a>
+@else     
+
+ <a href="{{route('download', $permiso->id)}}"   class="btn btn-secondary"><i class="fas fa-cloud-download-alt" >  Descargar archivo  </i></a>
+ 
+@endif 
+
 
  <button class="btn btn-primary" name="permitstatus_id" type="submit" value="2">Aprobar</button>
 

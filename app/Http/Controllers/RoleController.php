@@ -82,10 +82,7 @@ class RoleController extends Controller
              
              $permission_role[]=$permission->id; 
         }
-
-          
         $permissions = Permission::get();
-
         return view('role.view', compact('permissions','role','permission_role'));
     }
 
@@ -107,10 +104,8 @@ class RoleController extends Controller
              $permission_role[]=$permission->id; 
         }
 
-          
         $permissions = Permission::get();
-
-        return view('role.edit', compact('permissions','role','permission_role'));
+     return view('role.edit', compact('permissions','role','permission_role'));
     }
 
     /**
@@ -131,15 +126,9 @@ class RoleController extends Controller
 
         ]);
 
-       
-        $role->update($request->all()); 
-
-
-            $role->permissions()->sync($request->get('permission'));
-       
-
-
-        return  redirect()->route('role.index')->with('status_success','Rol Actualizado Existosamente');
+       $role->update($request->all()); 
+         $role->permissions()->sync($request->get('permission'));
+         return  redirect()->route('role.index')->with('status_success','Rol Actualizado Existosamente');
         
 
     }
@@ -153,11 +142,9 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $this->authorize('haveaccess','role.destroy');
-         
         $role->active='0';
         $role->update();
-
-       return  redirect()->route('role.index')->with('status_success','Rol Eliminado Existosamente');
+        return  redirect()->route('role.index')->with('status_success','Rol Eliminado Existosamente');
         
     }
 }

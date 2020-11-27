@@ -106,7 +106,8 @@ return [
     'attributes' => [
 
      'usu' => 'Usuario',
-     'password' => 'Contraseña'
+     'password' => 'Contraseña',
+     'file' => 'subir archivo'
 
     ],
 

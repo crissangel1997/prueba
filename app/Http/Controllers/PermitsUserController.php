@@ -32,10 +32,10 @@ class PermitsUserController extends Controller
         $users = DB::select('CALL `getSelectUsers`()');
         $permisotipo = DB::select('CALL ` getPermirsotipo`()');
         $permiestado  = DB::select('CALL `getPermitStatus`()');
-       
+          $sd = DB::select('CALL `getSedel`(?)',[$iduser]);
         //dump($permisouser);
 
-        return view('permisouser.index',compact('permisouser','users', 'permisotipo','permiestado'));
+        return view('permisouser.index',compact('permisouser','users', 'permisotipo','permiestado','sd'));
     }
 
     /**
@@ -62,23 +62,33 @@ class PermitsUserController extends Controller
         $iduser = auth()->user()->id;
        
 
-       $permisouser = [$request->fechainicio, $request->fechafinal, $request->horainicio, $request->horafinal, $iduser, $request->permittype_id, $request->description, $request->permitstatus_id];
+       $permisouser = [$request->fechainicio, $request->fechafinal, $request->horainicio, $request->horafinal, $iduser, $request->permittype_id, $request->description, $request->permitstatus_id,$request->sede];
 
-     $request->validate([
+
+
+$request->validate([
           
-            'file' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf|max:2048',
+            'file' => 'mimes:jpeg,bmp,png,gif,svg,pdf|max:2048',
         
  
      ]);
     
 
-      DB::select('CALL `insPermisoUser`(?,?,?,?,?,?,?,?)',$permisouser);
+      DB::select('CALL `insPermisoUser`(?,?,?,?,?,?,?,?,?)',$permisouser);
 
 
-     $idp = Permits::latest()->first()->id;
+    $idp = Permits::latest()->first()->id;
   
 
 
+if ($request->file('file') == null) {
+  
+        $idnl = [$idp, null, null, null];
+     DB::select('CALL `insAttachment`(?,?,?,?)',$idnl);
+
+}else{
+
+  
       $archivo = $request->file('file')->store('public/archivos');
      //dd($idp);
 
@@ -87,18 +97,21 @@ class PermitsUserController extends Controller
       $url = Storage::url($archivo);
     
       $Attachment = [$idp, $size, $mimetype, $url];
- 
+    
+
       //dd($Attachment);
        DB::select('CALL `insAttachment`(?,?,?,?)',$Attachment);
 
-
+   //insNullAttchment
+}
      // return $idp.$size.$mimetype.$url;
     
     
 
    return  redirect()->route('permisouser.index')->with('status_success','Permiso Registrado Exitosamente');
 
-    }
+
+}
 
     /**
      * Display the specified resource.

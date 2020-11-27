@@ -13,6 +13,8 @@
 
 <div class="container">
            @include('custom.message')
+
+            @include('custom.messages')
             <div class="card card-primary card-outline">
                 <div class="card-header"><h2 style="font-family: monospace;">{{ __('Lista de  permisos') }}</h2></div>
 
@@ -22,22 +24,23 @@
                     <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#permsio" class="btn btn-primary float-right" >Nuevo Permiso</a>
 
                     @endcan
+                     @can('haveaccess','permiso.create')
+                    <a href="" data-toggle="modal" data-target="#excels" style="margin-top: -4px; margin-right: 5px;"  class="btn btn-secondary float-right" >Descargar Reporte</a>
+
+                    @endcan
 
                       <table id="permi" class="table table-hover">
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">Fecha inicio</th>
-                          <th scope="col">Fecha final</th>
-                          <th scope="col">Hora inicio</th>
-                          <th scope="col">Fecha final</th>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Apellido</th>
-                          <th scope="col">Tipo permiso</th>
-                          <th scope="col">Descripcion</th>
-                          <th scope="col">Estado permiso</th>
-                          <th scope="col">Aprobado por: </th>
-                          <th scope="col">Active</th>
+                          <th scope="col">F.inicio</th>
+                          <th scope="col">F.final</th>
+                          <th scope="col">H.inicio</th>
+                          <th scope="col">H.final</th>
+                          <th scope="col">Agente</th>
+                          <th scope="col">Tipo </th>
+                          <th scope="col">Estado</th>
+                          <th scope="col">Aprueba </th>
                           <th scope="col"></th>
                           <th scope="col"></th>
                       
@@ -53,16 +56,13 @@
                                   <td>{{ $permi->fechafinal }}</td>
                                   <td>{{ $permi->horainicio }}</td>
                                   <td>{{ $permi->horafinal }}</td>
-                                  <td>{{ $permi->name }}</td>
-                                  <td>{{ $permi->fname }}</td>
+                                  <td>{{ $permi->name }}  {{ $permi->fname }}</td>
                                   <td>{{ $permi->nombrept }}</td>
-                                  <td>{{ $permi->description }}</td>
                                   <td>{{ $permi->namep }}</td>
-                                  <td>{{ $permi->nombre}} --- {{$permi->apellido}} </td>
-                                  <td>{{ $permi->active }}</td>
+                                  <td>{{ $permi->nombre}} {{$permi->apellido}} </td>
                                   <td>
                                     @can('haveaccess','permiso.edit')
-                                      <a class="btn btn-success" href="{{ route('permiso.edit',$permi->id) }}">Dar Permiso</a>
+                                      <a class="btn btn-success" href="{{ route('permiso.edit',$permi->id) }}">Ver</a>
                                     @endcan
                                  </td>
 
@@ -253,14 +253,16 @@ $fecha_actual = date("y-m-d");
 
             </div>
               
+
+
               @foreach($permiestado as $permistado)
               @endforeach
-            <div class="form-group">
+            <div  class="form-group">
                <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Estado permiso') }}
               </label>
-                <select class="form-control" name="permitstatus_id" id="permitstatus_id">
+                <select  class="form-control" name="permitstatus_id" id="permitstatus_id">
 
-                   <option value="{{$permistado->id }}">{{ $permistado->namep}}</option>
+                   <option  value="{{$permistado->id }}">{{ $permistado->namep}}</option>
 
               </select>
 
@@ -271,11 +273,13 @@ $fecha_actual = date("y-m-d");
     </div>
 
     <div class="row">
-      <div class="col-md-">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="permitstatus_id" class="col-form-label text-md-right">{{ __('Subir archivo') }}  </label>
           <div class="custom-file">
-            <input type="file" name="file"  id="file" accept="image/*,.pdf" >
+       </span>
+
+            <input type="file" name="file" id="file" accept="image/*,.pdf" >
 
             @error('file')
                 
@@ -287,13 +291,71 @@ $fecha_actual = date("y-m-d");
       </div>
 
     </div>
-
+         
+        
 
       <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
 
       </div>
+          </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<!--expor excel------------------------------------------------------+++++++++++++++++++++++-->
+<div class="modal fade" id="excels" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="margin-top: 126px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Reporte excel permiso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+         <form  action="{{ route('permits.excel') }}" method="get">
+          @csrf
+          
+           <div class="row">
+              <div class="col-md-12">
+
+                <div class="form-group">
+
+                     <label for="fechainicio" class="col-form-label text-md-right">{{ __('Desde: ') }}</label>
+                     
+                     <input id="fechainicio" type="date" class="form-control @error('fechainicio') is-invalid @enderror" name="fechainicio" value="{{date('Y-m-d') }}"  autocomplete="fechainicio" autofocus> 
+
+                     @error('fechainicio')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                </div>
+
+                <div class="form-group">
+
+                     <label for="fechafinal" class="col-form-label text-md-right">{{ __('Hasta: ') }}</label>
+                     
+                     <input  id="fechafinal" type="date" class="form-control @error('fechafinal') is-invalid @enderror" name="fechafinal" value="{{date('Y-m-d') }}"  autocomplete="fechafinal" autofocus> 
+
+                     @error('fechafinal')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
+                 </div>   
+           </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-success">descargar</button>
+        </div>
           </form>
       </div>
      

@@ -51,7 +51,7 @@ $confighoras = DB::select('CALL `getconfighora`()');
                   @else
 
                    @can('haveaccess','cena.create')
-                    <a href="" style="margin-top: -4px;"  data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nueva Cena</a>
+                    <a href="" style="margin-top: -4px;" hidden data-toggle="modal" data-target="#cenas" class="btn btn-primary float-right" >Nueva Cena</a>
 
                     @endcan
 
@@ -177,16 +177,36 @@ $confighoras = DB::select('CALL `getconfighora`()');
 
                   </div>
 
-                    <div class="form-group">
-                    <label for="sede" class="col-form-label text-md-right">{{ __('Sede') }}
-                    </label>
+                      <div hidden  class="form-group">
 
-                    <select class="form-control" name="sede" id="sede">
-                        <option value="Cartagena">Cartagena</option>
-                        <option value="Carmen De Bolivar">Carmen De Bolivar</option>
-                     </select> 
+                        <label for="sede" class="col-form-label text-md-right">{{ __('Sede actual Cena') }}
+                            </label>
 
-                  </div>
+                             <select 
+
+                              
+                              class="form-control" name="sede" id="sede"
+                              >
+                             
+                                 @foreach($sd as $se)
+
+                                      
+                               <option  value="{{$se->nombresd }}"
+
+                                @isset ($user->sd[0]->nombresd)
+                                    @if ($se->nombresd == $user->sd[0]->nombresd)
+                                     selected  
+                                    @endif
+
+                                @endisset
+
+                              >{{ $se->nombresd }}</option>
+
+                               @endforeach
+
+                             </select> 
+
+                         </div>
 
                     <div class="form-group">
 

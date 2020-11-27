@@ -86,7 +86,10 @@ Route::resource('permiso', 'PermitsController')->names('permiso');
 
 Route::resource('permisouser', 'PermitsUserController')->names('permisouser');
 
-Route::get('download', 'PermitsController@download')->name('downloandfile');
+Route::get('download/{id}', 'PermitsController@download')->name('download');
+
+
+Route::get('permits-excel', 'PermitsController@exportExcels')->name('permits.excel');
 
 
 

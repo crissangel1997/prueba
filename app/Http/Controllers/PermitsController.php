@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use App\Permission\Models\Permits;
+use App\Permission\Models\Sede;
 use App\Permission\Models\Attachment;
 use RodionARR\PDOService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PermitsExport;
+use Alert;
+use Response;
 use DB; 
 
 class PermitsController extends Controller
@@ -29,15 +34,17 @@ class PermitsController extends Controller
          $permisos = DB::select('CALL `getPermits`()');
 
         //dump($permiso);
-
+       
          $users = DB::select('CALL `getSelectUsers`()');
-
-
+      
+ 
          $permisotipo = DB::select('CALL ` getPermirsotipo`()');
             
          $permiestado  = DB::select('CALL `getPermitStatus`()');
-
-        return view('permiso.index',compact('permisos','users','permisotipo','permiestado'));
+         $sede = Sede::orderBy('nombresd')->get();
+          
+     
+        return view('permiso.index',compact('permisos','users','permisotipo','permiestado','sede'));
     }
 
     /**
@@ -60,37 +67,44 @@ class PermitsController extends Controller
     {
         
         $this->authorize('haveaccess','permisotipo.create');
-
-        $permiso = [$request->fechainicio, $request->fechafinal, $request->horainicio, $request->horafinal, $request->user_id, $request->permittype_id, $request->description, $request->permitstatus_id];
+   
+        
+          $permiso = [$request->fechainicio, $request->fechafinal, $request->horainicio, $request->horafinal, $request->user_id, $request->permittype_id, $request->description, $request->permitstatus_id];
 
          
-
+      
         $request->validate([
           
-            'file' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf|max:2048',
+            'file' => 'mimes:jpeg,bmp,png,gif,svg,pdf|max:2048',
         
  
           ]);
     
 
-          DB::select('CALL `insPermiso`(?,?,?,?,?,?,?,?)',$permiso); 
+           DB::select('CALL `insPermiso`(?,?,?,?,?,?,?,?)',$permiso); 
+
 
           $idpt = Permits::latest()->first()->id;
 
-            $archivos = $request->file('file')->store('public/archivos');
-               
-            $size = Storage::size($archivos);
-            $mimetype = Storage::mimetype($archivos);
-            $url = Storage::url($archivos);
-        
-            $permi = [$idpt, $size, $mimetype, $url];
+        if ($request->file('file') == null) {
+      
+            $idnl = [$idpt, null, null, null];
+         DB::select('CALL `insAttachment`(?,?,?,?)',$idnl);
 
-          
-            DB::select('CALL `insPermiFile`(?,?,?,?)',$permi);
+           }else{
+                $archivos = $request->file('file')->store('public/archivos');
+                   
+                $size = Storage::size($archivos);
+                $mimetype = Storage::mimetype($archivos);
+                $url = Storage::url($archivos);
+            
+                $permi = [$idpt, $size, $mimetype, $url];
 
+                DB::select('CALL `insPermiFile`(?,?,?,?)',$permi);
+     
+            }
 
-
-        return  redirect()->route('permiso.index')->with('status_success','Permiso Registrado Exitosamente') ;
+            return  redirect()->route('permiso.index')->with('status_success','Permiso Registrado Exitosamente') ;
 
 
     }
@@ -126,14 +140,13 @@ class PermitsController extends Controller
          $permiestado  = DB::select('CALL `getPermitStatus`()');
           
 
-        $id = [$permiso->id];
+         $id = [$permiso->id];
      
+         $attachments = DB::select('CALL `getAttachments`(?)',$id);
             
          $permilist = DB::select('CALL `getPermisoFrom`(?)',$id);
 
-         //dump($permilist);
-      
-        return view('permiso.edit',compact('permiso','permilist','permisotipo','permiestado'));
+        return view('permiso.edit',compact('permiso','permilist','permisotipo','permiestado','attachments'));
     
 
 
@@ -156,12 +169,11 @@ class PermitsController extends Controller
 
             $permiso = [$permitstatus ,  $iduser,  $id[0]];
 
-        //dump($permiso);
 
-         DB::select('CALL updPermiso (?,?,?)',$permiso);
+        DB::select('CALL updPermiso (?,?,?)',$permiso);
 
 
-      return  redirect()->route('permiso.index')->with('status_success','Permiso Actualizado Existosamente');
+        return  redirect()->route('permiso.index')->with('status_success','Permiso Actualizado Existosamente');
        
     }
 
@@ -185,14 +197,35 @@ class PermitsController extends Controller
     }
 
 
-    public function download($id){
+    public function download($id, Permits $permiso){
 
-        $dl = Attachment::find($id);
+     $file = Attachment::find($id);
 
-     //dump($dl);
+    
+   
+     $path = public_path($file->ruta);
 
-      return Storage::download($dl->url, $dl->mimetype);
+     if ($file->ruta == null) {
+         
+           // return redirect()->route('')->with(alert('¡No hay archivo para descargar!'));
+        $var = "¡¡¡No hay ningun archivo para descargar!!!";
 
-      
+        echo "<script> alert('".$var."'); </script>";
+
+        //return view('permi.edit');
+
+     }else{
+
+         return Response::download($path);
+     }
+    
+    
+    }
+
+
+     public function exportExcels(Request $request){
+
+    return Excel::download(new PermitsExport($request->fechainicio,$request->fechafinal),'permiso-report.xlsx');
+
     }
 }

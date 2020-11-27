@@ -35,8 +35,7 @@
 
                      <li class="nav-item has-treeview ">
 
-
-                        <a class="nav-link  " href="">
+                         <a class="nav-link  " href="">
 
                          <i class="fas fa-plus-circle "></i>
 
@@ -91,7 +90,7 @@
                                 <i class="fas fa-list "></i>
 
                                     <p>
-                                     Menu Almuerzo
+                                     Menu almuerzo
 
                                  </p>
 
@@ -134,9 +133,9 @@
 
                 </a>
 
-            
                 <ul class="nav nav-treeview">
 
+                    
                  @can('haveaccess','almuerzototal.index')
                     <li class="nav-item">
 
@@ -145,7 +144,7 @@
                             <i class="far fa-clipboard "></i>
 
                             <p>
-                             Almuerzos Totales
+                             Almuerzos totales
 
                          </p>
 
@@ -161,7 +160,7 @@
                         <i class="fas fa-clipboard-list "></i>
 
                                 <p>
-                                 Cena Total
+                                 Cena total
 
                              </p>
 
@@ -174,122 +173,165 @@
 
                </li>
                @endcan
+                  <li class="nav-item has-treeview ">
+                     <a class="nav-link  " href="">
 
-              @can('haveaccess','visita.index')
-               <li class="nav-item">
+                          <i class="fas fa-user-shield"></i>
 
-                    <a class="nav-link  " href="http://prueba.test/visita">
+                            <p>
+                               Permisos
+                                <i class="fas fa-angle-left right"></i>
 
-                        <i class="fas fa-user-friends "></i>
+                            </p>
 
-                        <p>
-                         Visita
+                        </a>
 
-                     </p>
+                   <ul class="nav nav-treeview">
 
-                 </a>
+                      @can('haveaccess','permisouser.index')
+                         <li class="nav-item">
 
-                </li> 
-                @endcan
+                             <a class="nav-link  " href="http://prueba.test/permisouser">
+
+                             <i class="fas fa-door-open"></i>
+
+                                 <p>
+
+                                   Permiso
+
+                                 </p>
+
+                             </a>
+
+                         </li> 
+                     @endcan    
+
+                     @can('haveaccess','permisotipo.index')
+                         <li class="nav-item">
+
+                             <a class="nav-link  " href="http://prueba.test/permisotipo">
+
+                             <i class="fas fa-thumbtack"></i>
+
+                                 <p>
+                                   Tipo permiso
+
+                                 </p>
+
+                             </a>
+
+                         </li> 
+                         @endcan
+                         @can('haveaccess','permiso.index')
+                         <li class="nav-item">
+
+                             <a class="nav-link  " href="http://prueba.test/permiso">
+
+                             <i class="fas fa-stamp"></i> 
+
+                                 <p>
+
+                                   Permiso administrador
+
+                                 </p>
+
+                             </a>
+
+                         </li> 
+                         @endcan
+         
+                      </ul>
+
+                   </li>
+               
                  @can('haveaccess','user.index')
-                <li class="nav-item">
+                   <li class="nav-item has-treeview ">
 
-                    <a class="nav-link  " href="http://prueba.test/confighora">
 
-                    <i class="far fa-clock"></i>
+                        <a class="nav-link  " href="">
 
-                        <p>
-                            Hora Limite
+                          <i class="fas fa-user-cog"></i>
 
-                        </p>
+                            <p>
+                                Administracion
+                                <i class="fas fa-angle-left right"></i>
 
-                    </a>
+                            </p>
 
-                </li> 
-                @endcan
-                 @can('haveaccess','permisotipo.index')
-                <li class="nav-item">
+                        </a>
+                         <ul class="nav nav-treeview">
+                          @can('haveaccess','visita.index')
+                       <li class="nav-item">
 
-                    <a class="nav-link  " href="http://prueba.test/permisotipo">
+                            <a class="nav-link  " href="http://prueba.test/visita">
 
-                    <i class="fas fa-thumbtack"></i>
+                                <i class="fas fa-user-friends "></i>
 
-                        <p>
-                          Tipo Permiso
+                                <p>
+                                 Visita
 
-                        </p>
+                             </p>
 
-                    </a>
+                         </a>
 
-                </li> 
-                @endcan
-                @can('haveaccess','permiso.index')
-                <li class="nav-item">
+                        </li> 
+                        @endcan
 
-                    <a class="nav-link  " href="http://prueba.test/permiso">
+                         @can('haveaccess','role.index')
+                        <li class="nav-item">
 
-                    <i class="fas fa-stamp"></i> 
+                            <a class="nav-link  " href="http://prueba.test/confighora">
 
-                        <p>
+                            <i class="far fa-clock"></i>
 
-                          Permiso Administrador
+                                <p>
+                                    Hora limite
 
-                        </p>
+                                </p>
 
-                    </a>
+                            </a>
 
-                </li> 
-                @endcan
-                @can('haveaccess','permisouser.index')
-                <li class="nav-item">
+                        </li> 
+                     @endcan
+                           
 
-                    <a class="nav-link  " href="http://prueba.test/permisouser">
+                       @can('haveaccess','user.index')
+                        <li class="nav-item">
 
-                    <i class="fas fa-door-open"></i>
+                            <a class="nav-link  " href="http://prueba.test/user">
 
-                        <p>
+                                <i class="fas fa-fw fa-user "></i>
 
-                          Permiso 
+                                <p>
+                                    Usuario
 
-                        </p>
+                                </p>
 
-                    </a>
+                            </a>
 
-                </li> 
-                @endcan
-                 @can('haveaccess','user.index')
-                <li class="nav-item">
+                        </li> 
+                        @endcan
+                    
+                     @can('haveaccess','role.index')
+                      <li class="nav-item">
 
-                    <a class="nav-link  " href="http://prueba.test/user">
+                            <a class="nav-link  " href="http://prueba.test/role">
 
-                        <i class="fas fa-fw fa-user "></i>
+                                <i class="fas fa-fw fa-cog "></i>
 
-                        <p>
-                            Usuario
+                                <p>
+                                    Roles
 
-                        </p>
+                                </p>
 
-                    </a>
+                            </a>
 
-                </li> 
-                @endcan
-            
-             @can('haveaccess','role.index')
-              <li class="nav-item">
-
-                    <a class="nav-link  " href="http://prueba.test/role">
-
-                        <i class="fas fa-fw fa-cog "></i>
-
-                        <p>
-                            Roles
-
-                        </p>
-
-                    </a>
-
+                       </li>
+                       @endcan
+                    </ul>
                </li>
                @endcan
+
 
             </ul>
 

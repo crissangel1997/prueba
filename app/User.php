@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Permission\Traits\UserTrait;
 use App\Permission\Models\Role;
+use App\Permission\Models\Sede;
+
 use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
@@ -66,6 +68,12 @@ class User extends Authenticatable
         return 'profile';
     }
 
+     public function sedes(){
 
+
+        return $this->hasOne('App\Permision\Models\Sede');
+    }
     
+
+  
 }

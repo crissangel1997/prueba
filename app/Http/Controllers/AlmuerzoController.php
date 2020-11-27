@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Permission\Models\Role;
+use App\Permission\Models\Sede;
 use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
@@ -34,8 +35,10 @@ class AlmuerzoController extends Controller
         $menualmuerzos = DB::select('CALL `getSelectMenuAlmuerzo`()');
 
          $visitas = DB::select('CALL `getSelectVisita`()');
-         
-        return view('almuerzo.index',compact('almuerzos','menualmuerzos', 'visitas'));
+
+        $sd = DB::select('CALL `getSedel`(?)',[$iduser]);
+
+        return view('almuerzo.index',compact('almuerzos','menualmuerzos', 'visitas', 'sd'));
     }
 
     /**
@@ -76,7 +79,8 @@ class AlmuerzoController extends Controller
         $almuerzos = [$iduser,  $request->fecha, $request->malmuerzo_id, $request->description,$request->sede];
 
 
-        $ValAlm = DB::select('CALL `getValidateAlm`(?,?)',$ValidateAlm);
+   //dump($almuerzos);
+       $ValAlm = DB::select('CALL `getValidateAlm`(?,?)',$ValidateAlm);
        
  
      

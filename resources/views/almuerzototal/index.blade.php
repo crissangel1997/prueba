@@ -167,10 +167,7 @@
            <div class="row">
               <div class="col-md-12">
 
-                
-
-            
-               <div class="form-group">
+                <div class="form-group">
 
                      <label for="fecha1" class="col-form-label text-md-right">{{ __('Desde: ') }}</label>
                      

@@ -27,6 +27,7 @@ class PermitsTypeController extends Controller
      Gate::authorize('haveaccess','permisotipo.index');
 
          $permisotipo = DB::select('CALL ` getPermirsotipo`()');
+         
 
 
         return view('permisotipo.index',compact('permisotipo'));

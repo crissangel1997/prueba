@@ -92,7 +92,7 @@ class UserController extends Controller
      
                 ]);
 
-                /*  $user = DB::insert('CALL `sp_inusers`("name","sname","fname","slname","typeident","ident","fnaci","direc","email","usu","password")');*/
+               
              
                 $user->roles()->sync($request->get('roles'));
                  

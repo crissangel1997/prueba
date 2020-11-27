@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Permission\Models\Role;
+use App\Permission\Models\Sede;
 use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
@@ -32,10 +33,12 @@ class CenaController extends Controller
         $cenas = DB::select('CALL `getCena`(?)',[$iduser]);
 
        $menucenas = DB::select('CALL `getSelectMenuCena`()');
+
+       $sd = DB::select('CALL `getSedel`(?)',[$iduser]);
         
        
         //dump($cenas);
-        return view('cena.index',compact('cenas', 'menucenas'));
+        return view('cena.index',compact('cenas', 'menucenas', 'sd'));
     }
 
     /**

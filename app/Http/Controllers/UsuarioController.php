@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Permission\Models\Role;
+use App\Permission\Models\Sede;
 use App\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
@@ -75,6 +76,11 @@ class UsuarioController extends Controller
 
        $role = DB::select('CALL `getRoleName`(?)',[$iduser]);
 
+
+       $sd = DB::select('CALL `getSedel`(?)',[$iduser]);
+
+       $sede = Sede::orderBy('nombresd')->get();
+
        $user = User::find(auth()->user()->id);
        $roles = Role::orderBy('name')->get();
        if(empty($user)){
@@ -82,8 +88,8 @@ class UsuarioController extends Controller
          return redirect()->back();
        }
 
-      //dump($user);
-      return view('profile.edit', compact('roles', 'user','role')); 
+   //  dump($sede);
+    return view('profile.edit', compact('roles', 'user','role','sede','sd')); 
 
     }
 
@@ -94,7 +100,7 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, Sede $sede)
     {
     
       
@@ -126,13 +132,28 @@ class UsuarioController extends Controller
         
              unset($data['password']);
     }
-        $update = auth()->user()->update($data); 
-         /*Sincroniza con la tabla de permisos y roles*/ 
-        $user->roles()->sync($request->get('roles'));
+       
+     
 
-        //dump($update);
-    
-         if ($update) {
+  
+        $update = auth()->user()->update($data); 
+
+  
+       /* $user = auth()->user()->roles()->sync($request->get('roles'));*/
+
+
+        $iduser = auth()->user()->id;
+
+           $sede  = [$request->sedes, $iduser];
+
+        DB::select('CALL `updSede`(?,?)',$sede);
+
+
+  /* $sede = auth()->user()->sedes()->sync($request->get('sedes'));*/
+
+
+
+       if ($update) {
 
              return  redirect()->route('perfil.edit')->with('status_success','Perfil Usuario  Actualizado Existosamente');
 

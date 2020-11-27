@@ -175,16 +175,36 @@ $confighoras = DB::select('CALL `getconfighora`()');
 
                   </div>
 
-                    <div class="form-group">
-                    <label for="sede" class="col-form-label text-md-right">{{ __('Sede') }}
-                    </label>
+                    <div hidden  class="form-group">
 
-                    <select class="form-control" name="sede" id="sede">
-                        <option value="Cartagena">Cartagena</option>
-                        <option value="Carmen De Bolivar">Carmen De Bolivar</option>
-                     </select> 
+                        <label for="sede" class="col-form-label text-md-right">{{ __('Sede actual almuerzo') }}
+                            </label>
 
-                  </div>
+                             <select 
+
+                              
+                              class="form-control" name="sede" id="sede"
+                              >
+                             
+                                 @foreach($sd as $se)
+
+                                      
+                                 <option  value="{{$se->nombresd }}"
+
+                                @isset ($user->sd[0]->nombresd)
+                                    @if ($se->nombresd == $user->sd[0]->nombresd)
+                                     selected  
+                                    @endif
+
+                                @endisset
+
+                               >{{ $se->nombresd }}</option>
+
+                               @endforeach
+
+                             </select> 
+
+                         </div>
 
                     <div class="form-group">
 
